@@ -1,0 +1,414 @@
+\usepackage{xparse}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage{comment}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=1cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{xltxtra}
+\usepackage{url}
+\usepackage{appendix}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{fancyvrb}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{ifthen}
+\usepackage{enumerate}
+\usepackage{longtable}
+\usepackage{pst-plot}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{enumitem}
+\usepackage{minted}
+\usepackage[final]{pdfpages}
+\usepackage{csquotes}
+\usemintedstyle{bw}
+\renewcommand{\normalfont}{\sloppy\linespread{1.5}\fontsize{12pt}{12pt}\selectfont}
+\newcommand{\lstsize}{10pt}
+\newcommand{\lstfont}{\sloppy\linespread{1.5}\fontsize{\lstsize}{\lstsize}\selectfont\ttfamily}
+\newcommand{\cmd}[1]{\sloppy\linespread{1.5}\fontsize{\lstsize}{\lstsize}\selectfont\framebox{\texttt{#1}}\normalfont}
+\renewcommand{\bibname}{}
+\newcommand{\ktutocdots}{1.5mm}
+\newcommand{\ktuheading}{\bfseries\fontsize{14pt}{14pt}\selectfont}
+\usepackage[pdftitle={\ktutitle },pdfsubject={\ktusubject},pdfauthor={\ktuauthor},unicode=true,colorlinks=false,bookmarks=true,pdfborder=0,hyperindex=true]{hyperref}
+\raggedbottom
+\captionsetup[figure]{name=}
+\captionsetup[table]{name=}
+\DeclareCaptionFormat{ktulentele}{\bfseries #1 lentelė\par\raggedright#3\par}
+\DeclareCaptionFont{ktu}{\bfseries}
+\DeclareCaptionLabelSeparator{nothing}{}
+\DeclareCaptionLabelFormat{ktu}{#2 #1}
+\DeclareCaptionStyle{ktulentele}[]{justification=raggedleft,format=ktulentele,listformat=simple,labelseparator=period,labelformat=ktu,labelfont={ktu},textfont={ktu},singlelinecheck=false}
+\DeclareCaptionFormat{ktupav}{\bfseries #1 pav. #3\par}
+\DeclareCaptionStyle{ktupav}[]{justification=centering,format=ktupav,listformat=simple,labelseparator=period,labelformat=ktu,labelfont={ktu},textfont={ktu},singlelinecheck=false}
+\DeclareCaptionFormat{ktualg}{\bfseries #1 algoritmas. #3\par}
+\DeclareCaptionStyle{ktualg}[]{justification=centering,format=ktualg,listformat=simple,labelseparator=period,labelformat=ktu,labelfont={ktu},textfont={ktu},singlelinecheck=false}
+\makeatletter
+\def\tagform@#1{\maketag@@@{\bfseries(\ignorespaces#1\unskip\@@italiccorr)}}
+\makeatother
+\renewcommand\thefigure{\arabic{chapter}.\arabic{figure}}
+\renewcommand\thetable{\arabic{chapter}.\arabic{table}}
+\renewcommand\theequation{\arabic{chapter}.\arabic{equation}}
+\renewcommand\thechapter{\arabic{chapter}.}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+\renewcommand\thesection{\thechapter\arabic{section}.}
+\renewcommand\thesubsection{\thesection\arabic{subsection}.}
+\renewcommand\thesubsubsection{\thesubsection\arabic{subsubsection}.}
+\renewcommand\theparagraph{}
+\usetikzlibrary{decorations,arrows,shapes}
+\fancypagestyle{ktudarbas}{
+\fancyhf{}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO,RE]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+}
+\makeatletter
+\renewcommand{\@pnumwidth}{3em} \renewcommand{\@tocrmarg}{4em}
+  \renewcommand{\chapter}{\@startsection{chapter}{1}{0mm}{\baselineskip}{\baselineskip}{\ktuheading\setcounter{figure}{0}\setcounter{table}{0}\raggedright}}
+  \renewcommand{\section}{\@startsection{section}{2}{0mm}{\baselineskip}{\baselineskip}{\ktuheading\raggedright\raggedright}}
+  \renewcommand{\subsection}{\@startsection{subsection}{3}{0mm}{\baselineskip}{\baselineskip}{\ktuheading\raggedright}}
+  \renewcommand{\subsubsection}{\@startsection{subsubsection}{4}{0mm}{\baselineskip}{\baselineskip}{\ktuheading\raggedright}}
+\makeatother
+
+
+\renewcommand{\theenumi}{\alph{enumi})}
+\renewcommand{\labelenumi}{\theenumi}
+\newcommand{\fname}{}
+\newcommand{\forloop}[5][1]%
+{%
+\setcounter{#2}{#3}%
+\ifthenelse{#4}%
+  {%
+  #5%
+  \addtocounter{#2}{#1}%
+  \forloop[#1]{#2}{\value{#2}}{#4}{#5}%
+  }%
+% Else
+  {%
+  }%
+}%
+\renewcommand{\reftextfaraway}{(žr. psl. \pageref}
+\renewcommand{\reftextfacebefore}{ankstesniame puslapyje}
+\renewcommand{\reftextbefore}{ankstesniame puslapyje}
+\newminted{pascal}{linenos=true,baselinestretch=1,samepage=false,frame=leftline}
+\newminted{text}{linenos=false,baselinestretch=1,samepage=false}
+\renewcommand\theFancyVerbLine{\lstfont\arabic{FancyVerbLine}}
+\renewcommand\FancyVerbFormatLine{\lstfont}
+\newcommand{\ktualgoref}[1]{#1 nr.~\vref{algorithm:#1})}
+\newcommand{\ktusrcref}[1]{#1~\vref{file:#1})}
+\newcommand{\ktusrc}[2]{
+  \ktusubsection{#1}\label{file:#1}
+  \inputminted[linenos=true,baselinestretch=1,samepage=false,frame=leftline]{#2}{#1}
+}
+\newcommand{\ktusrcr}[3]{
+  \ktusubsection{#1}\label{file:#1}
+  \inputminted[linenos=true,baselinestretch=1,samepage=false,frame=leftline]{#3}{#2}
+}
+\newcommand{\ktusrcrh}[4]{
+  #4{#1}\label{file:#1}
+  \inputminted[linenos=true,baselinestretch=1,samepage=false,frame=leftline]{#3}{#2}
+}
+\newcommand{\ktutexfigure}[2]{
+  \begin{figure}[H]
+    \begin{center}
+      \input{#1}
+      \captionsetup{style=ktupav}
+      \caption{#2}\label{fig:#1}
+    \end{center}
+  \end{figure}
+}
+\newcommand{\ktutextable}[2]{
+  \begin{table}[H]
+    \captionsetup{style=ktulentele}
+    \caption{#2}
+    \vspace{-20pt}
+    \centering
+    \input{#1}\label{tab:#1}
+  \end{table}
+  \addtocounter{table}{-1}
+}
+\newenvironment{ktutable}[2]
+  {
+    \begin{table}[H]
+      \captionsetup{style=ktulentele}
+      \caption{#2}
+      \centering
+      \label{tab:#1}
+  }
+  {
+    \end{table}
+  }
+\newcommand{\ktutextc}[2]{
+  \ktutextcl{#1}{#2}{true}
+}
+\newcommand{\ktutextcl}[3]{
+  \begin{figure}[H]
+    \begin{center}
+      \inputminted[linenos=#3,baselinestretch=1,samepage=false,frame=leftline]{text}{#1}\label{file:#1}
+      \captionsetup{style=ktupav}
+      \caption{#2}
+    \end{center}
+  \end{figure}
+}
+\newcommand{\ktutextn}[1]{
+  \inputminted[linenos=true,baselinestretch=1,samepage=false,frame=leftline]{text}{#1}\label{file:#1}
+}
+\newcommand{\ktutext}[1]{
+  \begin{figure}[H]
+    \begin{center}
+      \inputminted[linenos=true,baselinestretch=1,samepage=false,frame=leftline]{text}{#1}\label{file:#1}
+      \captionsetup{style=ktupav}
+      \caption{#1}
+    \end{center}
+  \end{figure}
+}
+\newcommand{\ktufigref}[1]{\ref{fig:#1}}
+% filename, width, caption
+\newcommand{\ktufigure}[3]{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=#2]{#1}\\
+      \captionsetup{style=ktupav}
+      \caption{#3}\label{fig:#1}
+    \end{center}
+  \end{figure}
+}
+\newcommand{\ktufigurewidest}[2]{
+    \ktufigure{#1}{18cm}{#2}
+}
+\newcommand{\ktunchapter}[1]{\clearpage\phantomsection\addcontentsline{toc}{chapter}{#1}\chapter*{\MakeUppercase{#1}}\label{sec:#1}}
+\newcommand{\ktuchapter}[1]{\clearpage\chapter[#1]{\MakeUppercase{#1}}\label{sec:#1}}
+\newcommand{\ktusection}[1]{\section[#1]{\MakeUppercase{#1}}\label{sec:#1}}
+\newcommand{\ktusubsection}[1]{\subsection[#1]{#1}\label{sec:#1}}
+\newcommand{\ktusubsubsection}[1]{\subsubsection[#1]{#1}\label{sec:#1}}
+\newcommand{\ktusecref}[1]{\vref{sec:#1}, #1)}
+\newcommand{\ktucomment}[1]{}
+\newcommand{\mq}[1]{,,#1\textquotedblleft}
+\algrenewcommand\algorithmicwhile{\textbf{kol}}
+\algrenewcommand\algorithmicdo{\textbf{kartoti}}
+\algrenewcommand\algorithmicfor{\textbf{visiems}}
+\algrenewcommand\algorithmicrepeat{\textbf{kartoti}}
+\algrenewcommand\algorithmicif{\textbf{jei}}
+\algrenewcommand\algorithmicprocedure{\textbf{procedūra}}
+\algrenewcommand\algorithmicfunction{\textbf{funkcija}}
+\algrenewcommand\algorithmicloop{\textbf{ciklas}}
+\algrenewcommand\algorithmicend{\textbf{baigti}}
+\algrenewcommand\algorithmicreturn{\textbf{grąžinti}}
+\algrenewcommand\algorithmicthen{\textbf{tada}}
+\algrenewcommand\algorithmicelse{\textbf{kitu atveju}}
+\floatstyle{plaintop}
+\restylefloat{algorithm}
+\floatname{algorithm}{Algoritmas}
+\renewcommand{\listalgorithmname}{\MakeUppercase{Algoritmų sąrašas}}
+\NewDocumentEnvironment{ktualgo}{m m}{
+        \begin{algorithm}
+            \captionsetup{style=ktualg}
+            \caption{#2}\label{algorithm:#1}
+            \begin{algorithmic}[1]
+    }
+    {
+            \end{algorithmic}
+        \end{algorithm}
+    }
+\newenvironment{ktuappendices}
+  {
+    \ktunchapter{Priedai}
+    \begin{appendices}
+      \renewcommand{\thesection}{\arabic{section} priedas.}
+      \renewcommand{\thesubsection}{}
+  }
+  {
+    \end{appendices}
+  }
+\newenvironment{ktusol}
+  {$\blacktriangleright$}
+  {$\blacktriangleleft$}
+\setlength{\tabcolsep}{1mm}
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{1cm}
+\setlist{noitemsep, before={\vspace{-0.6cm}}}
+\usepackage{titletoc}
+\usepackage{tocloft}
+
+\setlength{\cftchapindent}{0em}
+\setlength{\cftsecindent}{2em}
+\setlength{\cftsubsecindent}{7em}
+\setlength{\cftsubsubsecindent}{11em}
+\setlength{\cftfigindent}{0em}
+\setlength{\cfttabindent}{0em}
+
+\setlength{\cftchapnumwidth}{2em}
+\setlength{\cftsecnumwidth}{5em}
+\setlength{\cftsubsecnumwidth}{4em}
+\setlength{\cftsubsubsecnumwidth}{4em}
+\setlength{\cftfignumwidth}{3em}
+\setlength{\cfttabnumwidth}{3em}
+
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsubsecfont}{\normalfont}
+\renewcommand{\cftsubsubsecfont}{\normalfont}
+\renewcommand{\cftfigfont}{\normalfont}
+\renewcommand{\cfttabfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsubsecpagefont}{\normalfont}
+\renewcommand{\cftsubsubsecpagefont}{\normalfont}
+\renewcommand{\cftfigpagefont}{\normalfont}
+\renewcommand{\cfttabpagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\normalfont\titlerule*[\ktutocdots]{.}}
+\renewcommand{\cftsecleader}{\normalfont\titlerule*[\ktutocdots]{.}}
+\renewcommand{\cftsubsecleader}{\normalfont\titlerule*[\ktutocdots]{.}}
+\renewcommand{\cftsubsubsecleader}{\normalfont\titlerule*[\ktutocdots]{.}}
+\renewcommand{\cftfigleader}{\normalfont\titlerule*[\ktutocdots]{.}}
+\renewcommand{\cfttableader}{\normalfont\titlerule*[\ktutocdots]{.}}
+\renewcommand{\cftbeforetoctitleskip}{-\baselineskip}
+\renewcommand{\cftaftertoctitleskip}{\baselineskip}
+\renewcommand{\cftbeforeloftitleskip}{-\baselineskip}
+\renewcommand{\cftafterloftitleskip}{\baselineskip}
+\renewcommand{\cftbeforelottitleskip}{-\baselineskip}
+\renewcommand{\cftafterlottitleskip}{\baselineskip}
+\newcommand{\ktuinit}{
+\pagestyle{ktudarbas}
+\tocloftpagestyle{ktudarbas}
+\title{\ktutitle}
+\author{\ktuauthor}
+\date{\today}
+\renewcommand{\listfigurename}{\ktuheading\MakeUppercase{Paveikslų sąrašas}}
+\renewcommand{\listtablename}{\ktuheading\MakeUppercase{Lentelių sąrašas}}
+\renewcommand{\contentsname}{\ktuheading\MakeUppercase{Turinys}}
+\renewcommand{\bibname}{\ktuheading\MakeUppercase{Literatūra}}
+\normalfont
+
+\begin{titlepage}
+  \begin{center}
+    \includegraphics[width=0.7in]{ktu_logo.eps} \\
+    \textbf {
+      \fontsize{18pt}{18pt}\selectfont {
+        \MakeUppercase \ktuinstitution
+      } \\
+      \fontsize{16pt}{16pt}\selectfont {
+        \MakeUppercase \ktufaculty
+      } \\
+      \fontsize{14pt}{14pt}\selectfont {
+        \MakeUppercase \ktucathedral
+      } \\[2.5cm]
+      \fontsize{22pt}{22pt}\selectfont {
+        \MakeUppercase \ktutitle
+      } \\[1cm]
+    }
+    \fontsize{16pt}{16pt}\selectfont {
+      \ktusubject
+    }
+    \\[3.5cm]
+  \end{center}
+
+  \textbf {
+    \begin{flushright}
+      \begin{tabular}{ r l }
+         {Atliko:} & {\ktuauthor} \\
+         {Priėmė:} & {\ktumaster} \\
+         {Data:} & {\ktudate} \\
+      \end{tabular}
+    \end{flushright}
+  }
+
+  \vfill
+
+  \begin{center}
+    \textbf {
+      \fontsize{16pt}{16pt}\selectfont {
+        \MakeUppercase \ktucity, \ktuyear
+      }
+    }
+  \end{center}
+\end{titlepage}
+
+\clearpage\tableofcontents
+\clearpage\conditionalLoF
+\clearpage\conditionalLoT
+\clearpage\conditionalLoA
+}
+\makeatletter
+\AtEndEnvironment{figure}{\gdef\there@is@a@figure{}}
+\AtEndDocument{\ifdefined\there@is@a@figure\label{fig:was:used:in:doc}\fi}
+\newcommand{\conditionalLoF}{\@ifundefined{r@fig:was:used:in:doc}{}{\listoffigures}}%
+\AtEndEnvironment{table}{\gdef\there@is@a@table{}}
+\AtEndDocument{\ifdefined\there@is@a@table\label{table:was:used:in:doc}\fi}
+\newcommand{\conditionalLoT}{\@ifundefined{r@table:was:used:in:doc}{}{\listoftables}}%
+\AtEndEnvironment{algorithm}{\gdef\there@is@an@algorithm{}}
+\AtEndDocument{\ifdefined\there@is@an@algorithm\label{algorithm:was:used:in:doc}\fi}
+\newcommand{\conditionalLoA}{\@ifundefined{r@algorithm:was:used:in:doc}{}{\listofalgorithms}}%
+\makeatother
+
+\newenvironment{ktuliterature}{
+\clearpage
+\addcontentsline{toc}{chapter}{Literatūra}
+}{}
+
+
+%----------------------- BEGIN KNITR ------------------------------
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
+\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
+\newcommand{\hlslot}[1]{\textit{#1}}%
+\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+\usepackage{alltt}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+%----------------------- END KNITR ------------------------------

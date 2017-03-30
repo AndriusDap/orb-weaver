@@ -1,0 +1,92 @@
+\newcommand{\ktusubject}{Report nr.1}   
+\newcommand{\ktutitle}{Example title}
+\newcommand{\ktuyear}{2014}
+\newcommand{\ktudate}{\ktuyear-04-24}
+\newcommand{\ktucity}{Kaunas}
+\newcommand{\ktuinstitution}{Kaunas University of Technology}
+\newcommand{\ktufaculty}{Faculty of Mathematics and Fundamental Sciences}
+\newcommand{\ktucathedral}{Department of Applied Mathematics}
+\newcommand{\ktuauthor}{John Doe}
+\newcommand{\ktumaster}{Jane Roe}
+
+  
+\documentclass[12pt, a4paper, onecolumn, titlepage, oneside, intlimits]{report}
+  
+ 
+\usepackage{ktua4}
+
+\begin{document} 
+
+
+
+
+
+% 
+\ktuinit{}    
+
+\ktuchapter{First Chapter}
+\begin{equation}\label{eq:pirma}
+x^2=3
+\end{equation} 
+
+This is first equation \ref{eq:pirma}.
+
+
+\begin{ktutable}{caption}{Atsitiktinai suvesti duomenys}
+    \begin{tabular}{lcl}
+      Vardas & Metai & Formulę \\
+      Niutonas   & 1687 & $F = m a$ \\
+      Einšteinas & 1905 & $E = m c^2$ \\
+    \end{tabular}
+\end{ktutable}
+
+\begin{ktutable}{caption1}{Atsitiktinai suvesti duomenys}
+    \begin{tabular}{lcl}
+      Vardas & Metai & Formulę \\
+      Niutonas   & 1687 & $F = m a$ \\
+      Einšteinas & 1905 & $E = m c^2$ \\
+    \end{tabular}
+\end{ktutable}
+
+\begin{ktutable}{caption2}{Atsitiktinai suvesti duomenys}
+    \begin{tabular}{lcl}
+      Vardas & Metai & Formulę \\
+      Niutonas   & 1687 & $F = m a$ \\
+      Einšteinas & 1905 & $E = m c^2$ \\
+    \end{tabular}
+\end{ktutable}
+\newpage
+
+\ktusection{First section}
+
+%\ktufigure{johndoe.pdf}{0.5\textwidth}{this is it}
+
+\newpage 
+
+\ktusection{Second section}
+\begin{equation}
+\sin(x)=1 
+\end{equation}
+\ktusubsection{First subsection}
+%I want to cite something here. I will cite \cite{lear} book.
+\ktusubsection{Second subsection}
+
+%\input{md-sample} 
+
+\begin{ktuliterature}
+\begin{thebibliography}{99}
+    \bibitem{NSSI} Tobias Oetiker et. al. \emph{The Not So 
+       Short Introduction to \LaTeXe{}}.
+\end{thebibliography}
+\end{ktuliterature}
+
+\clearpage
+
+\begin{ktuappendices}
+
+\ktusection{Example material}
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, R, S, T, U, V, Z.
+
+\end{ktuappendices}
+
+\end{document}

@@ -1,0 +1,3 @@
+[submodule "ktu-latex-template"]
+	path = ktu-latex-template
+	url = https://github.com/naglis/ktu-latex-template
