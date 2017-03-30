@@ -9,19 +9,20 @@
 \newcommand{\ktuauthor}{John Doe}
 \newcommand{\ktumaster}{Jane Roe}
 
-  
+
+
 \documentclass[12pt, a4paper, onecolumn, titlepage, oneside, intlimits]{report}
-  
- 
+
 \usepackage{ktua4}
 
-\begin{document} 
+\usepackage{polyglossia}
+\setdefaultlanguage{lithuanian}
 
+\usepackage[spacecolon=false,bibencoding=UTF8,sortlocale=en_US,backend=biber,sorting=none,labelnumber=true,natbib=true,bibstyle=iso-numeric,firstinits=true,citestyle=iso-authoryear,language=lithuanian]{biblatex}
+\bibliography{references}
 
+\begin{document}
 
-
-
-% 
 \ktuinit{}    
 
 \ktuchapter{First Chapter}
@@ -29,8 +30,7 @@
 x^2=3
 \end{equation} 
 
-This is first equation \ref{eq:pirma}.
-
+This is first equation \ref{eq:pirma}. Citing King Lear here \cite{lear}
 
 \begin{ktutable}{caption}{Atsitiktinai suvesti duomenys}
     \begin{tabular}{lcl}
@@ -59,7 +59,6 @@ This is first equation \ref{eq:pirma}.
 
 \ktusection{First section}
 
-%\ktufigure{johndoe.pdf}{0.5\textwidth}{this is it}
 
 \newpage 
 
@@ -68,16 +67,11 @@ This is first equation \ref{eq:pirma}.
 \sin(x)=1 
 \end{equation}
 \ktusubsection{First subsection}
-%I want to cite something here. I will cite \cite{lear} book.
 \ktusubsection{Second subsection}
 
-%\input{md-sample} 
 
 \begin{ktuliterature}
-\begin{thebibliography}{99}
-    \bibitem{NSSI} Tobias Oetiker et. al. \emph{The Not So 
-       Short Introduction to \LaTeXe{}}.
-\end{thebibliography}
+    \printbibliography{}
 \end{ktuliterature}
 
 \clearpage
