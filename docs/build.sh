@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
-rm -f paper.log
-docker run --rm -v $(pwd):/docs ktulatex xelatex --shell-escape paper.tex
-docker run -it --rm -v $(pwd):/docs ktulatex biber paper
-docker run --rm -v $(pwd):/docs ktulatex xelatex --shell-escape paper.tex
-while grep -q "Please rerun LaTeX" paper.log
+mkdir -p ./out
+rm -f out/paper.log
+docker run --rm -v $(pwd):/docs ktulatex xelatex --shell-escape --output-directory=./out paper.tex
+
+if grep -q "Please (re)run Biber on the file" out/paper.log
+then
+    docker run --rm -v $(pwd):/docs ktulatex biber --input-directory out --output-directory out paper
+    docker run --rm -v $(pwd):/docs ktulatex xelatex --shell-escape --output-directory=./out paper.tex
+fi
+
+while grep -q "Please rerun LaTeX" out/paper.log
 do
-    rm -f paper.log
-    docker run --rm -v $(pwd):/docs ktulatex xelatex --shell-escape paper.tex
+    rm -f build/paper.log
+    docker run --rm -v $(pwd):/docs ktulatex xelatex --shell-escape --output-directory=./out paper.tex
 done
