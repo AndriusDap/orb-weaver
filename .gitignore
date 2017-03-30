@@ -26,3 +26,7 @@ project/plugins/project/
 *.fot
 *.cb
 *.cb2
+*.blg
+*.bbl
+*.bcf
+*.xml
