@@ -8,9 +8,12 @@ import java.util.zip.GZIPInputStream
 import it.unimi.dsi.big.webgraph.BVGraph
 import it.unimi.dsi.logging.ProgressLogger
 import org.rocksdb.{WriteBatch, _}
-import com.timgroup.iterata.ParIterator.Implicits._
 
 import scala.io.BufferedSource
+import scala.util.Random
+
+
+
 
 object App {
   def longHash(s: String): Long = {
@@ -25,50 +28,55 @@ object App {
     hash
   }
 
+  def eta(start: Long, progress: Double): Unit = {
+    val elapsed = (System.currentTimeMillis() - start) / 60000.0
+    val total = elapsed/progress
+    println(f"ETA: ${total - elapsed}%2.2f min ($progress%2.4f%%)")
+  }
+
   def buildDb(db: String, index: String): Unit = {
     RocksDB.loadLibrary()
 
-
-
     val options = new Options()
+      .setWalDir(db)
       .setCompressionType(CompressionType.BZLIB2_COMPRESSION)
       .setCreateIfMissing(true)
+      .setIncreaseParallelism(4)
       .prepareForBulkLoad()
 
     val dba = RocksDB.open(options, db)
 
-    var i = 0
-
     val startTime = System.currentTimeMillis()
     val writeOptions = new WriteOptions()
-    val count = 5000
+    writeOptions.setSync(true)
+    val count = 10000
     val parser = NumberFormat.getNumberInstance
+
     readFile(index).getLines().grouped(count).map {
       batch =>
-        val wb = new WriteBatch()
-        batch.foreach {
+        batch.par.flatMap {
           line =>
             val pair = line.split(" ")
             try {
-
               val id = parser.parse(pair.last).longValue
               val url = pair.dropRight(1).mkString("  ")
-
               val hash = longHash(url)
-
-              wb.put(toBytes(hash), toBytes(id))
-
+              Some(toBytes(hash), toBytes(id))
             } catch {
               case idgaf: Exception => None
             }
+        }.foldLeft(new WriteBatch()) {
+          case (wb, (hash, id)) =>
+            wb.put(hash, id)
+            wb
         }
-        wb
-    }.zipWithIndex.foreach {
-      case (wb, id) =>
-        println(s"$startTime/${System.currentTimeMillis()}: ${(id * count).toDouble / 1700000000.0} done.")
+    }.zipWithIndex.foldLeft(dba){
+      case (dba, (wb, id)) =>
+        eta(startTime, id * count / 1700000000.0)
         dba.write(writeOptions, wb)
+        wb.close()
+        dba
     }
-
 
     dba.close()
   }
