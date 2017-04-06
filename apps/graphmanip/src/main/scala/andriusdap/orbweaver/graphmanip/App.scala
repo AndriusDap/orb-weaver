@@ -1,19 +1,10 @@
 package andriusdap.orbweaver.graphmanip
 
 import java.io.FileInputStream
-import java.nio.ByteBuffer
 import java.text.NumberFormat
 import java.util.zip.GZIPInputStream
 
-import it.unimi.dsi.big.webgraph.BVGraph
-import it.unimi.dsi.logging.ProgressLogger
-import org.rocksdb.{WriteBatch, _}
-
 import scala.io.BufferedSource
-import scala.util.Random
-
-
-
 
 object App {
   def longHash(s: String): Long = {
@@ -34,58 +25,34 @@ object App {
     println(f"ETA: ${total - elapsed}%2.2f min ($progress%2.4f%%)")
   }
 
-  def buildDb(db: String, index: String): Unit = {
-    RocksDB.loadLibrary()
-
-    val options = new Options()
-      .setWalDir(db)
-      .setCompressionType(CompressionType.BZLIB2_COMPRESSION)
-      .setCreateIfMissing(true)
-      .setIncreaseParallelism(4)
-      .prepareForBulkLoad()
-
-    val dba = RocksDB.open(options, db)
-
-    val startTime = System.currentTimeMillis()
-    val writeOptions = new WriteOptions()
-    writeOptions.setSync(true)
-    val count = 10000
+  def buildDb(database: String, index: String): Unit = {
+    val count = 5000
     val parser = NumberFormat.getNumberInstance
 
+    val db = new WriteDb(database)
+
+    val startTime = System.currentTimeMillis()
     readFile(index).getLines().grouped(count).map {
       batch =>
         batch.par.flatMap {
           line =>
-            val pair = line.split(" ")
+            val pair = line.split("\t")
             try {
               val id = parser.parse(pair.last).longValue
               val url = pair.dropRight(1).mkString("  ")
               val hash = longHash(url)
-              Some(toBytes(hash), toBytes(id))
+              Some(hash -> id)
             } catch {
               case idgaf: Exception => None
             }
-        }.foldLeft(new WriteBatch()) {
-          case (wb, (hash, id)) =>
-            wb.put(hash, id)
-            wb
         }
-    }.zipWithIndex.foldLeft(dba){
-      case (dba, (wb, id)) =>
+    }.zipWithIndex.foreach{
+      case (wb, id) =>
         eta(startTime, id * count / 1700000000.0)
-        dba.write(writeOptions, wb)
-        wb.close()
-        dba
+        db.write(wb.seq)
     }
 
-    dba.close()
-  }
-
-  @inline
-  def toBytes(hash: Long): Array[Byte] = {
-    val hashBuffer = ByteBuffer.allocate(java.lang.Long.BYTES)
-    hashBuffer.asLongBuffer().put(hash)
-    hashBuffer.array()
+    db.close()
   }
 
   def readFile(index: String): BufferedSource = {
@@ -96,7 +63,6 @@ object App {
     dbOutput: Option[String],
     indexInput: Option[String]
   )
-
 
   def main(args: Array[String]): Unit = {
     val params = args.sliding(2, 1).foldLeft(InputParams(None, None)) {
@@ -114,5 +80,4 @@ object App {
       case _ => println("requred params: --db <db output file> --index <index input file, gzipped>")
     }
   }
-
 }
