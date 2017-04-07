@@ -30,11 +30,29 @@ class WriteDb(filename: String) {
     options.close()
   }
 
+  def writeStrings(values: Seq[(Long, String)]): Unit = {
+    val options = new WriteOptions()
+    val writeBatch = new WriteBatch()
+
+    val length = values.length
+
+    var i = 0
+    while(i < length) {
+      val (k, v) = values(i)
+      writeBatch.put(toBytes(k), v.getBytes)
+      i += 1
+    }
+
+    db.write(options, writeBatch)
+
+    writeBatch.close()
+    options.close()
+  }
+
   def close(): Unit = {
     db.compactRange()
     db.close()
   }
-
 }
 
 class ReadDb(filename: String) {
