@@ -26,7 +26,7 @@ object App {
   }
 
   def buildReverseDb(database: String, index: String): Unit = {
-    val count = 5000
+    val count = 1000
     val parser = NumberFormat.getNumberInstance
 
     val db = new WriteDb(database)
@@ -47,11 +47,11 @@ object App {
         }
     }.zipWithIndex.foreach{
       case (wb, id) =>
-        eta(startTime, id * count / 1700000000.0)
+        if((id % 10) == 0) { eta(startTime, id * count / 1700000000.0) }
         db.writeStrings(wb.seq)
     }
 
-    println("starting with compacting. May take some time.")
+    println(s"${System.currentTimeMillis()} Starting with compacting. May take some time.")
     db.close()
   }
 
