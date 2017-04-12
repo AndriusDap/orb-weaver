@@ -1,0 +1,44 @@
+\ktuchapter{Literatūros apžvalga}
+
+\ktusection{Pavojingos svetainės}
+
+Didelė dalis interneto svetainių yra komerciniai projektai. Naudojami įvairūs pajamų šaltiniai.
+Tai gali būti reklamos, vykdomi pardavimai, prenumeravimo principu veikiančios svetainės.
+Šie būdai yra vartotojų matomi ir suprantami. Tačiau egzistuoja ir svetainės kurios pajamas
+generuoja nelegaliais būdais - vagiamos naudotojų tapatybės, banko sąskaitų, kreditinių kortelių
+duomenys, užvaldomi kompiuteriai siekiant pasipelnyti. Tai yra pavojingos svetainės.
+
+Pavojingos svetainės taip gali būti talpinamos ir ne savo noru.
+Naudojantis spragomis programinėje įrangoje galima įterpti žalingą kodą į kitas svetaines,
+taip pasinaudojant jų naudotojais ir jų pasitikėjimu svetaine.
+
+Egzistuoja įvairūs būdai saugoti naudotojus nuo pavojingų svetainių \cite{trees}.
+Vienas iš naudojamų variantų yra pavojingų svetainių blokavimas.
+Naudotojui naršant internete svetainės analizuojamos pagal tam tikras savybes.
+Svetainę galima analizuoti pagal įvairias metrikas \cite{tangled},
+talpinančio serverio parametrus, raktažodžius adrese, asinchroniškai įkeliamus resursus.
+
+Pavojingų svetainių aptikimo modulis yra pagrindinis tokios filtravimo sistemos komponentas.
+Šis modulis sprendžia svetainių klasifikavimo problemą. Tam gali būti naudojami įvairūs mašininio mokymosi algoritmai.
+Vienas iš puikiai tinkančių šiam panaudos atvejui \cite{trees} yra sprendimų medis.
+Pagrindiniai jo privalumai yra didelis veikimo greitis, nesudėtingas derinimas - nėra daugybės hyperparametrų.
+
+Modelio apmokymui naudojami egzistuojantys juodieji svetainių sąrašai.
+Adresai sąrašuose yra skaldomi į žetonus kurie sudaryti iš žodžių, simbolių, skaičių.
+Taip pat galima įtraukti ir svetainės metaduomenis - dydį, serverio duomenis, naudojamos programinės įrangos versijas.
+Tačiau įprasti sprendimų medžiai nagrinėja vieną svetainę \cite{trees}.
+Taip ignoruojama svarbiausia interneto savybė -- svetainės talpina nuorodas į kitas svetaines.
+Šios nuorodos tiekia papildomą informaciją apie svetainę,
+jos turinys bei rangas interneto grafe priklauso nuo svetainių kurios turi nuorodą į ją.
+Šiuo principu yra pagrystas PageRank algoritmas \cite{pagerank} varantis "Google" paieškos variklį.
+Laikant, kad svarbios svetainės turi nuorodas į kitas svarbias svetaines kyla mintis,
+kad tai turi galioti ir pavojingoms svetainėms.
+Šios svetainės siekia pritraukti žmones, dėl to turi būti optimizuotos SEO prasme.
+Dėl to filtruojant svetaines būtina įtraukti ir interneto svetainių grafo suteikiamą informaciją.
+
+Interneto svetainių grafas primena socialinių tinklų grafą.
+
+Interneto svetainių grafas yra biškį didelis.
+
+
+\newpage
