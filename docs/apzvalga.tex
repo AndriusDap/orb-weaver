@@ -35,11 +35,36 @@ Laikant, kad svarbios svetainės turi nuorodas į kitas svarbias svetaines kyla 
 kad tai turi galioti ir pavojingoms svetainėms.
 Šios svetainės siekia pritraukti žmones, dėl to turi būti optimizuotos SEO prasme.
 
-žalingos svetainės gali būti analizuojamos pagal jų sąryšių grafą pagal \cite{webcop}
 
+\ktusection{Žalingų svetainių aptikimas}
 
+Ryšiais tarp žalingų svetainių galima naudotis aptinkant kaimynines žalignas svetaines \cite{webcop}.
+To tyrimo metu siekiama rasti žalingą programinę įrangą platinančias svetaines. Iškskiriami du žalingų svetainių tipai --
+tai yra nuorodos į žalingus failus bei svetainės talpinančios žalingos programinės įrangos nuorodas.
+Priešingai nei daugelyje kitų metodikų naudojama ne iš viršaus žemyn metodika, skenuojant interneto grafą ir ieškant kenkėjų,
+o iš apačios viršun metodas.
 
-Interneto svetainių grafas yra biškį didelis.
+Ieškant žalingų svetainių iš viršaus žemyn yra einama per interneto grafą ir tikrinama ar rasti puslapiai yra žalingi \cite{webcop}.
+Tai aptinkama puslapių lankymą vykdant iš mašinų kurių būsena yra gerai žinoma. Aplankius svetainę tikrinama kaip pakito
+mašinos būsena po aplankymo. Tam naudojamos virtualios mašinos, kurios turi būti kuriamos iš naujo lankant naują puslapį.
+Tai reikalauja itin daug kompiuterinių resursų -- virtualios mašinos perkūrimo procesas yra lėtas lyginant su
+internetinio puslapio aplankymu. Taip pat po puslapio aplankymo virtuali mašina turi būti ištirta. Tyrimo metu tikrinama
+ar nenutiko netikėti pakitimai operacinėje sistemoje, bei vartotojui prieinamuose failuose.
+
+Skenavimas iš viršaus žemyn taip pat nesinaudoja interneto socialinio grafo savybėmis. Kenkėjiškos svetainės yra linkusios
+turėti ryšius su kitomis kenkėjiškomis svetainėmis, tik nedidelė dalis vartotojams saugių svetainių turi nuorodas į
+kenkėjiškas svetaines. Taip pat kenkėjiškos svetainės linkusios dažnai keisti savo domenus \cite{webcop} bei juos
+generuoti automatiškai \cite{trees}. Tai reikalauja dažnai perskenuoti interneto grafą iš naujo analilzuojant visus
+rastus puslapius.
+
+Galima alternatyva yra iš apačios žemyn veikiantis metodas. Šiuo metodu vietoje vieno multigrafo naudojamos dvi duomenų
+struktūros. Tai yra interneto grafas bei žalingų svetainių sąrašas. Interneto grafas formuojamas greičiau nei skenuojant
+svetaines iš viršaus žemyn, nes grafo formavimo metu nėra siekiama identifikuoti pavojingus puslapius. Antra naudojama
+duomenų struktūra yra žalingų svetainių sąrašas. Pagal šį sąrašą yra išskiriami du kenkėjiškų svetainių tipai:
+\begin{enumerate}[label=\alph*]
+    \item Nuorodos į žalingus failus
+    \item Žalingų failų katalogas
+\end{enumerate}
 
 
 \newpage
