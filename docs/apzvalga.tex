@@ -58,13 +58,21 @@ generuoti automatiškai \cite{trees}. Tai reikalauja dažnai perskenuoti interne
 rastus puslapius.
 
 Galima alternatyva yra iš apačios žemyn veikiantis metodas. Šiuo metodu vietoje vieno multigrafo naudojamos dvi duomenų
-struktūros. Tai yra interneto grafas bei žalingų svetainių sąrašas. Interneto grafas formuojamas greičiau nei skenuojant
-svetaines iš viršaus žemyn, nes grafo formavimo metu nėra siekiama identifikuoti pavojingus puslapius. Antra naudojama
-duomenų struktūra yra žalingų svetainių sąrašas. Pagal šį sąrašą yra išskiriami du kenkėjiškų svetainių tipai:
+struktūros. Tai yra interneto grafas bei žalingų svetainių sąrašas. Interneto grafas formuojamas greičiau nei skenavimo
+svetaines iš viršaus žemyn metodu, nes grafo formavimo metu nėra siekiama identifikuoti pavojingus puslapius. Antra naudojama
+duomenų struktūra yra žalingų svetainių sąrašas. Žalingų svetainių sąrašas yra formuojamas naudojant atskirą nuo
+interneto svetainių skenavimo procesą. Tam naudojami įvairūs Microsoft kompanijos saugumo įrankiai. Jų naudojimo metu
+yra identifikuojamos žąlingos naudotojų parsiunčiamos programos. Žinant iš kokios nuoroduos buvo gautas kenkėjiškas failas
+jis yra registruojamas centrinėje duomenų bazėje.
+
+Interneto grafas yra jungiamas su žalingus failus platinančiom svetainėmis ir surandamos viršūnės turinčios lankus į žalingus failus.
+taip yra išskiriami du kenkėjiškų svetainių tipai:
 \begin{enumerate}[label=\alph*]
     \item Nuorodos į žalingus failus
     \item Žalingų failų katalogas
 \end{enumerate}
+Žalingų failų katalogo svetainės yra nagrinėjamos - randamos nuorodos yra potencialiai žalingos.
+
 
 
 \newpage
