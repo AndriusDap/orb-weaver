@@ -36,7 +36,7 @@ kad tai turi galioti ir pavojingoms svetainėms.
 Šios svetainės siekia pritraukti žmones, dėl to turi būti optimizuotos SEO prasme.
 
 
-\ktusection{Žalingų svetainių aptikimas}
+\ktusection{Žalingų svetainių aptikimas skenuojant iš viršaus žemyn}
 
 Ryšiais tarp žalingų svetainių galima naudotis aptinkant kaimynines žalignas svetaines \cite{webcop}.
 To tyrimo metu siekiama rasti žalingą programinę įrangą platinančias svetaines. Iškskiriami du žalingų svetainių tipai --
@@ -66,13 +66,25 @@ yra identifikuojamos žąlingos naudotojų parsiunčiamos programos. Žinant iš
 jis yra registruojamas centrinėje duomenų bazėje.
 
 Interneto grafas yra jungiamas su žalingus failus platinančiom svetainėmis ir surandamos viršūnės turinčios lankus į žalingus failus.
-taip yra išskiriami du kenkėjiškų svetainių tipai:
+Taip yra išskiriami du kenkėjiškų svetainių tipai:
 \begin{enumerate}[label=\alph*]
     \item Nuorodos į žalingus failus
     \item Žalingų failų katalogas
 \end{enumerate}
-Žalingų failų katalogo svetainės yra nagrinėjamos - randamos nuorodos yra potencialiai žalingos.
+Naudojantis interneto svetainių grafu randamos gretimos svetinaės, tikėtina, kad šios svetainės yra kenksmingos \cite{webcop}.
+Tokia metodika leidžia uždavinį skaidyti į dvi dalis - pavienių svetainių kenksmingumo tyrimas bei jų kaimynų aptikimas grafe.
+Grafo struktūra naudojama tik gretimas svetaines grafe -- analizė nėra vykdoma toliau nei vienas žingsnis.
 
+Svarbi \cite{webcop} tyrimo dalis yra klaidingai žalingai įvertintų svetainių įvertinimas. Vienas iš rodiklių
+padedančių identifikuoti klaidas yra grafo viršūnės laipsnis. Nežalingų svetainių grafo viršūnės laipsnis yra
+eksponentiškai didesnis nei kenkėjiškų svetainių.
+
+Straipsnyje \cite{webcop} naudojamame metode yra keli trūkumai. Naudojamas daug resursų interneto grafo formavimui,
+tačiau visa grafo suteikiama informacija nėra panaudojama. Dėl to kad angrinėjami tik artimiausi kaimynai, prarandama
+daug informacijos apie kaimynus kurie yra nutolinami dirbtinai -- įterpiant papildomų nukreipimų kuriuos įprastos
+naršyklės išspręndžia naudotojui nepastebint. Taip pat naudojamas sudėtingas būdas aptikti pradinį žalingų svetainių
+sąrašą -- tam panaudojama Microsoft kuriamų antivirusinių programų naudotojų duomenys.
+Tai negali būti replikuota be daugybės naudotojų.
 
 
 \newpage
