@@ -1,0 +1,35 @@
+\ktuchapter{Sistemos architektūra}
+
+Kuriamos programinės įrangos tikslas -- atpažinti ar svetainė yra kenkėjiška.
+
+Sistemai keliami tam tikri nefunkciniai reikalavimai. Galimybė plėsti sistemai skirtus kompiuterinius resursus, optimaliai
+panaudojant turimus resursus. Privaloma leisti mažinti infrastruktūros kaštus jei sistemos apkrova yra nedidelė, bei
+skirti papildomus skaičiavimo resursus esant didelei apkrovai.
+
+Duotus nefunkcinius reikalavimus leidžia išpildyti mikroservisais paremta architektūra. Komponentai yra kuriami kaip
+atskiros sistemos kurios pateikiamos Docker sistemos konteineriuose. Komunikacijai tarp konteinerių naudojamas HTTPS
+protokolas, bendravimas paremtas REST principais.
+
+Docker konteineriai naudojajmi siekiant sistemos komponentus padaryti nepriklausomus nuo išorinių resursų. Visos
+reikalingos bibliotekos, sistemos yra sudiegiamos kartu su konteineriu. Tai itin palengvina horizontalų sistemos
+plėtojimą padidėjus apkrovai. Vieno tipo konteineriai yra sudiegiami taip gaunant kelias skirtingas tarnybas
+atliekančias skirtingas funkcijas. Kurios nors tarnybos apkrovai didėjant skiriama daugiau serverinės resursų šiai
+tarnybai -- kuriamos naujos sistemos naudojant egzistuojančius konteinerius.
+
+Siekiant įgyvendinti horizontalų plėtimąsi tarnybos turi veikti naudojant skirtingus servisų kiekius. Tai gali būti
+įgyvendinama naudojant kelis skirtingus metodus. Naudojant žinučių eiles užklausos tarnyboms yra formuojamos ir dedamos
+į eilę. Tarnybos posistemės iš eilės ima žinutes, jas apdoroja ir siunčia atsakymus. Alternatyvus metodas yra HTTPS
+protokolo naudojimas su REST tipo paslaugomis. Naudojant šią metodiką naudojami įprasto apkrovos balansavimo įrankiai.
+Tai taip pat leidžia lengviau naudoti atskirus modulius vartotojus pasiekiančiose aplikacijose, su sistema nesusijusiose
+programose. Taip yra dėdl didesnio REST paplitimo, lyginant su žinučių eilėmis, paprastesnio sistemos diegimo.
+
+Sistema sudaroma iš kelių komponentų. Interneto grafo analizei pasirenkamas skenavimas iš apačios aukštyn
+remiantis \cite{webcop} idėjomis. Svetainės esančios kaimynystėje yra vertinamos naudojant PageRank algoritmo
+principus \cite{pagerank} siekiant aprėpti daugiau nei vieną kaimyną. Žalingų svetainių atpažinimui naudojamas
+mašininio mokymosi modelis \cite{trees}.
+
+\ktusection{Svetainių klasifikavimo modulis}
+\ktusection{Gretimų svetainių aptikimo modulis}
+\ktusection{Subgrafo vertinimo modulis}
+\ktusection{Spartinančioji atmintinė}
+\newpage
