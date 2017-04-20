@@ -29,7 +29,44 @@ principus \cite{pagerank} siekiant aprėpti daugiau nei vieną kaimyną. Žaling
 mašininio mokymosi modelis \cite{trees}.
 
 \ktusection{Svetainių klasifikavimo modulis}
-\ktusection{Gretimų svetainių aptikimo modulis}
+
+Svetainių klasifikavimo modulio paskirtis - atsakyti ar svetainė yra kenksminga ar ji yra saugi naudotojams.
+Modulį sudaro matematinis modelis, duomenų paruošimo komponentas, sąsaja skirta bendradarbiauti su kitomis tarnybomis.
+
+Kenkėjiškoms svetainėms atpažinti naudojamas sprendimų medis. Šis algoritmas neveikai ant įprastų, adresus
+atvaizduojančių, simbolių eilučių. Dėl to iš svetainių adresų yra suformuojami įvairūs parametrai. Šiuos parametrus
+sudaro svetainių adresų ilgis, skyrybos simbolių skaičius adrese. Adresai taip pat suskaidomi į simbolius bei naudojamus
+žodžius. Apmokant modelį žodžiai yra svetainės sąvybės kurios gali turėti dvi reikšmes - 0 arba 1, priklausomai nuo to
+ar žodis egzistuoja ar neegzistuoja svetainėje. Modeliui apmokyti naudojamas VowpalWabbit programinės įrangos paketas.
+Ši programa parinkta dėl galimybės naudoti skirtingas tekstines adreso sąvybes nesudarant viso galimo žodyno. Tai yra
+įgyvendinama skaičiuojant maišos kodus visiems atskiriems žodžiams. Naudojant tokį žodyno vengimo būdą svarbu parinkti
+pakankamą atminties kiekį maišos lentelės formavimui. Išskyrus nepakankamą atminties kiekį yra rizikuojama naudoti per
+trumpus maišos kodus, kas sukels jų susikirtimus. Maišos kodų sutapimai lemtų mažą modelio tikslumą.
+
+Modeliui apmokyti naudojamas žinomų kenksmingų svetainių sąrašas, suformuotas iš įvairių blokavimo sąrašų, bei
+atsitiktinai parinktos svetainės iš interneto grafo. Siekiant aptikti modelio persimokymą naudojama kryžminė
+validacija.
+
+Viena iš naudingų VowpalWabbit programinės įrangos sąvybių yra galimybė naudoti tą patį duomenų rinkinį su ksirtingais
+mašininio mokymosi modeliais. Tai reikšia, kad derinant modelio hyperparametrus, siekiant išgauti geriausią rezultatą
+galima keisti ne tik įprastus parametrus bet ir patį modelį. Ttai leidžia išmėginti ne tik sprendimų medžius, bet ir
+atsitiktinio miško metodą, neuroninius tinklus. Visi šie modeliai ir jų hyperparametrai privalo būti išbandyti,
+siekiant surasti optimaliausią modelį turimam duomenų rinkiniui.
+
+Apmokius modelį yra įvertinamas jo tikslumas, tikrinama, ar modelis nėra permokytas. Jei modelis buvo sukurtas sėkmingai,
+konstruojamas svetainių klasifikavimo modulio konteineris kuris bus naudojamas visoje sistemoje.
+
+\ktusection{Subgrafų radimo modulis}
+
+Gretimų svetainių aptikimo modulio tikslas -- surasti analizuojamos svetainės kaimynus. Tai atliekama vykdant paiešką
+iš apačios viršun per intereneto svetainių grafą. Naudojamas interneto grafas kelia sunkumų dėl jo dydžio. Naudojamas
+duomenų rinkinys turi 1.8 milijardo įrašų. Tai sudaro apie 200 gigabaitų informacijos. Visa ši informacija turi būti
+pasiekiama realiu laiku, dėl to ji negali būti suarchyvuota ar iškelta į kitą serverį.
+Šią problemą sprendžia WebGraph programinis paketas. Šis paketas leidžia saugoti tik grafo viršūnių indeksus bei ryšius
+ tarp jų. Tai leidžia sutalpinti grafo informaciją į 30 gigabaitų dydžio failą. Tačiau šiame grafe nėra saugomi
+ svetainių adresai, tik jų indeksai. Kadangi svarbu žinoti žalingų svetainių adresus yra suformuojamos dvi duomenų
+ bazės. Viena iš jų leidžia pagal svetainės adresą gauti jos indeksą, kita atvirkščiai, pagal indeksą gauti svetainės
+ adresą. Šios tarpinės duomenų bazės telpa į 30 gigabaitų vietą diske.
+
 \ktusection{Subgrafo vertinimo modulis}
-\ktusection{Spartinančioji atmintinė}
 \newpage
