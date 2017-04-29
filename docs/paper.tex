@@ -10,6 +10,9 @@
 \newcommand{\ktumaster}{Doc. dr. Vytautas Janilionis}
 
 
+\newcommand{\kc}[1]{\citeauthor{#1} \cite{#1}}
+
+
 \documentclass[12pt, a4paper, onecolumn, titlepage, oneside, intlimits]{report}
 
 \usepackage{ktua4}
@@ -28,13 +31,12 @@
 
 \newpage
 
-\input{apzvalga.tex}
+\ktuchapter{Literatūros apžvalga}
+\input{apzvalga/webcop.tex}
+
+
 \newpage
-
 \ktuchapter{Medžiagos ir tyrimų metodai}
-
-\input{architektura.tex}
-
 \newpage
 
 \ktuchapter{Tyrimų rezultatai ir aptarimas}
