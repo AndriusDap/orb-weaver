@@ -14,3 +14,5 @@ do
     rm -f build/paper.log
     docker run --rm -v $(pwd):/docs ktulatex xelatex --shell-escape --output-directory=./out paper.tex
 done
+
+/opt/google/chrome/chrome out/paper.pdf
