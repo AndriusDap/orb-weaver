@@ -15,7 +15,62 @@ pagal jų adresą.
 
 \ktutexfigure{apzvalga/webtrees_process.tex}{Metodo schema}
 
+Metodo pritaikymo schema yra vaizduojama \vref{fig:apzvalga/webtrees_process.tex} diagramoje. Svetainių klasifikavimui
+naudojamas C4.5 sprendimų medis.
+
+Klasifikavimui naudojamos leksikografinės svetainių adreso sąvybės bei serverio savybės. Naudojamos svetainės serverio sąvybės:
+\begin{enumerate}[label=\arabic*.]
+    \item Duomenų centro vieta
+    \item Domeno sąvininko kontaktinė informacija
+    \item Domeno registracijos data
+    \item Domeno informacijos atnaujinimo data
+    \item Svetainės spartinančiųjų atmintinių informacijos saugojimo laikas
+    \item Domeno valstybės kodas
+    \item Ryšio su serveriu pralaidumas
+\end{enumerate}
+
+Naudojamos leksikografinės savybės yra formuojamos iš svetainės universalaus adreso (URL). Jis yra dalinamas į segmentus,
+kuriuos skiria įvairūs simboliai bei skyrybos ženklai. Šie segmentai tampa dvireikšmėmis adreso sąvybėmis.
+
 \ktusubsection{Duomenų rinkinio aprašas}
+
+Modeliui apmokyti naudotas duomenų rinkinys surinktas iš kelių skirtingų šaltinių. Naudoti 5000 URL iš kurių 1676 yra
+kenkėjiškų svetainių adresai.
+
 \ktusubsection{Rezultatai}
-\ktusubsection{Programinė įranga}
-\ktusubsection{Metodo analizė}
+\ktucomment{
+jautrumas sensitivity
+specifiškumas specificity
+tikslumas accuracy
+}
+
+Apmokant modelį naudota kryžminė patikra, 10\% duomenų skiriama testavimo duomenų imčiai. Naudoti matai tikslumui
+įvertinti yra jautrumas, tikslumas, specifiškumas.
+
+\begin{equation}\label{eq:jautrumas}
+jautrumas = {TP \over {TP + FN}} \cdot 100
+\end{equation}
+
+\begin{equation}\label{eq:tikslumas}
+tikslumas = {TP \over {jautrumas + specifiškumas}} \cdot 100
+\end{equation}
+
+\begin{equation}\label{eq:specifiškumas}
+specifiškumas = {TN \over {TN + FP}} \cdot 100
+\end{equation}
+
+kur \textit{TN} yra tikrų neigiamų, \textit{TP} tikrų teigiamų, \textit{FP} klaidingai teigiamų, \textit{FN} klaidingai
+neigiamų klasifikavimų skaičius.
+
+Taip pat skaičiuojama ir ROC kreivė, AUC metrika.
+
+\begin{ktutable}{webtrees_rezultatas}{Straipsnyje pateikiami matavimų rezultatai}
+    \begin{tabular}{| l | c | c | c | c | }
+     \hline
+     \diagbox{Kategorija}{Metrika} & Tikslumas & Jautrumas & Specifiškumas & AUC \\ \hline
+     Nekenksmingos & 98.3\% & 96.4\% & 96.5\% & 0.985 \\ \hline
+     Kenksmingos & 92.9\% & 96.4\% & 96.5\% & 0.985 \\ \hline
+    \end{tabular}
+\end{ktutable}
+
+Matavimų rezultatai pateikiami \vref{tab:webtrees_rezultatas}.
