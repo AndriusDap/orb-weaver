@@ -1,0 +1,13 @@
+\tikzstyle{block} = [rectangle, draw, text width=20em, text centered, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+
+\begin{tikzpicture}[node distance = 1.5 cm, auto]
+    \node [block] (url) {URL adresai};
+    \node [block, below of=url] (features) {Leksikografinės bei serverio sąvybės};
+    \node [block, below of=features] (tree) {Klasifikatorius};
+    \node [block, below of=tree] (result) {Kenksmingos ir nekenksmingos svetainės};
+
+    \path [line] (url) -- (features);
+    \path [line] (features) -- (tree);
+    \path [line] (tree) -- (result);
+\end{tikzpicture}
