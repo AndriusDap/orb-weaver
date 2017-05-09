@@ -45,24 +45,22 @@ tikslumas accuracy
 }
 
 Apmokant modelį naudota kryžminė patikra, 10\% duomenų skiriama testavimo duomenų imčiai. Naudoti matai tikslumui
-įvertinti yra jautrumas, tikslumas, specifiškumas.
+įvertinti yra jautrumas, tikslumas, specifiškumas, AUC metrika.
 
 \begin{equation}\label{eq:jautrumas}
 jautrumas = {TP \over {TP + FN}} \cdot 100
 \end{equation}
 
 \begin{equation}\label{eq:tikslumas}
-tikslumas = {TP \over {jautrumas + specifiškumas}} \cdot 100
+tikslumas = {TP \over {jautrumas + specifi \check skumas}} \cdot 100
 \end{equation}
 
 \begin{equation}\label{eq:specifiškumas}
-specifiškumas = {TN \over {TN + FP}} \cdot 100
+specifi \check skumas = {TN \over {TN + FP}} \cdot 100
 \end{equation}
 
 kur \textit{TN} yra tikrų neigiamų, \textit{TP} tikrų teigiamų, \textit{FP} klaidingai teigiamų, \textit{FN} klaidingai
 neigiamų klasifikavimų skaičius.
-
-Taip pat skaičiuojama ir ROC kreivė, AUC metrika.
 
 \begin{ktutable}{webtrees_rezultatas}{Straipsnyje pateikiami matavimų rezultatai}
     \begin{tabular}{| l | c | c | c | c | }
