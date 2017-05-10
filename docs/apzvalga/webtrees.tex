@@ -14,17 +14,33 @@ Metodo pritaikymo schema yra vaizduojama \vref{fig:apzvalga/webtrees_process.tex
 
 \ktusubsubsection{Sprendimų medžio formavimas. C4.5 algoritmas}
 
-Sprendimų medis yra vienas iš klasifikavimo modelių \cite{c45}. Klasifikavimas vykdomas sukuriant testus, kurie atitinka medžio viršūnes. Įrašai yra tikrinami pagal viršūnes atitinkančius testus, pagal testo rezultatą einama per medį kol pasiekiama kurią nors klasę atitinkanti medžio viršūnė \cite{trees}. Algoritmas C4.5 yra paremtas ankstesniu, ID3 medžio formavimo algoritmu \ctite{c45}.
+Sprendimų medis yra vienas iš klasifikavimo modelių \cite{c45}. Klasifikavimas vykdomas sukuriant testus, kurie atitinka medžio viršūnes. Įrašai yra tikrinami pagal viršūnes atitinkančius testus, pagal testo rezultatą einama per medį kol pasiekiama kurią nors klasę atitinkanti medžio viršūnė \cite{trees}. Algoritmas C4.5 yra paremtas ankstesniu, ID3 medžio formavimo algoritmu \cite{c45}.
 
-Sprendimų medis formuojamas dviem etapais. Pirma suformuojamas medis, vėliau jis yra supaprastinamas siekiant sumažinti jo sudėtingumą ir galimai padidinti jo tikslumą \cite{c45}. Medį sudarantys testai formuojami siekiant padalinti duomenų rinkinį į dvi dalis, pagal
+Sprendimų medis formuojamas dviem etapais. Pirma suformuojamas medis, vėliau jis yra supaprastinamas siekiant sumažinti jo sudėtingumą ir galimai padidinti jo tikslumą \cite{c45}. Medį sudarantys formuojami testai. Testas tikrina vieną iš atributų. Atributas ir jo vertė parenkami siekiant maksimizuoti informacijos išlošį gaunamą padalinant duomenų rinkinį į du segmentus \cite{Wu2008}.
 
+ Informacijos išlošis skaičiuojamas kaip duomenų rinkinio entropijos skirtumas prieš ir po padalinimo. Viso duomenų rinkinio S entropija gaunama \cite{c45}
+\begin{equation}\label{eq:entropija}
+entropija(S) = \sum_{j=1}^{k} \frac{freq(C_j, S)}{|S|} \times log_2\Big(\frac{freq(C_j, S)}{|S|}\Big)  bitai.
+\end{equation}
+kur $freq(C_j, S)$ yra $S$ aibės elementų skaičius kurie priklauso klasei $C_i$. Rinkinį $T$ padalinus į rinkinius $T_1, T_2, ... , T_n$ naudojant testą $X$ kuris padalina rinkinį į $n$ grupių skaičiuojama pasverta entropija $entropija_X(T)$ \cite{c45}
+\begin{equation}\label{eq:entropija_x}
+entropija_x(T) = \sum_{i=1}^{n} \frac{|T_i|}{|T|} \times entropija(T_i)
+\end{equation}
+dydis
+\begin{equation}\label{eq:išlošis}
+    išlo \check sis(X) = entropija(T) - entropija_X(T)
+\end{equation}
+nusako kiek informacijos gaunama, dalinant rinkinį $T$ naudojant testą $X$. Šis dydis yra skaičiuojamas visiems galimiems testams. Radus didžiausią vertę kuriamas testas ir pridedamas į formuojamą medį. Toliau tai kartojama su gautomis $n$ medžio šakų, taip suformuojant visą medį, iki kol pasiekiamos konkrečios klasės medžio viršūnėse ir nebėra atributų pagal kuriuos būtų galima atlikti testus \cite{c45}.
 
+Algoritmas C4.5 yra vystomas iš ID3 \cite{Wu2008}. Šis, atnaujintas, metodas prideda papildomas savybes. Medžio formavimo metu testuose atsižvelgiama į neegzistuojančias reikšmes, pridedama galimybė naudoti ne tik testus su diskrečiomis reikšmėmis, bet ir su tęstinėmis reikšmėmis. Taip pat pridedamas ir medžio mažinimo žingsnis, kuris atliekamas suformavus visą medį. Tai ne tik supaprastina medį bet ir mažina persimokymą \cite{c45}. Taikant metodą interneto svetainių klasifikavimio atveju yra svarbus tik šio algoritmo minimizavimo aspektas, nes tęstinės bei neegzistuojančios reikšmės nepasitaiko duotame duomenų rinkinyje.
+
+Medžio minimizavimui galimi keli metodai. Vieni naudoja papildomą duomenų rinkinį, pagal kurį aptinkamos medžio šakos suformuotos dėl pirminio mokymo duomenų rinkinio persimokymo. Alternatyvus metodas kuris nereikalauja papildomų duomenų mokymui yra naudojamas C4.5 algoritme, jis stengiasi prognozuoti klaidų kiekį šakoje, laikant kad duomenys yra pasiskirstę pagal binominį skirstinį. Tada skaičiuojama, kuriuo atveju klaidų yra daugiau, ar kai medžio šaka pakeista lapu atitinkančiu tam tikrą klasę ar kai paliekama egzistuojanti šaka.
 
 \ktusubsubsection{C4.5 algoritmo pritaikymas}
 Klasifikavimui naudojamos leksikografinės svetainių adreso sąvybės bei serverio savybės. Naudojamos svetainės serverio sąvybės:
 \begin{enumerate}[label=\arabic*.]
     \item Duomenų centro vieta
-    \item Domeno sąvininko kontaktinė informacija
+    \item Domeno savininko kontaktinė informacija
     \item Domeno registracijos data
     \item Domeno informacijos atnaujinimo data
     \item Svetainės spartinančiųjų atmintinių informacijos saugojimo laikas
