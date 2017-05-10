@@ -1,0 +1,108 @@
+\ktusection{Straipsnio Comparisons of machine learning techniques for detecting malicious webpages analizė}
+
+Straipsnyje lyginami įvairūs metodai skirti svetainių klasifikavimui į kenksmingas ir nekenksmingas.
+\ktusubsection{Problema}
+Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant metodus \cite{comp}
+\begin{enumerate}
+ \item K-Artimiausų kaimynų (K-Nearest neighbours)
+ \item Atramos vektorių mašinų (Support Vector Machine)
+ \item Paprastasis Bayes klasifikatorius (Naive Bayes)
+ \item K-Vidurkių (K-Means)
+ \item Affinity propagation metodas
+\end{enumerate}
+
+\ktusubsection{Metodai}
+
+Staripsnyje naudojami ir prižiūrimi ir neprižiūrimi metodai. Jų rezultatas yra lyginamas siekiant aptikti geriausiai tinkantį parinktai problemai spręsti \cite{comp}.
+
+\ktusubsubsection{K-Artimiausų kaimynų (K-Nearest neighbours)}
+
+
+
+\ktusubsubsection{Atramos vektorių mašinų (Support Vector Machine)}
+
+
+\ktusubsubsection{Paprastasis Bayes klasifikatorius (Naive Bayes)}
+
+
+\ktusubsubsection{K-Vidurkių (K-Means)}
+ K-Vidurkių algoritmas yra iteracinis metodas skirtas skaidyti duomenų rinkinį į naudotojo parinktą klasterių skaičių $k$ \cite{Wu2008}. Algoritmo metu siekiama minimizuoti visų imties elementų atstumą iki jiems priskirtų klasterių centrų. Algoritmas susideda iš dviejų žingsnių:
+
+ \textbf{Duomenų priskyrimas.} Visi elementai yra priskiriami jiems artimiausiam centroidui. Esant vienodiems atstumais centroidas parenkamas atsitiktinai. Pirmą kartą vykdant šį žingsnį centroidai parenkami atsitiktinai. Šio žingsnio rezultatas yra duomenys, suskaidyti į $k$ grupių.
+
+ \textbf{Centrų tikslinimas.} Perskaičiuojamoss grupių vidutinės parametrų vertės, parenkamas naujas centroidas esantis arčiausiai tikrojo grupės centro.
+ Šie algoritmo žingsniai yra kartojami kol centroidai nebesikeičia \cite{Wu2008}. Atstumui įvertinti naudojamas Euklido atstumas \cite{comp}:
+   \begin{equation}
+   ||x_n - \mu_k||^2 = \sqrt{\sum_{i=1}^{D}(x_{ni} - \mu_{ki})^2}
+   \end{equation}
+   kur $\mu_k$ yra klasterio centroidas, $D$ yra duomenų rinkinio dydis, $x$ yra vienas iš duomenų rinkinio elementų.
+
+   K vidurkių metodas turi trūkumų. Galutiniai klasteriai priklauso nuo pirminių taškų pasirinkimo. Netinkamai parinkti taškai gali lemti neoptimalų sprendimą. Taip pat k-vidurkių metodas nesugeba išskirti klasterių kurie nėra vienas nuo kito aiškiai atskirtos sferos erdvėje.
+
+   Dėl vidurkio funkcijos naudojimo centroidų parinkimui rezultatas gali būti stipriai iškreiptas kelių išskirčių. Tai gali būti sprendžiama naudojant papildomą duomenų valymą, pirma suskaidant į daugiau klasterių, siekiant kad išskirtims būtų priskiriami maži klasteriai, ir vėliau jas prijungiant prie didesnių klasterių \cite{Wu2008}.
+
+\ktusubsubsection{Affinity propagation metodas}
+
+Affinity propagation yra vienas iš klasterizavimo metodų. Tai yra neprižiūrimas metodas \cite{comp}. Šio metodo įvestis yra panašumų matrica, kurioje saugoma visų duomenų įrašų porų panašumai $s[i, j]$ kur $i, j =  (1,  2, ..., N)$. Naudojant šį metodą siekiama surasti kiekvieno elemento duomenų aibėje atstovą. Tą galima analizuoti kaip žinučių tarp duomenų įrašų perdavimą \cite{fastprop}. Kiekvienai elementų porai $i$ ir $j$ egzistuoja dvi žinutės -- atsakomybė (responsibility), $r[i, j]$ siunčiama iš taško $i$ į $j$, kuri parodo sukauptus įrodymus apie elemento $j$ galimybę atstovauti elementą $i$ klasteryje.  Antra žinutė yra tinkamumas (availability) $a[i, j]$, tai žinutė siunčiama iš elemento $j$ elementui $i$ kuri parodo $j$ elemento tinkamumą atstovauti elementą $i$. Iš pradžių visos $a$ ir $r$ reikšmės nustatomos į nulį ir yra iteratyviai atnaujinamos pagal \cite{fastprop}:
+ \begin{equation}
+    r[i, j] = (1 - \lambda)\rho[i, j] + \lambda r[i, j]
+    a[i, j] = (1 - \lambda)\alpha[i, j] + \lambda a[i, j]
+ \end{equation}
+ kur $\lambda$ yra konstanta naudojama sumažinti svyravimus, galimos reikšmės yra $ 0 \geq \lambda < 1 $ , o $\rho[i, j]$ ir  $\alpha[i, j]$ yra propagujama atsakomybė ir propaguojamas tinkamumas \cite{fastprop}. Šie dydžiai gaunami pagal \cite{fastprop}:
+ \begin{equation}
+   \rho[i, j]=\left\{
+                  \begin{array}{l r}
+                    s[i,j] - max_{k \neq j} \{ {a[i, k] + s[i, k]} \} & (i \neq j) \\
+                    s[i,j] - max_{k \neq j} \{ {s[i, k]} \} & (i = j) \\
+                  \end{array}
+                \right.
+ \end{equation}
+   ir \cite{fastprop}:
+\begin{equation}
+    \alpha[i, j] =  \left\{
+         \begin{array}{l r}
+            min \{ 0, r[i, j] + \sum_{k \neq i,j} max \{ 0, r[k, j] \} \}         & (i \neq j) \\
+            \sum_{k \neq i,j} max \{ 0, r[k, j] \}  & (i = j) \\
+         \end{array}
+       \right.
+\end{equation}
+žinutės yra gaunamos iš atitinkamų propaguojamų žinučių. Galiausiai atstovas elementui $i$ yra apibrėžiamas kaip \cite{fastprop}
+\begin{equation}
+    argmax \{r[i, j] + a[i, j] : j = 1, 2 ..., N \}
+\end{equation}
+
+Šis metodas leidžia kontroliuoti suformuojamų klasterių kiekį per $\lambda$ vertę \cite{comp}. Šis metodas pasižymi geresne greitaveika lyginant su K-vidurkių metodu \cite{fastprop}.
+
+\ktusubsubsection{Metodų pritaikymas}
+
+Interneto svetainės turi būti supaprastinamos iki tam tikrų savybių sąrašo. Tyrimo metu nauodtas svetainių turinys, jų URL adresai \cite{comp}. Svetainių turinys, kuris yra anglų kalba buvo analizuojamas siekiant išgauti jų semantinę prasmę. Tam naudota Term Frequency - inverse document frequency (TFIDF) metodika. Taip pat į svetainių savybes įtraukta ir jų HTML kodo struktūra, jų adreso semantinė reikšmė, nuorodos į kitus puslapius, atvaizduoto puslapio vaizdas.
+
+\ktusubsection{Duomenų rinkinio aprašas}
+
+Duomenų rinkinys surintkas iš dviejų pagrindinių šaltinių, Alexa katalogo, iš kurio išgautos nekenksmingos svetainės, bei iš Phishtank žalingų svetainių registro. Surinkta $100000$ svetainių informacija.
+
+\ktusubsection{Rezultatai}
+
+Modeliai apmokyti naudojant 70\% pradinių, sužymėtų duomenų apmokymui bei 30\% testavimui. Kenksmingų ir nekenksmingų svetainių santykis išlaikytas vienodas testavimo ir mokymo imtyse.
+
+
+\begin{ktutable}{webtrees_rezultatas}{Prižiūrimų modelių rezultatai}
+    \begin{tabular}{l c c c c  }
+     \hline
+       \diagbox{Metrika}{Modelis} & KNN & LS & RS & NB \\ \hline
+        Tikslumas, naudojant 50 įrašų & 74\% & 80\% & 79\% & 77\% \\ \hline
+        Tikslumas, naudojant 100 įrašų & 75\% & 82\% & 83\% & 78\% \\ \hline
+        Tikslumas, naudojant 500 įrašų & 79\% & 86\% & 92\% & 78\% \\ \hline
+        Tikslumas, naudojant 5000 įrašų & 91\% & 93\% & 97\% & 84\% \\ \hline
+        Tikslumas, naudojant 100,000 įrašų & 95\% & 93\% & 98\% & 89\% \\ \hline
+        AUC                               & 0.66  &  0.93 & 0.91 & 0.88 \\ \hline
+        kur modeliai: \\
+        KNN - K-artimiausių kaimynų \\
+        LS - Tiesinės atramos vektorių mašinos \\
+        RS - Radial Basis Function atramos vektorių mašinos \\
+        NB - Paprastasis Bayes klasifikatorius
+    \end{tabular}
+\end{ktutable}
+
+Modelių rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje.
+
