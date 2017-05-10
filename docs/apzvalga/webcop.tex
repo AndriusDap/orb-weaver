@@ -1,7 +1,6 @@
 \ktusection{Straipsnio WebCop: Locating Neighborhoods of Malware on the web analizė}
 
-Straipsnyje \kclong{webcop} siūlomas \mq{WebCop} metodas skirtas atpažinti žalingus internetinius puslapius ir
-pavojingų tinklapių grupes, kaimynystes.
+Straipsnyje \kclong{webcop} siūlomas \mq{WebCop} metodas skirtas atpažinti žalingus internetinius puslapius ir pavojingų tinklapių grupes, kaimynystes.
 
 Šiuo straipnsiu siekiama:
     \begin{itemize}
@@ -12,37 +11,24 @@ pavojingų tinklapių grupes, kaimynystes.
     \end{itemize}
 
 \ktusubsection{Problema}
-Straipsnyje aprašoma žalingos programinės įrangos plitimo problema. Vienas iš būdų kaip į kompiuterius patenka  tokia
-programinė įranga yra kenksmingų vykdomųjų failų parsisiuntimas iš interneto svetainių. Kenkimo programų plitimą siekiama
-apriboti naudojant prevencines priemones. Siekiama identifikuoti svetaines platinančias kenksmingus failus ir neleisti
-naudotojams jas pasiekti, ar juos kitaip perspėti apie potencialiai pavojingą svetainę.
+Straipsnyje aprašoma žalingos programinės įrangos plitimo problema. Vienas iš būdų kaip į kompiuterius patenka  tokia programinė įranga yra kenksmingų vykdomųjų failų parsisiuntimas iš interneto svetainių. Kenkimo programų plitimą siekiama apriboti naudojant prevencines priemones. Siekiama identifikuoti svetaines platinančias kenksmingus failus ir neleisti naudotojams jas pasiekti, ar juos kitaip perspėti apie potencialiai pavojingą svetainę.
 
 \ktusubsection{Metodas}
 
-Straipsnyje identifikuotą kenkėjiškos programinės įrangos plitimo problemos sprendimui siūloma WebCop sistema. Tai yra
-sistema, atpažįstanti kenkėjiškas ir joms gretimas svetaines.
+Straipsnyje identifikuotą kenkėjiškos programinės įrangos plitimo problemos sprendimui siūloma WebCop sistema. Tai yra sistema, atpažįstanti kenkėjiškas ir joms gretimas svetaines.
 
-WebCop sistemą WebCop modulis bei dvi duomenų bazės. Viena duomenų bazėje saugomi interneto svetainių tarpusavio ryšių
-informacija, tai yra interneto svetainių grafas. Antra duomenų bazė laiko informaciją apie identifikuotas kenkėjiškas
-programas bei jų šaltinius internete. Ši sistema veikia keliais etapais:
+WebCop sistemą WebCop modulis bei dvi duomenų bazės. Viena duomenų bazėje saugomi interneto svetainių tarpusavio ryšių informacija, tai yra interneto svetainių grafas. Antra duomenų bazė laiko informaciją apie identifikuotas kenkėjiškas programas bei jų šaltinius internete. Ši sistema veikia keliais etapais:
     \begin{enumerate}[label=\arabic*.]
         \item Nuorodų į platinimo svetaines aptikimas
         \item Žalingų kaimynysčių aptikimas
         \item Naujos, potencialiai žalingos, programinės įrangos aptikimas
     \end{enumerate}
 
-Pirmas žingsnis, platinimo svetainių atpažinimas vykdomas jungiant identifikuotų kenkėjų duomenų bazės duomenis su
-interneto grafo viršūnėmis. Sekančiame žingsnyje išrenkamos svetainės gretimos platinimo svetainėms. Tai yra vienos
-nuorodos atstumu nuo pavojingų svetainių esančios svetainės. Šie interneto puslapiai yra laikomi žalingos programinės
-įrangos katalogais. Naudotojų prieiga prie šių puslapių turi būti apribota, siekiant juos apsaugoti. Svetainės esančios
-dviejų nuorodų atstumu ir talpinančios nežinomas taikomasias programas identifikuojamos kaip potencialiai pavojingos,
-laikoma kad tai nauja, neidentifikuota kenkėjiška programinė įranga.
+Pirmas žingsnis, platinimo svetainių atpažinimas vykdomas jungiant identifikuotų kenkėjų duomenų bazės duomenis su interneto grafo viršūnėmis. Sekančiame žingsnyje išrenkamos svetainės gretimos platinimo svetainėms. Tai yra vienos nuorodos atstumu nuo pavojingų svetainių esančios svetainės. Šie interneto puslapiai yra laikomi žalingos programinės įrangos katalogais. Naudotojų prieiga prie šių puslapių turi būti apribota, siekiant juos apsaugoti. Svetainės esančios dviejų nuorodų atstumu ir talpinančios nežinomas taikomasias programas identifikuojamos kaip potencialiai pavojingos, laikoma kad tai nauja, neidentifikuota kenkėjiška programinė įranga.
 
 \ktusubsection{Duomenų rinkinio aprašas}
 
-WebCop sistema naudoja du duomenų rinkinius -- kenksmingos programinės įrangos registrą bei interneto grafą. Interneto
-grafo duomenų rinkinys formuotas naudojant interneto paieškos variklio duomenis. Kenkėjišių programų registras kuriamas
-naudojantis Windows operacinės sistemos naudotojų teikiamais duomenimis.
+WebCop sistema naudoja du duomenų rinkinius -- kenksmingos programinės įrangos registrą bei interneto grafą. Interneto grafo duomenų rinkinys formuotas naudojant interneto paieškos variklio duomenis. Kenkėjišių programų registras kuriamas naudojantis Windows operacinės sistemos naudotojų teikiamais duomenimis.
 
 \ktusubsection{Rezultatai}
 
@@ -61,5 +47,4 @@ Lentelėje \vref{tab:webcop_rezultatas} pateikiami straipsnyje atliktų matavim�
 
 \ktusubsection{Metodo analizė}
 
-Šis metodas yra unikalus keliais aspektais -- skenavimas iš viršaus žemyn pakeičiamas skenavimu iš apačios žemyn ir
-naudojamas egzistuojantis kenkėjiškos programinės įrangos registras vietoje bandymo ją identifikuoti skenavimo metu.
+Šis metodas yra unikalus keliais aspektais -- skenavimas iš viršaus žemyn pakeičiamas skenavimu iš apačios žemyn ir naudojamas egzistuojantis kenkėjiškos programinės įrangos registras vietoje bandymo ją identifikuoti skenavimo metu.
