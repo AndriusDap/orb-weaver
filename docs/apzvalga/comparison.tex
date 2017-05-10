@@ -42,8 +42,21 @@ Apmokant atraminių vektorių mašinų modelį yra svarbu parinkti tinkamą kern
 
 Šio metodo trūkumas yra didelio kiekio skaičiavimo resursų reikalavimas modelio apmokymo metu. Tačiau po modelio formavimo jis gali būti panaudojamas nereikalaujant daug resursų \cite{Wu2008}.
 
-\ktusubsubsection{Paprastasis Bayes klasifikatorius (Naive Bayes) metodas}
+\ktusubsubsection{Paprastasis Bajeso klasifikatorius (Naive Bayes) metodas}
 
+Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma kad visi įrašų matmenys priklauso nepriklauso vienas nuo kito \cite{comp}. Šio metodo privalumas yra paprastas modelio formavimas, nėra hiperparametrų kuriuos reikėtų derinti. Taip pat jo sudėtingumas mokymosi metu laiko atžvilgiu yra tiesinis, mokymosi imties dydžiui. Tai leidžia jį pritaikyti dideliems duomenų rinkiniams \cite{Wu2008}. Taip pat rezultatas yra pakankamai geras, ypač įvertinant reikalingą pastangų kiekį norint apmokyti modelį \cite{Wu2008}.
+
+  Modelis formuojamas naudojantis bajeso teorema ir sąlyginėmis tikimybėmis. Jei klasių aibė yra $i = 0, 1$ tik dviejų elementų, $P(i|x)$ yra tikimybė kad įrašas su verčių vektoriumi $x = (x_1, ..., x_p)$ priklauso klasei $i$, tai bet kokia monotoniška $P(i|x)$ gali būti naudojama klasifikavimui \cite{Wu2008}. Ši funkcija gali būti išreiškiama kaip santykis $P(1|x)/P(0|x)$. Tai gali būti išreiškiama kaip \cite{wu2008}:
+    \begin{equation}
+        \frac{P(1|x)}{P(0|x)} = \frac{f(x|1)P(1)}{f(x|0)P(0)}
+    \end{equation}
+  Šią funkciją klasifikavimui galima naudoti radus $f(x|i)$ funkciją. Paprastojo Bajeso klasifikavimo metode laikoma kad visi $x$ vektorių matmenys yra nepriklausomi, tada $f(x|i)$ prastinama į \cite{Wu2008}
+  \begin{equation}
+    f(x|i) = \prod_{j=1}^{p} f(x_j|i)
+  \end{equation}
+  kur visos $f(x_j|i)$ funkcijos yra įvertinamos atskirai, taip supaprastinant problemą į daug  vienmačių uždavinių.
+
+  Šis metodas leidžia panaudoti nedidelį duomenų kiekį modelio apmokymui, apmokymas vyksta greitai ir paprastai, nereikalauja komplikuotų iteracinių schemų modelio formavimui \cite{Wu2008}. Tačiau vienas iš reikalavimų labiausiai ribojančių šį metodą yra visų duomenų matmenų nepriklausomumas tarpusavyje. Tačiau tai galima spręsti naudojant pirminį duomenų apdorojimą, pašalinant stipriai koreliuotas reikšmes \cite{Wu2008}. Taip pat metodas gali modeliuoti tik tiesines ribas tarp klasių, be papildomų modifikacijų jo pritaikyti netiesiniams uždaviniams neina \cite{comp}.
 
 \ktusubsubsection{K-Vidurkių (K-Means) metodas}
  K-Vidurkių algoritmas yra iteracinis metodas skirtas skaidyti duomenų rinkinį į naudotojo parinktą klasterių skaičių $k$ \cite{Wu2008}. Algoritmo metu siekiama minimizuoti visų imties elementų atstumą iki jiems priskirtų klasterių centrų. Algoritmas susideda iš dviejų žingsnių:
