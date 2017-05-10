@@ -15,17 +15,26 @@ Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant met
 
 Staripsnyje naudojami ir prižiūrimi ir neprižiūrimi metodai. Jų rezultatas yra lyginamas siekiant aptikti geriausiai tinkantį parinktai problemai spręsti \cite{comp}.
 
-\ktusubsubsection{K-Artimiausų kaimynų (K-Nearest neighbours)}
+\ktusubsubsection{K-Artimiausų kaimynų (K-Nearest neighbours) metodas}
+Šis klasifikavimo metodas yra paremtas trimis elementais \cite{Wu2008}:
+\begin{enumerate}
+    \item Pavyzdinis duomenų rinkinys (Mokymo duomenų rinkinys)
+    \item Elementų atstumo matas
+    \item Analizuojamų kaimynų kiekis $k$
+\end{enumerate}
+Elemento klasifikacija vyksta balsavimo principu - išrenkama $k$ elementų, kurie yra artimiausi pagal parinktą artumo metriką, dominuojanti klasė išrinktame rinkinyje priskiriama klasifikuojamam elementui.
+
+Pagrindiniai šio metodo sunkumai yra $k$ dydžio parinkimas. Per didelis lems gretimų klasių įtraukimą į balsavimo procesą, per mažas gali lemti blogą rezultatą esant triukšmui pradiniuose, apmokymo, duomenyse. Tai sprendžiama pridedant balso svorį \cite{Wu2008} kuris yra atvirkščiai proporcingas elemento atstumui nuo balsuojančio elemento. Taip pat svarbus atstumo mato parinkimas. Dažnai naudojamas Euklido atstumas, tačiau jis nėra tinkamas kai yra daug matmenų, ar jų reikšmės yra itin skirtingos \cite{Wu2008}. Tada verta naudoti kitus matus arba normalizuoti atributų vertes.
+
+Šio metodo privalumas yra tai,  kad skaičiavimai atliekami tingiai. Pirminio modelio formavimo metu nėra atliekami jokie skaičiavimai, jie vykdomi tik klasifikuojant naujus duomenis \cite{Wu2008}.
+
+\ktusubsubsection{Atramos vektorių mašinų (Support Vector Machine) metodas}
 
 
-
-\ktusubsubsection{Atramos vektorių mašinų (Support Vector Machine)}
-
-
-\ktusubsubsection{Paprastasis Bayes klasifikatorius (Naive Bayes)}
+\ktusubsubsection{Paprastasis Bayes klasifikatorius (Naive Bayes) metodas}
 
 
-\ktusubsubsection{K-Vidurkių (K-Means)}
+\ktusubsubsection{K-Vidurkių (K-Means) metodas}
  K-Vidurkių algoritmas yra iteracinis metodas skirtas skaidyti duomenų rinkinį į naudotojo parinktą klasterių skaičių $k$ \cite{Wu2008}. Algoritmo metu siekiama minimizuoti visų imties elementų atstumą iki jiems priskirtų klasterių centrų. Algoritmas susideda iš dviejų žingsnių:
 
  \textbf{Duomenų priskyrimas.} Visi elementai yra priskiriami jiems artimiausiam centroidui. Esant vienodiems atstumais centroidas parenkamas atsitiktinai. Pirmą kartą vykdant šį žingsnį centroidai parenkami atsitiktinai. Šio žingsnio rezultatas yra duomenys, suskaidyti į $k$ grupių.
