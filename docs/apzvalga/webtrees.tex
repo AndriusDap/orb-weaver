@@ -36,6 +36,10 @@ Algoritmas C4.5 yra vystomas iš ID3 \cite{Wu2008}. Šis, atnaujintas, metodas p
 
 Medžio minimizavimui galimi keli metodai. Vieni naudoja papildomą duomenų rinkinį, pagal kurį aptinkamos medžio šakos suformuotos dėl pirminio mokymo duomenų rinkinio persimokymo. Alternatyvus metodas kuris nereikalauja papildomų duomenų mokymui yra naudojamas C4.5 algoritme, jis stengiasi prognozuoti klaidų kiekį šakoje, laikant kad duomenys yra pasiskirstę pagal binominį skirstinį. Tada skaičiuojama, kuriuo atveju klaidų yra daugiau, ar kai medžio šaka pakeista lapu atitinkančiu tam tikrą klasę ar kai paliekama egzistuojanti šaka.
 
+Sprendimų medžiai turi ir tam tikrų apribojimų \cite{c45}. Laikant kad visi tiriamos aibės elementai yra išsidėstę Euklido erdvėje, sprendimų medis klases sukurs išskirdamas stačiakampius regionus erdvėje. Tai reiškia, kad ne stačiakampio formos klasteriai bus imituojami kelių stačiakampių, taip prarandant dalį tikslumo ir didinant sudėtingumą.
+
+Siūloma alternatyva \cite{c45} yra dirbtinių neuronų tinklai, jie gali pasiekti didesnį tikslumą nei sprendimų medžiai, rezultatas yra gana nesudėtingai pasiekiamas \cite{c45}, tačiau jiems suformuoti reikia žymiai daugiau skaičiavimo resursų.
+
 \ktusubsubsection{C4.5 algoritmo pritaikymas}
 Klasifikavimui naudojamos leksikografinės svetainių adreso sąvybės bei serverio savybės. Naudojamos svetainės serverio sąvybės:
 \begin{enumerate}[label=\arabic*.]
