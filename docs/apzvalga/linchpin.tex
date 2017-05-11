@@ -1,8 +1,39 @@
 \ktusection{Straipsnio Finding the Linchpins of the Dark Web: a Study on Topologically Dedicated Hosts on Malicious Web Infrastructures analizė}
 
-Straipsnyje \kclong{linchpins} aprašomas alternatyvus metodas kenksmingos programinės įrangos aptikimui remiantis interneto grafo struktūra naudojant PageRank algoritmą.
+Straipsnyje \kclong{linchpins} aprašomas alternatyvus metodas kenksmingos programinės įrangos aptikimui remiantis interneto grafo topologine struktūra ir naudojant PageRank algoritmą.
 
 \ktusubsection{Problema}
+
+Straipsnyje \cite{linchpins} identifikuojami dedikuoti serveriai kurie yra būtini kenksmingų internetinių svetainių veikimui. Šie serveriai talpna svetaines, kurios pasiekiamos tik iš kenkėjiškų svetainių ir yra skirti valdyti įvairias kenksmingas veiklas nukreipiant naudotojų srautus. Šiuos tinklo ramsčius aptikti ir sustabdyti yra svarbu dėl vykdomo veiklos masto -- jie gyvuoja daug ilgiau nei įprastos kenksmingos svetainės, apdorojami dideli duomenų kiekiai, dėl to jų sustabdymas labiau sutrikdo žalingą veiklą. Sprendžiama šių ramsčių aptikimo problema.
+
 \ktusubsection{Metodas}
+
+Svetainės kurias stengiamasi aptikti pasžymi tam tikromis topologinėmis savybėmis grafe. Interneto svetaines galima skaidyti į dvi klases - kenksmingos ir nekenksmingos svetainės. Ramstinių serverių tikslas yra nukreipti naudotojus į kitas kenksmingas svetaines, kur bus bandoma monetizuoti naudotojus. Dėl to ramstiniai serveriai neturi jokių tiesioginių ryšių iš nekenksmingų svetainių. Visi ryšiai ateina tik iš kenksmingų svetainių. \cite{linchpins}.
+
+PageRank algoritmas ranguoja interneto puslapius pagal kiekvieno puslapio svarbą. Svarba vertinama pagal nuorodų į puslapį kiekį, laikoma kad svarbesni puslapiai yra dažniau minimi kitose svetainėse. Taip pat svarbių svetainių paminėjimai yra verti daugiau nei nesvarbių svetainių. Taip imituojamas socialinio tinklo prestižo statusas \cite{Wu2008}.
+
+Vertinant svetainės PageRank įvertį internetas laikomas kryptiniu grafu $G = (V, E)$ kur $V$ yra grafo viršūnės, tai yra puslapiai, o $E$ yra kryptinės briaunos, tai yra nuorodos tarp puslapių \cite{Wu2008}. Supaprastintas PageRank įvertis yra apibrėžiamas kaip \cite{pagerank}:
+\begin{equation}
+    R(u) = c \sum_{v \in B_u} \frac{R(v)}{N_v}
+\end{equation}
+kur $R(u)$ yra PageRank įvertis svetainei $u$, $B_u$ yra aibė svetainių kurios turi nuorodas į svetainę $u$, $N_v$ yra svetainės $v$ nuorodų į kitus puslapius skaičius, o $c$ normalizavimo faktorius. Šis įvertis yra teisingas, tačiau gali būti lengvai iškreipiamas grafe esančių ciklų. Jie lemtų greitą kilimą range. Tas sprendžiama įtraukiant slopinimo faktorių $d$ \cite{pagerank}. Gaunamas galutinis PageRank įvertis yra:
+\begin{equation}
+    R(u) = (1 - d) + d \sum_{v \in B_u} \frac{R(v)}{N_v}
+\end{equation}
+slopinimo faktorius $d$ gali būti nustatomas betkokiam skaičiui tarp $0$ ir $1$. $d=0.85$ naudojama straipsnyje \cite{pagerank}
+
+ PageRank įvertis priklauso nuo kitų svetainių įverčio, dėl to naudojamas iteratyvinis metodas jo skaičiavimui. Rezultatai taip pat priklauso nuo pradinio, nulinės iteracijos, PageRank vertės nustatymo. Ji gali būti parenkama pagal ekspertinę nuomonę, jei siekiama gauti įprastinį rangavimą kuris tinkamas naudoti interneto paieškos varikliuose.  Iteratyvus algoritmas konverguoja greitai, 322 milijonų nuorodų duomenų rinkinys pasiekia gerą rezultatą per 52 iteracijas \cite{pagerank}.
+
+ PageRank algoritmo rezultatas labai priklauso nuo nulinės iteracijos PageRank įverčių parinkimo \cite{linchpins}. Tuo pasinaudojant formuojami keli PageRank įverčiai. Vienas yra įprastinis įvertis, kai įvertis nustatomas į 1 nekenksmingoms svetainėms, į 0 visoms kitoms svetainėms \cite{linchpins}. Taip suranguojamos nekenksmingos svetainės. Šiuo atveju ramstinės kenksmingos svetinės turės itin žemą rangą, nes neegzistuos nuorodos iį nekenksmingų svetainių. Formuojant antrą PageRank įvertį vieneto reikšmės priskiriamos kenksmingoms svetainėms. Taip ramstinės svetainės gaus itin aukštą rangą \cite{linchpins}. Taip gaunamas rangas interneto tinkle ir kenksmingų svetainių tinkle. Skirtumas tarp rangų leidžia atpažinti ramstines svetaines, taip netiesiogiai pasinaudojant jų izoliuotumu nuo nekenksmingų svetainių interneto grafe.
+
 \ktusubsection{Duomenų rinkinio aprašas}
+
+Naudotas duomenų rinkinys suformuotas iš kelių šaltinių. Kenksmingos svetainės surinktos iš Microsoft suteikto duomenų rinkinio, \mq{WarningBird} projekto duomenų, \mq{Twitter} socialinio tinklo duomenų, \mq{Alexa} svetainių katalogo duomenų. Iš šių šaltinių surinkta apie 5.5 milijono svetainių URL, kurie buvo panaudoti tolimesniam interneto svetainių  riknimui naudojant paiešką internete \cite{linchpins}. Paieška vykdyta 7 mėnesius naudojant 20 virtualių mašinų \cite{linchpins}.
+
+Duomenys kategorizuoti suformuojant svetainių klasterius ir juos peržiūrint. Keli klasteriai identifikuoti kaip nekenksmingos svetainės. Kenksmingos svetainės žymėtos jas tikrinant naudojant Microsoft Forefront kenksmingos programinės įrangos aptikimo įrankį \cite{linchpins}. Didelė dalis URL (78.51\%) nebuvo priskirti jokiai klasei, jiems klasė priskiriama tyrimo metu, identifikuojant kenksmingas svetaines.
+
 \ktusubsection{Rezultatai}
+
+Nauodjant turimą duomenų rinkinį dalis žinomų ramstinių serverių yra naudojama kitų ramsčių aptikimui. Atsitiktinai parenkama dalis žinomų ramsčių (1\%, 5\%, 10\%, 50\%, 90\%) kurie bus naudojami kaip nulinė PageRank įverčio skaičiavimo iteracija, jiems kenksmingų svetainių formavimno žingsnyje nustatomas pradinis $R(u) = 1$, ir tikrinama kiek kitų žinomų ramsčių bus aptikta.
+
+Naudojant 5\% pradiniam apmokymui aptikta 48.59\% kitų ramstinių serverių. Tai reiškia kad įmanoma aptikti 7 kartus daugiau ramstinių serverių nei buvo panaudota apmokyti pradiniam modeliui. Šiuo atveju pirmojo tipo klaidos pasiekia 2.36\%. Tai yra atvejis pasiekęs didžiausią klaidą ir skirtumą tarp pradinio duomenų rinkinio dydžio ir aptiktų ramstinių serverių kiekio. Metodas gali būti taikomas iteravytiai, panaudojant dalį aptiktų ramstinių serverių kitų serverių radumui. Tai leidžia aptikti žymiai daugiau ramstinių serverių, tačiau klaidos vis dar yra pakankamai žemos, leidžiančios praktinį panaudojimą \cite{linchpins}.
