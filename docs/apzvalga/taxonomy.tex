@@ -1,0 +1,18 @@
+\ktusection{Straipsnio A taxonomy of attacks and a survey of defence mechanisms for semantic social engineering attacks analizė}
+
+Straipsnyje \kclong{tax} analizuojamas įvairūs metodai kuriais pasinaudojant apgaunami naudotojai, jie patenka į kenksmingus puslapius. Atakose naudotojas yra išksiriamas kaip silpniausia sistemos grandis \cite{tax}. Tai išskiriama ne tik dėl galimybės apgauti pateikiant klaidinančią informaciją, bet ir naudotojų turimų teisių, naudotojas gali prieiti prie visų sistemos resursų ir įdiegti bet kokią programinę įrangą, net jei ji yra kenksminga. Sistemos naudotoju stengiamasi pasinaudoti semantinėse atakose.
+
+Straipsnyje išskiriamos semantinės atakos yra \cite{tax}:
+\begin{enumerate}
+    \item \label{phishing} \textbf{Phishing} -- Sukčiavimas apsimetant, naudojami el. laiškai, žinutės, kuriomis apsimetama patikimu šaltiniu ir siekiama apgaule išvilioti naudotojo asmeninius duomenis, kuriais pasinaudojus bus galima pasipelnyti.
+    \item \textbf{File Masquerading} -- Failo maskavimas, platinami failai kurie yra maskuojami kaip naudotojui įprasti ir saugiai atrodantys failai. Failai galimai maskuojami kaip dokumentų failai, sisteminiai failai, kuriuos naudotojas įpratęs matyti ir pasitikėti.
+    \item \textbf{Application Masquerading} -- Apsimetimas aplikacija, apsimetama vartotojui naudinga aplikacija.
+    \item \label{popup} \textbf{Web Pop-Up} -- Iššokantieji langai, apsimetantys klaidų pranešimais, klausimynais, ar informacija kuri gali sudominti naudotoją.
+    \item \label{malvertisement}\textbf{Malvertisement} -- Kenksmingos reklamos.
+    \item \label{socnet}\textbf{Social Networking} -- socialiniais tinklais plintančios atakos, tai gali būti pasidalintos nuorodos, failai.
+    \item \textbf{Removable Media} -- Fiziniais įrenginiais paremtos atakos.
+    \item \textbf{Wireless} -- belaidžiais įrenginiais paremtos atakos.
+\end{enumerate}
+Didelė dalis šių atakų \ref{phishing} \ref{popup} \ref{malvertisement} \ref{socnet} naudojasi tarpinėmis svetainėmis. Tai yra ramstinės svetainės per kurias yra nukreipiamas duomenų srautas ir paskirstomas į kitas kenksmingas svetaines kurios yra naudojamos galutinei naudotojų monetizacijai \cite{linchpins}. Šios atakos pasižymi tuo, kad naudotojai jas gali atskirti per URL adresą, kuris nuves į kenkėjišką svetainę \cite{tax}.
+
+Semantines atakas atpažinti siūlomi mašininio mokymosi modeliai \cite{tax}. Jie gali būti pritaikyti atpažinti atakas pagal įvairias savybes: el. laiškų turinį, svetainių URL adresus, puslapių turinį \cite{tax}.
