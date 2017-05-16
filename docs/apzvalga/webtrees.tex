@@ -1,18 +1,11 @@
-\ktusection{Straipsnio Malicious Web Sites Detection using C4.5 Decision Tree apžvalga}
+Straipsnyje \kclong{trees} naudojamas paprastesnis duomenų rinkinys ir siūlomas sprendimų medžio naudojimas kenkėjiškoms svetainėms identifikuoti pagal įvairias jų savybes.
 
-Straipsnyje \kclong{trees} siūlomas sprendimų medžio naudojimas kenkėjiškoms svetainėms identifikuoti pagal įvairias jų savybes.
-
-\ktusubsection{Problema}
-
-Internetinės svetainės naudoja įvairius pajamų generavimo metodus. Dalis jų yra neteisėti ir kenkia svetainių naudotojams. Tokių svetainių identifikavimas ir blokavimas leidžia apsaugoti naudotojuos nuo kenkėjiškos programinės įrangos. Įprasti metodai naudoja pavojingų svetainių sąrašus, tačiau šie sąrašai yra baigtiniai, naujos svetainės į juos pridedamos ne iš karto. Alternatyva blokuojamų sąrašų sudarymui yra mašininio mokymo modelis kuris gali atpažinti pavojingas svetaines pagal jų adresą.
-
-\ktusubsection{Metodas}
+Internetinės svetainės naudoja įvairius pajamų generavimo metodus. Dalis jų yra neteisėti ir kenkia svetainių naudotojams. Tokių svetainių identifikavimas ir blokavimas leidžia apsaugoti naudotojuos nuo kenkėjiškos programinės įrangos. Įprasti metodai naudoja pavojingų svetainių sąrašus, tačiau šie sąrašai yra baigtiniai, naujos svetainės į juos pridedamos ne iš karto\cite{webtrees}. Alternatyva blokuojamų sąrašų sudarymui yra mašininio mokymo modelis kuris gali atpažinti pavojingas svetaines pagal jų adresą.
 
 \ktutexfigure{apzvalga/webtrees_process.tex}{Metodo schema}
 
 Metodo pritaikymo schema yra vaizduojama \vref{fig:apzvalga/webtrees_process.tex} diagramoje. Svetainių klasifikavimui naudojamas C4.5 sprendimų medis.
 
-\ktusubsubsection{Sprendimų medžio formavimas. C4.5 algoritmas}
 
 Sprendimų medis yra vienas iš klasifikavimo modelių \cite{c45}. Klasifikavimas vykdomas sukuriant testus, kurie atitinka medžio viršūnes. Įrašai yra tikrinami pagal viršūnes atitinkančius testus, pagal testo rezultatą einama per medį kol pasiekiama kurią nors klasę atitinkanti medžio viršūnė \cite{trees}. Algoritmas C4.5 yra paremtas ankstesniu, ID3 medžio formavimo algoritmu \cite{c45}.
 
@@ -40,7 +33,6 @@ Sprendimų medžiai turi ir tam tikrų apribojimų \cite{c45}. Laikant kad visi 
 
 Siūloma alternatyva \cite{c45} yra dirbtinių neuronų tinklai, jie gali pasiekti didesnį tikslumą nei sprendimų medžiai, rezultatas yra gana nesudėtingai pasiekiamas \cite{c45}, tačiau jiems suformuoti reikia žymiai daugiau skaičiavimo resursų.
 
-\ktusubsubsection{C4.5 algoritmo pritaikymas}
 Klasifikavimui naudojamos leksikografinės svetainių adreso sąvybės bei serverio savybės. Naudojamos svetainės serverio sąvybės:
 \begin{enumerate}[label=\arabic*.]
     \item Duomenų centro vieta
@@ -54,19 +46,21 @@ Klasifikavimui naudojamos leksikografinės svetainių adreso sąvybės bei serve
 
 Naudojamos leksikografinės savybės yra formuojamos iš svetainės universalaus adreso (URL). Jis yra dalinamas į segmentus, kuriuos skiria įvairūs simboliai bei skyrybos ženklai. Šie segmentai tampa dvireikšmėmis adreso sąvybėmis.
 
-\ktusubsection{Duomenų rinkinio aprašas}
-
 Modeliui apmokyti naudotas duomenų rinkinys surinktas iš kelių skirtingų šaltinių. Naudoti 5000 URL iš kurių 1676 yra kenkėjiškų svetainių adresai.
 
-\ktusubsection{Rezultatai}
-\ktucomment{
-jautrumas sensitivity
-specifiškumas specificity
-tikslumas accuracy
-}
+Apmokant modelį naudota kryžminė patikra, 10\% duomenų skiriama testavimo duomenų imčiai. Naudoti matai tikslumui įvertinti yra jautrumas, tikslumas, specifiškumas, AUC metrika. Kryžminė patikra naudota dėl mažo duomenų rinkinio. Jos algoritmas aprašomas \ktualgoref{cross}.
 
-Apmokant modelį naudota kryžminė patikra, 10\% duomenų skiriama testavimo duomenų imčiai. Naudoti matai tikslumui įvertinti yra jautrumas, tikslumas, specifiškumas, AUC metrika.
+\begin{ktualgo}{cross}{Kryžminės validacijos algoritmas}
+   \For{validacijos žingsniams i}
+        \State{Atskirti i-tąjį validacijos duomenų rinkinį}
+        \State{Apmokyti modelį su likusiais duomenimis}
+        \State{Įvertinti modelį su i-tąja validacijos imtimi}
+        \State{Išsaugoti validacijos rezultatus}
+    \EndFor{}
+    \State{Pateikti vidutines validacijų reikšmes}
+\end{ktualgo}
 
+Naudoti tikslumo matai yra:
 \begin{equation}\label{eq:jautrumas}
 jautrumas = {TP \over {TP + FN}} \cdot 100
 \end{equation}
@@ -91,4 +85,4 @@ neigiamų klasifikavimų skaičius.
     \end{tabular}
 \end{ktutable}
 
-Matavimų rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje.
+Matavimų rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje. Rezultatai yra itin aukšti. Tai gali būti lemiama duomenų rinkinio formavimo specifikos. Mokymo duomenų rinkiniui naudojamos svetainės iš egzistuojančių juodųjų sąrašų. Modelis sugeba išmokti tik jau aptiktų svetainių savybių, naudojant jį po tam tikro laiko tarpo, kai kenksmingos svetainės yra atnaujintos atsižvelgiant į egzistuojančius juoduosius sąrašus modelio rezultatia turėtų prastėti. Taip pat naudojamas duomenų rinkinys yra nedidelis, tai leidžia medžiui gerai prisitiakyti prie jame esančių duomenų.

@@ -1,8 +1,4 @@
-\ktusection{Straipsnio Comparisons of machine learning techniques for detecting malicious webpages analizė}
-
-Straipsnyje lyginami įvairūs metodai skirti svetainių klasifikavimui į kenksmingas ir nekenksmingas.
-\ktusubsection{Problema}
-Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant metodus \cite{comp}
+Straipsnyje lyginami įvairūs metodai skirti svetainių klasifikavimui į kenksmingas ir nekenksmingas. Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant metodus \cite{comp}
 \begin{enumerate}
  \item K-Artimiausų kaimynų (K-Nearest neighbours)
  \item Atraminių vektorių mašinų (Support Vector Machine)
@@ -11,12 +7,9 @@ Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant met
  \item Affinity propagation metodas
 \end{enumerate}
 
-\ktusubsection{Metodai}
-
 Staripsnyje naudojami ir prižiūrimi ir neprižiūrimi metodai. Jų rezultatas yra lyginamas siekiant aptikti geriausiai tinkantį parinktai problemai spręsti \cite{comp}.
 
-\ktusubsubsection{K-Artimiausų kaimynų (K-Nearest neighbours) metodas}
-Šis klasifikavimo metodas yra paremtas trimis elementais \cite{Wu2008}:
+K-Artimiausų kaimynų (K-Nearest neighbours) metodas yra paremtas trimis elementais \cite{Wu2008}:
 \begin{enumerate}
     \item Pavyzdinis duomenų rinkinys (Mokymo duomenų rinkinys)
     \item Elementų atstumo matas
@@ -28,9 +21,7 @@ Pagrindiniai šio metodo sunkumai yra $k$ dydžio parinkimas. Per didelis lems g
 
 Šio metodo privalumas yra tai,  kad skaičiavimai atliekami tingiai. Pirminio modelio formavimo metu nėra atliekami jokie skaičiavimai, jie vykdomi tik klasifikuojant naujus duomenis \cite{Wu2008}.
 
-\ktusubsubsection{Atraminių vektorių mašinų (Support Vector Machine) metodas}
-
-Atraminių vektorių mašinos yra vienas iš patikimiausių klasifikavimo metodų \cite{Wu2008}. Jis pasižymi geru rezultatu net turint mažą kiekį mokymo duomenų bei nenukenčia dėl didelio matmenų kiekio \cite{Wu2008}. Šio metodo esmė yra duomenų atvaizdavimas kitoje erdvėje kurioje bus galima aptikti hiperplokštumą kuri skiria įrašų klases.
+Atraminių vektorių mašinų (Support Vector Machine) metodas yra vienas iš patikimiausių klasifikavimo metodų \cite{Wu2008}. Jis pasižymi geru rezultatu net turint mažą kiekį mokymo duomenų bei nenukenčia dėl didelio matmenų kiekio \cite{Wu2008}. Šio metodo esmė yra duomenų atvaizdavimas kitoje erdvėje kurioje bus galima aptikti hiperplokštumą kuri skiria įrašų klases.
 
 Atraminių vektorių mašinos modelis aprašomas kaip \cite{comp}:
 \begin{equation}
@@ -41,8 +32,6 @@ kur $h(x)$ yra elemento $x$ atstumas nuo klases skiriančios hyperplokštumos, $
 Apmokant atraminių vektorių mašinų modelį yra svarbu parinkti tinkamą kernelio funkciją, nuo jos itin priklauso modelio rezultatų tikslumas. Mokymas vykdomas parenkant kernelio funkciją ir pskaičiuojant tokius koeficientus $\alpha_i$ su kuriais gaunamas didžiausias riba tarp hiperplokštumos ir teisingai klasifikuotų mokymo duomenų erdvėje.
 
 Šio metodo trūkumas yra didelio kiekio skaičiavimo resursų reikalavimas modelio apmokymo metu. Tačiau po modelio formavimo jis gali būti panaudojamas nereikalaujant daug resursų \cite{Wu2008}.
-
-\ktusubsubsection{Paprastasis Bajeso klasifikatorius (Naive Bayes) metodas}
 
 Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma kad visi įrašų matmenys priklauso nepriklauso vienas nuo kito \cite{comp}. Šio metodo privalumas yra paprastas modelio formavimas, nėra hiperparametrų kuriuos reikėtų derinti. Taip pat jo sudėtingumas mokymosi metu laiko atžvilgiu yra tiesinis, mokymosi imties dydžiui. Tai leidžia jį pritaikyti dideliems duomenų rinkiniams \cite{Wu2008}. Taip pat rezultatas yra pakankamai geras, ypač įvertinant reikalingą pastangų kiekį norint apmokyti modelį \cite{Wu2008}.
 
@@ -58,7 +47,6 @@ Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma kad visi �
 
   Šis metodas leidžia panaudoti nedidelį duomenų kiekį modelio apmokymui, apmokymas vyksta greitai ir paprastai, nereikalauja komplikuotų iteracinių schemų modelio formavimui \cite{Wu2008}. Tačiau vienas iš reikalavimų labiausiai ribojančių šį metodą yra visų duomenų matmenų nepriklausomumas tarpusavyje. Tačiau tai galima spręsti naudojant pirminį duomenų apdorojimą, pašalinant stipriai koreliuotas reikšmes \cite{Wu2008}. Taip pat metodas gali modeliuoti tik tiesines ribas tarp klasių, be papildomų modifikacijų jo pritaikyti netiesiniams uždaviniams neina \cite{comp}.
 
-\ktusubsubsection{K-Vidurkių (K-Means) metodas}
  K-Vidurkių algoritmas yra iteracinis metodas skirtas skaidyti duomenų rinkinį į naudotojo parinktą klasterių skaičių $k$ \cite{Wu2008}. Algoritmo metu siekiama minimizuoti visų imties elementų atstumą iki jiems priskirtų klasterių centrų. Algoritmas susideda iš dviejų žingsnių:
 
  \textbf{Duomenų priskyrimas.} Visi elementai yra priskiriami jiems artimiausiam centroidui. Esant vienodiems atstumais centroidas parenkamas atsitiktinai. Pirmą kartą vykdant šį žingsnį centroidai parenkami atsitiktinai. Šio žingsnio rezultatas yra duomenys, suskaidyti į $k$ grupių.
@@ -73,8 +61,6 @@ Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma kad visi �
    K vidurkių metodas turi trūkumų. Galutiniai klasteriai priklauso nuo pirminių taškų pasirinkimo. Netinkamai parinkti taškai gali lemti neoptimalų sprendimą. Taip pat k-vidurkių metodas nesugeba išskirti klasterių kurie nėra vienas nuo kito aiškiai atskirtos sferos erdvėje.
 
    Dėl vidurkio funkcijos naudojimo centroidų parinkimui rezultatas gali būti stipriai iškreiptas kelių išskirčių. Tai gali būti sprendžiama naudojant papildomą duomenų valymą, pirma suskaidant į daugiau klasterių, siekiant kad išskirtims būtų priskiriami maži klasteriai, ir vėliau jas prijungiant prie didesnių klasterių \cite{Wu2008}.
-
-\ktusubsubsection{Affinity propagation metodas}
 
 Affinity propagation yra vienas iš klasterizavimo metodų. Tai yra neprižiūrimas metodas \cite{comp}. Šio metodo įvestis yra panašumų matrica, kurioje saugoma visų duomenų įrašų porų panašumai $s[i, j]$ kur $i, j =  (1,  2, ..., N)$. Naudojant šį metodą siekiama surasti kiekvieno elemento duomenų aibėje atstovą. Tą galima analizuoti kaip žinučių tarp duomenų įrašų perdavimą \cite{fastprop}. Kiekvienai elementų porai $i$ ir $j$ egzistuoja dvi žinutės -- atsakomybė (responsibility), $r[i, j]$ siunčiama iš taško $i$ į $j$, kuri parodo sukauptus įrodymus apie elemento $j$ galimybę atstovauti elementą $i$ klasteryje.  Antra žinutė yra tinkamumas (availability) $a[i, j]$, tai žinutė siunčiama iš elemento $j$ elementui $i$ kuri parodo $j$ elemento tinkamumą atstovauti elementą $i$. Iš pradžių visos $a$ ir $r$ reikšmės nustatomos į nulį ir yra iteratyviai atnaujinamos pagal \cite{fastprop}:
  \begin{equation}
@@ -106,21 +92,16 @@ Affinity propagation yra vienas iš klasterizavimo metodų. Tai yra neprižiūri
 
 Šis metodas leidžia kontroliuoti suformuojamų klasterių kiekį per $\lambda$ vertę \cite{comp}. Šis metodas pasižymi geresne greitaveika lyginant su K-vidurkių metodu \cite{fastprop}.
 
-\ktusubsubsection{Metodų pritaikymas}
-
-Interneto svetainės turi būti supaprastinamos iki tam tikrų savybių sąrašo. Tyrimo metu nauodtas svetainių turinys, jų URL adresai \cite{comp}. Svetainių turinys, kuris yra anglų kalba buvo analizuojamas siekiant išgauti jų semantinę prasmę. Tam naudota Term Frequency - inverse document frequency (TFIDF) metodika. Taip pat į svetainių savybes įtraukta ir jų HTML kodo struktūra, jų adreso semantinė reikšmė, nuorodos į kitus puslapius, atvaizduoto puslapio vaizdas.
-
-\ktusubsection{Duomenų rinkinio aprašas}
+Pritaikant šiuos metodus svetainės turi būti supaprastinamos iki tam tikrų savybių vektoriaus. Tyrimo metu nauodtas svetainių turinys, jų URL adresai \cite{comp}. Svetainių turinys, kuris yra anglų kalba buvo analizuojamas siekiant išgauti jų semantinę prasmę. Tam naudota Term Frequency - inverse document frequency (TFIDF) metodika. Taip pat į svetainių savybes įtraukta ir jų HTML kodo struktūra, jų adreso semantinė reikšmė, nuorodos į kitus puslapius, atvaizduoto puslapio vaizdas.
 
 Duomenų rinkinys surintkas iš dviejų pagrindinių šaltinių, Alexa katalogo, iš kurio išgautos nekenksmingos svetainės, bei iš Phishtank žalingų svetainių registro. Surinkta $100000$ svetainių informacija.
 
-\ktusubsection{Rezultatai}
+\ktufigure{images/validation.png}{11 cm}{Modelio apmokymo ir validacijos proceso schema}
 
-Modeliai apmokyti naudojant 70\% pradinių, sužymėtų duomenų apmokymui bei 30\% testavimui. Kenksmingų ir nekenksmingų svetainių santykis išlaikytas vienodas testavimo ir mokymo imtyse.
-
+Modeliai apmokyti naudojant 70\% pradinių, sužymėtų duomenų apmokymui bei 30\% testavimui \ktufigref{images/validation.png}. Duomenų rinkinys atsitiktinai skaidomas į dvi dalis, mokymo ir validacijos. Mokymo duomenys naudojami modelio apmokymui, o validacijos duomenys naudojami įvertinti modelį. Taip yra išvengiama modelio persimokymo, galima teisingai suderinti modelio hiperparametrus. Kenksmingų ir nekenksmingų svetainių santykis išlaikytas vienodas testavimo ir mokymo imtyse.
 
 \begin{ktutable}{webtrees_rezultatas}{Prižiūrimų modelių rezultatai}
-    \begin{tabular}{l c c c c  }
+    \begin{tabular}{l c c c c }
      \hline
        \diagbox{Metrika}{Modelis} & KNN & LS & RS & NB \\ \hline
         Tikslumas, naudojant 50 įrašų & 74\% & 80\% & 79\% & 77\% \\ \hline
@@ -137,5 +118,4 @@ Modeliai apmokyti naudojant 70\% pradinių, sužymėtų duomenų apmokymui bei 3
     \end{tabular}
 \end{ktutable}
 
-Modelių rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje.
-
+Modelių rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje. Modelis pasiekęs geriausius rezultatsus yra tiesinės atramos vektorių mašinos. Deja šiame straipsnyje nėra vertinami sprendimų medžiai, dėl to nėra aišku, koks būtų jų rezultatas naudojant šiuos duomenų ir sąvybiųū rinkinius.
