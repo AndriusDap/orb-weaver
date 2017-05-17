@@ -62,6 +62,74 @@ object App {
     val (test, train, validate) = l("split files", () => splitFile(blacklist, whitelist))
     val (malicious, benign) = l("building seeds", () => getSeeds(train))
     val (maliciousPagerankFile, benignPagerankFile, maliciousPagerankConvergenceFile, benignPagerankConvergenceFile) = l("building pageranks", () => buildPageranks(malicious, benign))
+    val (trainingFile, testingFile, validationFile) = l("dump wabbit files", () => dumpWabbitFiles(test, train, validate, maliciousPagerankFile, benignPagerankFile))
+
+    (trainingFile, testingFile, validationFile)
+  }
+
+  def dumpWabbitFiles(test: File, train: File, validate: File, maliciousPagerankFile: File, benignPagerankFile: File): (File, File, File) = {
+    val trainingFile = File(tmpDir + "training_file.vw")
+    val testingFile = File(tmpDir + "testing_file.vw")
+    val validationFile = File(tmpDir + "validation_file.vw")
+
+    if (Seq(trainingFile, testingFile, validationFile).exists(!_.exists)) {
+      val maliciousRanks = readRankFile(maliciousPagerankFile)
+      val benignRanks = readRankFile(benignPagerankFile)
+      Seq(
+        train -> trainingFile,
+        test -> testingFile,
+        validate -> validationFile
+      ).foreach {
+        case (from, to) =>
+          val features = extractFeatures(from, maliciousRanks, benignRanks)
+          dump(to, features)
+      }
+    }
+    (trainingFile, testingFile, validationFile)
+  }
+
+  def dump(file: File, set: Iterator[FeatureSet]): Unit = {
+    val buffer = file.bufferedWriter()
+    set.toSeq.par.map {
+      case FeatureSet(host, query, dots, spec, maliciousRank, benignRank, label) =>
+        val result = label match {
+          case Malicious => 1
+          case Benign => 0
+        }
+        s"$result " +
+          s"|path ${host.mkString(" ")}" +
+          s" |query ${query.mkString(" ")}" +
+          s" |numerical dots:$dots.0 specialSymbols:$spec.0" +
+          s" |ranks ${benignRank.map("benign:" + _).getOrElse("")}${maliciousRank.map(" malicious:" + _).getOrElse("")}" +
+          "\n"
+    }.foreach(buffer.write)
+    buffer.close()
+  }
+
+  def extractFeatures(train: File, maliciousRanks: Map[String, Float], benignRanks: Map[String, Float]): Iterator[FeatureSet] = {
+    Source.fromFile(train.jfile).getLines().map(Feature.parse).map { f =>
+      val host = strip(f.url)
+      val url = UrlBuilder.build(f.url)
+      FeatureSet(
+        url.host,
+        url.query,
+        url.dots,
+        url.specialSymbols,
+        maliciousRanks.get(host),
+        benignRanks.get(host),
+        f.label
+      )
+    }
+  }
+
+  case class FeatureSet(host: Vector[String], query: Vector[String], dots: Int, specialSymbols: Int, maliciousRank: Option[Float], benignRank: Option[Float], flag: Label)
+
+  def readRankFile(benignPagerankFile: File): Map[String, Float] = {
+    Source.fromFile(benignPagerankFile.jfile).getLines().map {
+      s =>
+        val split = s.split(" ")
+        split(0) -> split(1).toFloat
+    }.toMap
   }
 
   def buildPageranks(malicious: File, benign: File): (File, File, File, File) = {

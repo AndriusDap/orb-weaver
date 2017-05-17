@@ -1,5 +1,7 @@
 package andriusdap.orbweaver.urlsplit
 
+import andriusdap.orbweaver.executor.UrlBuilder
+
 object WowpalWabbit {
   def main(args: Array[String]): Unit = {
     val justDomains = args.contains("domains")

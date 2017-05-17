@@ -1,5 +1,6 @@
 package andriusdap.orbweaver.urlsplit
 
+import andriusdap.orbweaver.executor.UrlBuilder
 import org.scalatest.{FreeSpec, MustMatchers}
 
 class UrlBuilderTest extends FreeSpec with MustMatchers {
