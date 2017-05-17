@@ -32,3 +32,5 @@ project/plugins/project/
 *.bbl
 *.bcf
 *.xml
+host_level_data/
+out
