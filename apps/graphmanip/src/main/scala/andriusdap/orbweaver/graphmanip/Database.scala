@@ -98,7 +98,5 @@ object Database {
     val read = rdb.read(Seq(1l, max))
 
     println(s"read values, first is ${read.head} last is ${read.last}")
-
   }
-
 }
