@@ -1,4 +1,4 @@
-package andriusdap.orbweaver.pagerank
+package andriusdap.orbweaver.executor
 
 import java.lang.Long
 import java.util.function.Consumer
@@ -6,72 +6,40 @@ import java.util.function.Consumer
 import it.unimi.dsi.big.webgraph.BVGraph
 
 import scala.collection.mutable.ArrayBuffer
-import scala.io.Source
+import scala.io.{Codec, Source}
 import scala.reflect.io.File
 
-object App {
+class Pagerank(webgraph: String) {
 
-  def l[T](message: String, f: () => T) = {
-    val before = System.currentTimeMillis()
+  val graph = BVGraph.load(webgraph)
+  val transposedGraph = transpose(graph)
+  val outDegree = outDegrees(graph)
 
-    print(s"$message ... ")
-
-    val result = f.apply()
-    val after = System.currentTimeMillis()
-    println(f" ... ${(after - before) / 1000.0f}%2.2f s")
-
-    result
-  }
-
-  case class AppParams(webgraph: Option[String] = None, seedFile: Option[String] = None, outFile: Option[String] = None, passes: Option[Int] = None)
-
-  def seed(length: Int, seedFile: Option[String]): Array[Float] = {
-    seedFile match {
-      case Some(file) =>
-        val values = Array.fill[Float](length)(0.0f)
-        Source.fromFile(file).getLines().map(_.toInt).foreach(values(_) = 1.0f)
-        values
-      case None => Array.fill[Float](length)(1.0f)
-    }
+  def seed(length: Int, seedFile: File): Array[Float] = {
+    val values = Array.fill[Float](length)(0.0f)
+    Source.fromFile(seedFile.jfile).getLines().map(_.toInt).foreach(values(_) = 1.0f)
+    values
   }
 
   def output(pagerank: Array[Float], s: String): Unit = {
     File(s).writeAll(pagerank.zipWithIndex.map { case (rank, index) => s"$index $rank\n" }: _*)
   }
 
-  def main(args: Array[String]): Unit = {
-    val applicationConfig = args.sliding(2, 1).foldLeft[AppParams](AppParams()) {
-      case (current, params) =>
-        params.toList match {
-          case "--webgraph" :: tail => current.copy(webgraph = tail.headOption)
-          case "--seed" :: tail => current.copy(seedFile = tail.headOption)
-          case "--out" :: tail => current.copy(outFile = tail.headOption)
-          case _ => current
+  case class PagerankResult(pagerank: Array[Float], convergence: Seq[Double])
+
+  def pagerank(seedFile: File, passes: Int, dampening: Float, error: Double): PagerankResult = {
+    val seedRank = seed(transposedGraph.length, seedFile)
+
+    val (convergence, pagerank) = (1 to passes).foldLeft(Seq[Double]() -> seedRank) {
+      case ((diffs, currentRank), pass) =>
+        if(!diffs.lastOption.exists(_ < error)) {
+          val newValue = singlePass(transposedGraph, outDegree, currentRank, dampening)
+          (diffs :+ distance(currentRank, newValue)) -> newValue
+        } else {
+          (diffs, currentRank)
         }
     }
-
-    applicationConfig match {
-      case AppParams(Some(webgraph), optSeedFile, optOutFile, optPasses) =>
-        val graph = BVGraph.load(webgraph)
-
-        val transposedGraph = l("transpose", () => transpose(graph))
-        val outDegree = l("out degree", () => outDegrees(graph))
-        val seedRank = l("seed file", () => seed(transposedGraph.length, optSeedFile))
-
-        val passes = optPasses.getOrElse(50)
-
-        val pagerank = (1 to passes).foldLeft(seedRank) {
-          case (currentRank, pass) =>
-
-            val newValue = l(s"pass #$pass", () => singlePass(transposedGraph, outDegree, currentRank))
-            println(s"diff is ${distance(currentRank, newValue)}")
-
-            newValue
-        }
-
-        optOutFile.foreach(f => l("outputing", () => output(pagerank, f)))
-      case _ => println("invalid params, please specify --seed, --webgraph, --out, --passes")
-    }
+    PagerankResult(pagerank, convergence)
   }
 
   def distance(current: Array[Float], previous: Array[Float]): Double = {

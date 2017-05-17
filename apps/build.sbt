@@ -14,6 +14,13 @@ lazy val urlsplit = (project in file("urlsplit")).settings(commonSettings:_*).
   )
 
 
+lazy val executor = (project in file("executor")).settings(commonSettings:_*).
+  settings(
+    name:= "executor",
+    mainClass in assembly := Some("andriusdap.orbweaver.executor.App"),
+    libraryDependencies += "it.unimi.dsi" % "webgraph-big" % "3.3.6"
+  )
+
 lazy val graphmanip = (project in file("graphmanip")).settings(commonSettings:_*).
   settings(
     name:= "graphmanip",
@@ -23,18 +30,9 @@ lazy val graphmanip = (project in file("graphmanip")).settings(commonSettings:_*
     libraryDependencies += "com.timgroup" % "iterata_2.11" % "0.1.6"
   )
 
-lazy val pagerank = (project in file("pagerank")).
+lazy val pagerank = (project in file("pagerank")).settings(commonSettings:_*).
   settings(
     name:= "pagerank",
-    organization := "orb-weaver",
-    version := "0.0.1-SNAPSHOT",
-    scalaVersion := "2.11.1",
-    libraryDependencies += "org.apache.spark" % "spark-graphx_2.10" % "2.1.1"
-)
-
-lazy val decompress = (project in file("decompress")).settings(commonSettings:_*).
-  settings(
-    name:= "decompress",
-    mainClass in assembly := Some("andriusdap.orbweaver.decompress.App"),
+    mainClass in assembly := Some("andriusdap.orbweaver.pagerank.App"),
     libraryDependencies += "it.unimi.dsi" % "webgraph-big" % "3.3.6"
   )
