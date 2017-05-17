@@ -15,9 +15,9 @@ class Pagerank(webgraph: String) {
   val transposedGraph = transpose(graph)
   val outDegree = outDegrees(graph)
 
-  def seed(length: Int, seedFile: File): Array[Float] = {
+  def seed(length: Int, seedFile: File, seedValue: Float): Array[Float] = {
     val values = Array.fill[Float](length)(0.0f)
-    Source.fromFile(seedFile.jfile).getLines().map(_.toInt).foreach(values(_) = 1.0f)
+    Source.fromFile(seedFile.jfile).getLines().map(_.toInt).foreach(values(_) = seedValue)
     values
   }
 
@@ -27,8 +27,8 @@ class Pagerank(webgraph: String) {
 
   case class PagerankResult(pagerank: Array[Float], convergence: Seq[Double])
 
-  def pagerank(seedFile: File, passes: Int, dampening: Float, error: Double): PagerankResult = {
-    val seedRank = seed(transposedGraph.length, seedFile)
+  def pagerank(seedFile: File, passes: Int, dampening: Float, error: Double, seedValue: Float): PagerankResult = {
+    val seedRank = seed(transposedGraph.length, seedFile, seedValue)
 
     val (convergence, pagerank) = (1 to passes).foldLeft(Seq[Double]() -> seedRank) {
       case ((diffs, currentRank), pass) =>

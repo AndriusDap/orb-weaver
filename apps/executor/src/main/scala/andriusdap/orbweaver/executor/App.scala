@@ -79,9 +79,8 @@ object App {
       val benignPagerankConvergenceFileBuffer = benignPagerankConvergenceFile.bufferedWriter()
 
       val pagerankAlgo = l("initializing pagerank", () => new Pagerank(hostgraph))
-      val maliciousPagerank = l(s"malicious pagerank", () => pagerankAlgo.pagerank(malicious, 50, 0.7f, 0.1))
-      val benignPagerank = l(s"benign pagerank", () => pagerankAlgo.pagerank(benign, 50, 0.75f, 0.1))
-
+      val maliciousPagerank = l(s"malicious pagerank", () => pagerankAlgo.pagerank(malicious, 20, 0.95f, 0.1, 100))
+      val benignPagerank = l(s"benign pagerank", () => pagerankAlgo.pagerank(benign, 50, 0.75f, 0.1, 1))
 
       val hosts = Source
         .fromFile(hostIndex)
