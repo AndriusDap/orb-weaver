@@ -79,7 +79,7 @@ object App {
         train -> trainingFile,
         test -> testingFile,
         validate -> validationFile
-      ).foreach {
+      ).par.foreach {
         case (from, to) =>
           val features = extractFeatures(from, maliciousRanks, benignRanks)
           dump(to, features)
@@ -90,7 +90,7 @@ object App {
 
   def dump(file: File, set: Iterator[FeatureSet]): Unit = {
     val buffer = file.bufferedWriter()
-    set.toSeq.par.map {
+    set.map {
       case FeatureSet(host, query, dots, spec, maliciousRank, benignRank, label) =>
         val result = label match {
           case Malicious => 1
