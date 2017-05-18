@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 vw\
-	 -d train\
+	 -d training_file.vw\
 	 --normalized\
 	 -f model.vw\
 	 -k\
@@ -17,9 +17,9 @@ echo
 echo "========================== Perf Test ======================"
 echo
 echo
-vw -d test -t  --binary -i model.vw -r results.txt # --quiet
+vw -d training_file.vw -t  --binary -i model.vw -r results.txt # --quiet
 
 perf \
  -all  -auc \
- -files test_labels results.txt
+ -files test_labels.txt results.txt
 

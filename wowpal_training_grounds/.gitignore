@@ -1,3 +1,6 @@
 model.vw
-train.cache
 results.txt
+test_labels.txt
+testing_file.vw
+training_file.vw
+*.cache
