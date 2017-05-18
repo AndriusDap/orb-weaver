@@ -51,9 +51,46 @@ Išskiriamos sąvybės iš tinklalapio adreso yra:
 \end{enumerate}
 Žodžiai adrese yra išskiriami kaip dviejų reikšmių sąvybės, $0$ jei žodis neegzistuoja adrese, $1$ jei žodis yra adrese. Laikoma, kad žodžius skiria specialieji simboliai.
 
-Pagerank įverčiai gaunami iš kryptinio svetainių grafo $G = (V, E)$, kur $V$ yra šio grafo viršūnės o $E$ lankai. Grafo formavimas iš interneto svetainių yra pavaizduotas \ktufigref{images/hostgraph.png} paveiksle.
+Pagerank įverčiai gaunami iš orientuoto svetainių grafo $G = (V, E)$, kur $V$ yra šio grafo viršūnės o $E$ lankai. Grafo formavimas iš interneto svetainių yra pavaizduotas \ktufigref{images/hostgraph.png} paveiksle.
 \ktufigure{images/hostgraph.png}{15 cm}{Svetainių grafo formavimas iš svetainių}
 
 Grafo viršūnės $V$ yra svetainės, o lankai atitinka ryšius tarp svetainių. Tai yra nuorodos tarp svetainių aptinkamos svetainių tinklalapiuose. Šie lankai turi kryptį. Jei svetainės $v_a$ tinklalapyje yra nuoroda į svetainės $v_b$ tinklalapį laikoma, kad egzistuoja lankas $e_{ab}$ iš viršūnės $v_a$ į viršūnę $v_b$. Visų lankų svoris yra vienodas, tai yra jei keli svetainės $v_a$ tinklalapiai turi nuorodas į svetainės $v_b$ tinklalapius, visvien laikoma kad yra tik vienas lankas $e_{ab}$. Galimi abipusiai svetainių ryšiai, tai yra jei egzistuoja lankas $e_{ab}$ lankas $e_{ba}$, kuris rodo ryšį iš viršūnės $v_b$ į viršūnę $v_a$ taip pat gali egzistuoti.
 
+Svetainių grafas naudojamas skaičiuoti Pagerank įverčiams. Pagerank įvertis apibrėžiamas kaip \cite{pagerank}:
+\begin{equation} \label{eq:pagerank}
+    R(v) = (1 - d) + d \sum_{u \in B_{v}} \frac{R(u)}{N_u}
+\end{equation}
+kur $R(v)$ yra viršūnės $v$ PageRank įvertis, $d$ - slopinimo faktorius, $B_v$ viršūnės $u$ kurios turi lankus $e_{uv}$ su viršūne $v$. $N_u$ yra viršūnės $u$ išėjimo laipsnis, tai yra skaičius lankų kurie veda iš viršūnės $u$. Slopinimo faktorius $d$ gali turėti reikšmes tarp $0$ ir $1$.
 
+PageRank įvertis negali būti tiesiogiai apskaičiuojamas pagal \ref{eq:pagerank} formulę. Naudojamas iteracinis metodas \ktualgoref{Pagerank} skaičiavimui:
+
+\begin{ktualgo}{Pagerank}{Iteracinis PageRank įverčio skaičiavimo algoritmas}
+\State{$R_0 \gets S$}
+\Repeat
+\For{$v_i$ grafe $G$}
+\State{$r \gets 0$}
+\For{$u \in B_{v_i}$}
+\State{$r \gets r + \frac{R_i(u)}{N_u} $}
+\EndFor{}
+\State{$R_{i+1}(v_i) \gets (1 - d) + d r $}
+\State{$\delta \gets \norm{R_i - R_{i+1}} $}
+\EndFor{}
+\Until{$\delta < e$}
+\end{ktualgo}
+
+Šis būdas apskaičiuoti PageRank priklauso nuo nuo kelių parametrų \vref{tab:pagerank_params}. Tai yra $S$, nulinės iteracijos įvertis. Šios iteracijos metu nustatytos reikšmės bus naudojamos tolimesnių viršūnių įverčiui rasti. Nustatant šį vektorių galima koreguoti kurios viršūnės yra svarbios skaičiavimų pradžioje. Šio vektoriaus keitimas leidžia personalizuoti PageRank įverčio rezultatą. Patametras $d$ yra slopinimas, nuo jo priklauso metodo konvergavimo greitis. Viskas vykdoma kol pasiekiamas pasirinktas konvergavimo lygmuo, kurį galima aptikti pagal tai, jog iteruojant įvertis kinta nežymiai. Minimali iteracijos įverčio pakitimo riba nustatoma kintamuoju $e$.
+
+\begin{ktutable}{pagerank_params}{Iteracinio PageRank įverčio skaičiavimo algoritmo parametrai}
+    \begin{tabular}{ | r | l | }
+        \hline
+        Parametras & Reikšmė \\ \hline
+        $G$ & Grafas kurio įverčiai skaičiuojami \\ \hline
+        $S$ & Pirminės įverčio reikšmės \\ \hline
+        $d$ & Slopinimo faktorius \\ \hline
+        $e$ & Siekiama klaida tarp iteracijų \\ \hline
+    \end{tabular}
+\end{ktutable}
+
+PageRank įvertis skaičiuojamas du kartus, naudojant skirtingas pradines reikšmes. Skaičiuojant nekenksmingų svetainių įvertį mokymo imties svetainių viršūnėms priskiriama nenulinė reikšmė, o visoms kitoms svetainėms nustatoma nulinė pradinė reikšmė. Skaičiuojant kenksmingų svetainių įvertį nenulinės reikšmės priskiriamos kenksmingų tinklalapių svetainių viršūnėms. Priskiriamos vertės yra vienas iš modelio mokymo metu derinamų hiperparametrų.
+
+Gavus PageRank įverčius, jie yra naudojami suformuoti vektoriui $X$, taip baigiant tinklalapių nuorodų transformavimą į klasifikavimo modeliams pritaikytą vektorių.
