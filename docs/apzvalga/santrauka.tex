@@ -1,3 +1,10 @@
+Analizuojant egzistuojančią literatūrą aptikta, kad geri rezultatai klasifikuojant kenksmingas ir nekenksmingas svetaines yra pasiekiami naudojant įvairius metodus: C4.5 sprendimų medį \cite{trees}, atraminių vektorių mašinų \cite{comp}, siūlomi neuroniniai tinklai \cite{trees}. Šie metodai bus mėginami bandant išrinkti geriausiai tinkantį parinktam panaudos atvejui.
+
+Duomenų rinkiniai yra formuojami jungiant įvairių juodųjų sąrašų duomenis bei naudojant privačius duomenų rinkinius kurie taip pat atitinka juoduosius sąrašus \cite{trees, comp, webcop}.
+
+Tinklalapių parametrai yra formuojami iš jų adresų (URL) \cite{trees, comp}. Interneto grafo struktūra naudojama straipsnyje \cite{linchpins} stengiangis identifikuoti klasterių centrus. Siūloma bandyti šią metriką pritaikyti ir klasifikavimo uždavinyje. Taip pat naudojami papildomi duomenys apie talpinančius serverius, įvairius svetainių metaduomenis, tačiau šie duomenys nėra viešai pasiekiami, ir jų surinkimui naudojami itin dideli skaičiavimo resursai -- \cite{linchpins} straipsnio atveju naudota 20 virtualių mašinų, renkančių duomenis 7 mėnesius. Del to naudojami tik URL bei vetainių grafo PageRank įverčiai.
+
+Modeliai formuojami naudojant įvairius metodus, tačiau dalinimas į mokymo, testavimo ir validavimo imtis yra paprastas ir tinkamas, turint pakankamai didelį duomenų rinkinį. Kryžminė validacija gali būti naudojant esant mažesniems rinkiniams \cite{trees}. Modeliai vertinami naudojant įvairias metrikas: tikslumas, validumo vertinimas naudojant AUC, tikslumą, specifiškumą, jautrumą.
 
 \newpage
 \ktusection{Darbo tikslas ir uždavinys}
