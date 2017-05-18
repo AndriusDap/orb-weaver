@@ -100,13 +100,16 @@ object App {
           s"|path ${host.mkString(" ")}" +
           s" |query ${query.mkString(" ")}" +
           s" |numerical dots:$dots.0 specialSymbols:$spec.0" +
-          s" |ranks ${benignRank.map("benign:" + _).getOrElse("")}${maliciousRank.map(" malicious:" + _).getOrElse("")}" +
+          s" |ranks benign:$benignRank malicious:$maliciousRank" +
           "\n"
     }.foreach(buffer.write)
     buffer.close()
   }
 
   def extractFeatures(train: File, maliciousRanks: Map[String, Float], benignRanks: Map[String, Float]): Iterator[FeatureSet] = {
+    val minMalicious = maliciousRanks.values.min
+    val minBenign = benignRanks.values.min
+
     Source.fromFile(train.jfile).getLines().map(Feature.parse).map { f =>
       val host = strip(f.url)
       val url = UrlBuilder.build(f.url)
@@ -115,14 +118,14 @@ object App {
         url.query,
         url.dots,
         url.specialSymbols,
-        maliciousRanks.get(host),
-        benignRanks.get(host),
+        maliciousRanks.getOrElse(host, minMalicious),
+        benignRanks.getOrElse(host, minBenign),
         f.label
       )
     }
   }
 
-  case class FeatureSet(host: Vector[String], query: Vector[String], dots: Int, specialSymbols: Int, maliciousRank: Option[Float], benignRank: Option[Float], flag: Label)
+  case class FeatureSet(host: Vector[String], query: Vector[String], dots: Int, specialSymbols: Int, maliciousRank: Float, benignRank: Float, flag: Label)
 
   def readRankFile(benignPagerankFile: File): Map[String, Float] = {
     Source.fromFile(benignPagerankFile.jfile).getLines().map {
