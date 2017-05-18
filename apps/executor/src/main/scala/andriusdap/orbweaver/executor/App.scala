@@ -58,13 +58,37 @@ object App {
     }
   }
 
+  def dumpLabelFiles(test: File, train: File, validate: File): (File, File, File) = {
+    val testLabelFile = File(tmpDir + "test_labels.txt")
+    val trainLabelFile = File(tmpDir + "train_labels.txt")
+    val validateLabelFile = File(tmpDir + "validate_labels.txt")
+    if (Seq(testLabelFile, trainLabelFile, validateLabelFile).exists(!_.exists)) {
+      Seq(
+        testLabelFile -> test,
+        trainLabelFile -> train,
+        validateLabelFile -> validate
+      ).foreach {
+        case (labels, source) =>
+          val writer = labels.bufferedWriter()
+          Source.fromFile(source.jfile)
+            .getLines()
+            .map(l => Feature.parse(l).label)
+            .map(toWabbitValue)
+            .foreach(l => writer.write(s"$l\n"))
+
+          writer.close()
+      }
+    }
+
+    (trainLabelFile, testLabelFile, validateLabelFile)
+  }
+
   def main(args: Array[String]): Unit = {
     val (test, train, validate) = l("split files", () => splitFile(blacklist, whitelist))
     val (malicious, benign) = l("building seeds", () => getSeeds(train))
     val (maliciousPagerankFile, benignPagerankFile, maliciousPagerankConvergenceFile, benignPagerankConvergenceFile) = l("building pageranks", () => buildPageranks(malicious, benign))
     val (trainingFile, testingFile, validationFile) = l("dump wabbit files", () => dumpWabbitFiles(test, train, validate, maliciousPagerankFile, benignPagerankFile))
-
-    (trainingFile, testingFile, validationFile)
+    val (trainingLabels, testingLabels, validationLabels) = l("dump label files", () => dumpLabelFiles(test, train, validate))
   }
 
   def dumpWabbitFiles(test: File, train: File, validate: File, maliciousPagerankFile: File, benignPagerankFile: File): (File, File, File) = {
@@ -92,10 +116,7 @@ object App {
     val buffer = file.bufferedWriter()
     set.map {
       case FeatureSet(host, query, dots, spec, maliciousRank, benignRank, label) =>
-        val result = label match {
-          case Malicious => 1
-          case Benign => -1
-        }
+        val result = toWabbitValue(label)
         s"$result " +
           s"|path ${host.mkString(" ")}" +
           s" |query ${query.mkString(" ")}" +
@@ -104,6 +125,13 @@ object App {
           "\n"
     }.foreach(buffer.write)
     buffer.close()
+  }
+
+  def toWabbitValue(label: Label): Int = {
+    label match {
+      case Malicious => 1
+      case Benign => -1
+    }
   }
 
   def extractFeatures(train: File, maliciousRanks: Map[String, Float], benignRanks: Map[String, Float]): Iterator[FeatureSet] = {
