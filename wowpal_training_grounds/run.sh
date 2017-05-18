@@ -17,7 +17,7 @@ echo
 echo "========================== Perf Test ======================"
 echo
 echo
-vw -d test -t  --binary -i model.vw -r results.txt --quiet
+vw -d test -t  --binary -i model.vw -r results.txt # --quiet
 
 perf \
  -all  -auc \

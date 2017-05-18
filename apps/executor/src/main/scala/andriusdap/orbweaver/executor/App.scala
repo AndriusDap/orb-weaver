@@ -94,7 +94,7 @@ object App {
       case FeatureSet(host, query, dots, spec, maliciousRank, benignRank, label) =>
         val result = label match {
           case Malicious => 1
-          case Benign => 0
+          case Benign => -1
         }
         s"$result " +
           s"|path ${host.mkString(" ")}" +
