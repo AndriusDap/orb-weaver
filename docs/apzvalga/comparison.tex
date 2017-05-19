@@ -27,15 +27,15 @@ Atraminių vektorių mašinos modelis aprašomas kaip \cite{comp}:
 \begin{equation}
     h(x) = b + \sum_{n=1}^{N}y_i \alpha_i K(x, x_i)
 \end{equation}
-kur $h(x)$ yra elemento $x$ atstumas nuo klases skiriančios hyperplokštumos, $b$ yra papildomas svorio koeficinetas, $\alpha$ yra hiperplokštumos paraštės korekcijos koeficientas mokymo imčiai, $N$ yra matmenų skaičius, $K$ yra kernelio funkcija kuri transformuoja elementus į atramos vektorių mašinos erdvę, $x$ yra klasifikuojamas įrašas.
+kur $h(x)$ yra elemento $x$ atstumas nuo klases skiriančios hiperplokštumos, $b$ yra papildomas svorio koeficientas, $\alpha$ yra hiperplokštumos paraštės korekcijos koeficientas mokymo imčiai, $N$ yra matmenų skaičius, $K$ yra branduolio funkcija kuri transformuoja elementus į atramos vektorių mašinos erdvę, $x$ yra klasifikuojamas įrašas.
 
-Apmokant atraminių vektorių mašinų modelį yra svarbu parinkti tinkamą kernelio funkciją, nuo jos itin priklauso modelio rezultatų tikslumas. Mokymas vykdomas parenkant kernelio funkciją ir pskaičiuojant tokius koeficientus $\alpha_i$ su kuriais gaunamas didžiausias riba tarp hiperplokštumos ir teisingai klasifikuotų mokymo duomenų erdvėje.
+Apmokant atraminių vektorių mašinų modelį yra svarbu parinkti tinkamą branduolio funkciją, nuo jos itin priklauso modelio rezultatų tikslumas. Mokymas vykdomas parenkant branduolio funkciją ir pskaičiuojant tokius koeficientus $\alpha_i$ su kuriais gaunamas didžiausias riba tarp hiperplokštumos ir teisingai klasifikuotų mokymo duomenų erdvėje.
 
 Šio metodo trūkumas yra didelio kiekio skaičiavimo resursų reikalavimas modelio apmokymo metu. Tačiau po modelio formavimo jis gali būti panaudojamas nereikalaujant daug resursų \cite{Wu2008}.
 
 Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma kad visi įrašų matmenys priklauso nepriklauso vienas nuo kito \cite{comp}. Šio metodo privalumas yra paprastas modelio formavimas, nėra hiperparametrų kuriuos reikėtų derinti. Taip pat jo sudėtingumas mokymosi metu laiko atžvilgiu yra tiesinis, mokymosi imties dydžiui. Tai leidžia jį pritaikyti dideliems duomenų rinkiniams \cite{Wu2008}. Taip pat rezultatas yra pakankamai geras, ypač įvertinant reikalingą pastangų kiekį norint apmokyti modelį \cite{Wu2008}.
 
-  Modelis formuojamas naudojantis bajeso teorema ir sąlyginėmis tikimybėmis. Jei klasių aibė yra $i = 0, 1$ tik dviejų elementų, $P(i|x)$ yra tikimybė kad įrašas su verčių vektoriumi $x = (x_1, ..., x_p)$ priklauso klasei $i$, tai bet kokia monotoniška $P(i|x)$ gali būti naudojama klasifikavimui \cite{Wu2008}. Ši funkcija gali būti išreiškiama kaip santykis $P(1|x)/P(0|x)$. Tai gali būti išreiškiama kaip \cite{wu2008}:
+  Modelis formuojamas naudojantis Bajeso teorema ir sąlyginėmis tikimybėmis. Jei klasių aibė yra $i = 0, 1$ tik dviejų elementų, $P(i|x)$ yra tikimybė kad įrašas su verčių vektoriumi $x = (x_1, ..., x_p)$ priklauso klasei $i$, tai bet kokia monotoniška $P(i|x)$ gali būti naudojama klasifikavimui \cite{Wu2008}. Ši funkcija gali būti išreiškiama kaip santykis $P(1|x)/P(0|x)$. Tai gali būti išreiškiama kaip \cite{wu2008}:
     \begin{equation}
         \frac{P(1|x)}{P(0|x)} = \frac{f(x|1)P(1)}{f(x|0)P(0)}
     \end{equation}
@@ -51,7 +51,7 @@ Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma kad visi �
 
  \textbf{Duomenų priskyrimas.} Visi elementai yra priskiriami jiems artimiausiam centroidui. Esant vienodiems atstumais centroidas parenkamas atsitiktinai. Pirmą kartą vykdant šį žingsnį centroidai parenkami atsitiktinai. Šio žingsnio rezultatas yra duomenys, suskaidyti į $k$ grupių.
 
- \textbf{Centrų tikslinimas.} Perskaičiuojamoss grupių vidutinės parametrų vertės, parenkamas naujas centroidas esantis arčiausiai tikrojo grupės centro.
+ \textbf{Centrų tikslinimas.} Perskaičiuojamos grupių vidutinės parametrų vertės, parenkamas naujas centroidas esantis arčiausiai tikrojo grupės centro.
  Šie algoritmo žingsniai yra kartojami kol centroidai nebesikeičia \cite{Wu2008}. Atstumui įvertinti naudojamas Euklido atstumas \cite{comp}:
    \begin{equation}
    ||x_n - \mu_k||^2 = \sqrt{\sum_{i=1}^{D}(x_{ni} - \mu_{ki})^2}
@@ -67,7 +67,7 @@ Affinity propagation yra vienas iš klasterizavimo metodų. Tai yra neprižiūri
     r[i, j] = (1 - \lambda)\rho[i, j] + \lambda r[i, j]
     a[i, j] = (1 - \lambda)\alpha[i, j] + \lambda a[i, j]
  \end{equation}
- kur $\lambda$ yra konstanta naudojama sumažinti svyravimus, galimos reikšmės yra $ 0 \geq \lambda < 1 $ , o $\rho[i, j]$ ir  $\alpha[i, j]$ yra propagujama atsakomybė ir propaguojamas tinkamumas \cite{fastprop}. Šie dydžiai gaunami pagal \cite{fastprop}:
+ kur $\lambda$ yra konstanta naudojama sumažinti svyravimus, galimos reikšmės yra $ 0 \geq \lambda < 1 $ , o $\rho[i, j]$ ir  $\alpha[i, j]$ yra propaguojama atsakomybė ir propaguojamas tinkamumas \cite{fastprop}. Šie dydžiai gaunami pagal \cite{fastprop}:
  \begin{equation}
    \rho[i, j]=\left\{
                   \begin{array}{l r}
@@ -94,7 +94,7 @@ Affinity propagation yra vienas iš klasterizavimo metodų. Tai yra neprižiūri
 
 Pritaikant šiuos metodus svetainės turi būti supaprastinamos iki tam tikrų savybių vektoriaus. Tyrimo metu nauodtas svetainių turinys, jų URL adresai \cite{comp}. Svetainių turinys, kuris yra anglų kalba buvo analizuojamas siekiant išgauti jų semantinę prasmę. Tam naudota Term Frequency - inverse document frequency (TFIDF) metodika. Taip pat į svetainių savybes įtraukta ir jų HTML kodo struktūra, jų adreso semantinė reikšmė, nuorodos į kitus puslapius, atvaizduoto puslapio vaizdas.
 
-Duomenų rinkinys surintkas iš dviejų pagrindinių šaltinių, Alexa katalogo, iš kurio išgautos nekenksmingos svetainės, bei iš Phishtank žalingų svetainių registro. Surinkta $100000$ svetainių informacija.
+Duomenų rinkinys surinktas iš dviejų pagrindinių šaltinių, Alexa katalogo, iš kurio išgautos nekenksmingos svetainės, bei iš Phishtank žalingų svetainių registro. Surinkta $100000$ svetainių informacija.
 
 \ktufigure{images/validation.png}{11 cm}{Modelio apmokymo ir validacijos proceso schema}
 
@@ -118,4 +118,4 @@ Modeliai apmokyti naudojant 70\% pradinių, sužymėtų duomenų apmokymui bei 3
     \end{tabular}
 \end{ktutable}
 
-Modelių rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje. Modelis pasiekęs geriausius rezultatsus yra tiesinės atramos vektorių mašinos. Deja šiame straipsnyje nėra vertinami sprendimų medžiai, dėl to nėra aišku, koks būtų jų rezultatas naudojant šiuos duomenų ir sąvybiųū rinkinius.
+Modelių rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje. Modelis pasiekęs geriausius rezultatus yra tiesinės atramos vektorių mašinos. Deja šiame straipsnyje nėra vertinami sprendimų medžiai, dėl to nėra aišku, koks būtų jų rezultatas naudojant šiuos duomenų ir savybių rinkinius.

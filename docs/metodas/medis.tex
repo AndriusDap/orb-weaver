@@ -1,4 +1,4 @@
-C4.5 sprendimų medis yra sprendimų medžio tipo klasifikatorius kurio formaivimui naudojamas C4.5 algoritmas. Sprendimų medis yra programa, suformuota iš tam tikrų testų, kurie tikrina nagrinėjamo objekto parametrus, ir pagal juos parenkama tam tikra klasė.
+C4.5 sprendimų medis yra sprendimų medžio tipo klasifikatorius kurio formavimui naudojamas C4.5 algoritmas. Sprendimų medis yra programa, suformuota iš tam tikrų testų, kurie tikrina nagrinėjamo objekto parametrus, ir pagal juos parenkama tam tikra klasė.
 
 \ktufigure{images/sprendimu_medis.png}{8 cm}{Pavyzdinis sprendimų medis}
 
@@ -8,7 +8,7 @@ Sprendimų medį sudarantys testai yra formuojami modelio apmokymo metu. Mokymui
 \begin{equation} \label{eq:gainratio}
     santykinisIšlošis(t_i) = \frac{išlošis(t_i)}{santykinėEntropija(t_i)}
 \end{equation}
-Santykinis išlošis priklauso nuo informacjios išlošio, kuris būtų maksimizuojamas naudojant ID3 algoritmą bei santykinės entropijos. Santykinė entrpija naudojama siekiant sumažinti informacjios išlošio iškreipimą kai testas skaido rinkinį į daug skirtingų klasių \cite{c45}
+Santykinis išlošis priklauso nuo informacijos išlošio, kuris būtų maksimizuojamas naudojant ID3 algoritmą bei santykinės entropijos. Santykinė entropija naudojama siekiant sumažinti informacijos išlošio iškreipimą kai testas skaido rinkinį į daug skirtingų klasių \cite{c45}
 
 \begin{equation}
     išlošis(t_i) = entropija(H) - entropija_{t_i}(H)
@@ -31,8 +31,8 @@ kur $freq(C_j, S)$ žymi klasės $C_j$ pasikartojimo kiekį rinkinyje $S$.
 Aptikus testą kuris maksimizuoja santykinį išlošį \ref{eq:gainratio} testas yra įtraukiamas į medį. Mokymo duomenų rinkinys $H$ yra skaidomas pagal testą į kelis rinkinius\cite{c45}. Šie duomenų rinkiniai priskiriami medžio šakoms atitinkančioms testo rezultatus ir rekursiškai tęsiamas medžio formavimas.
 C4.5 medžio formavimo algoritmas palaiko diskrečių reikšmių parametrus bei tolygius kintamuosius. Testai vykdomi diskretiems parametrams sukuria po vieną šaką kiekvienai galimai parametro reikšmei.
 
- Testai tolydiems parametrams vykdomi parenkant ribinę vertę $Z$, su kuria bus lyginama parametro $A$ vertė \cite{c45}. Kadangi apmokymui naudojamas baigtinis duomenų rinkinys, jame yra baigtinis kiekis galimų tolydaus parametro $A$ reikšmių $\{v_1, v_2, ..., v_m\}$. Ribinei vertei $Z$ priskirmama viena iš egzistuojančių parametro $A$ verčių  $v_i$. Parenkama vertė kuri maksimizuoja santykinį išlošį \ref{eq:gainratio}.
+ Testai tolydiems parametrams vykdomi parenkant ribinę vertę $Z$, su kuria bus lyginama parametro $A$ vertė \cite{c45}. Kadangi apmokymui naudojamas baigtinis duomenų rinkinys, jame yra baigtinis kiekis galimų tolydaus parametro $A$ reikšmių $\{v_1, v_2, ..., v_m\}$. Ribinei vertei $Z$ priskiriama viena iš egzistuojančių parametro $A$ verčių  $v_i$. Parenkama vertė kuri maksimizuoja santykinį išlošį \ref{eq:gainratio}.
 
-Suformavus medį vydomas medžio mažinimas. Dalis šakų yra sukeliančios persimokymą - tai yra jos yra per daug pritaikytos mokymo imčiai \cite{c45}. Šios šakos yra aptinkamos skaičiuojant tikėtiną klaidų dažnį medžiui be tam tikro testo ir su potencialiai pertekliniu testu.
+Suformavus medį vykdomas medžio mažinimas. Dalis šakų yra sukeliančios persimokymą - tai yra jos yra per daug pritaikytos mokymo imčiai \cite{c45}. Šios šakos yra aptinkamos skaičiuojant tikėtiną klaidų dažnį medžiui be tam tikro testo ir su potencialiai pertekliniu testu.
 
 Šis metodas neturi hiperparametrų kuriuos būtų galima derinti.
