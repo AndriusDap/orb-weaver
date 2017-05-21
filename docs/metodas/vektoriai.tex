@@ -25,4 +25,26 @@ ir sprendažitn atramos vektorių mašinų kvadratinio optimizavimo uždavinį:
 \end{equation}
 Kur C yra hiperparametras naudojamas modelio formavime. Naudojant mažas $C$ vertes galima pritaikyti modelį triukšmingiems pradiniams duomenims, o didelės vertės galimos kai visi mokymo duomenų rinkinio pavyzdžiai turi teisingas klases.
 
-Šis modelis turi du derinamus hiperparametrus - tai yra konstanta $C$, bei parenkama kernelio funkcija.
+Šio modelio naudojama kernelio funkcija gali būti laikoma vienu iš hiperparametrų kurie yra derinami modelio mokymo metu. Nagrinėjami trys kernelio tipai \cite{vw}:
+\begin{enumerate}
+    \item tiesinis
+    \item polinominis
+    \item radialinės bazės
+\end{enumerate}
+
+Tiesinis kernelio tipas yra naudojamas kai funkcija $K$ yra nenaudojama, tokiu atveju atramos vektorių mašinos yra apibrėžiamos kaip
+\begin{equation}
+    W(\alpha) = \sum_{i}\alpha_i y_i - \frac{1}{2} \sum_{i, j} \alpha_i \alpha_j x_i x_j
+\end{equation}.
+Šis modelio variantas gali būti naudojamas kai objektai nagrinėjamoje erdvėje gali būti atskirti tiesia plokštumas, nėra reikalingos papildomos modifikacijos.
+
+Polinominis kernelis gali būti formuojamas naudojant \cite{vw}
+\begin{equation}
+    K(u, v) = (1 + u \cdot v)^d
+\end{equation}
+radialinės bazės kernelsi išreiškiamas
+\begin{equation}
+    K(u, v) = exp \big( - \frac{|| u - v ||^2}{2 \sigma ^ 2} \big)
+\end{equation}
+
+Šis modelis turi du derinamus hiperparametrus - tai yra konstanta $C$, bei parenkama kernelio funkcija. Kernelio funkcija taip pat prideda papildomus hiperparametrus. Polinominio kernelio atveju tai yra laipsnio parametras $d$, radialinės bazės kernelio atveju tai yra parametras $\sigma$
