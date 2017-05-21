@@ -1,6 +1,6 @@
 Aprašyto metodo pritaikytas realiam uždaviniui sudarytas iš dviejų žingsnių. Tai yra modelio apmokymas bei apmokyto modelio naudojimas. Modeliui mokyti reikalingas duomenų rinkinys.
 
-\ktusubsection{Duomenų rinkinys}
+\ktusection{Duomenų rinkinys}
 
 Reikalingas duomenų rinkinys yra sudarytas iš trijų komponentų:
 \begin{enumerate}
@@ -8,6 +8,17 @@ Reikalingas duomenų rinkinys yra sudarytas iš trijų komponentų:
     \item kenksmingų tinklalapių sąrašas;
     \item nekenksmingų tinklalapių sąrašas.
 \end{enumerate}
-Interneto grafo duomenys naudojami iš \cite{webgraph} projekto teikiamų duomenų rinkinių.
 
-Kenksmingi tinklapiai surinkti naudojant egzistuojančius juoduosius sąrašus \cite{mal1}, \cite{mal2} \cite{mal3} \cite{mal4}. Taip suformuotas 48761 kenksmingų tinklalapių sąrašas. Jų tipas, pagal vykdomą ataką, nėra išskiriamas. Šių puslapių duomenų rinkiniai yra naudojami kuriant juoduosius sąrašus.
+\ktusubsection{Svetainių grafas}
+Interneto grafo duomenys naudojami iš \cite{webgraph} projekto teikiamų duomenų rinkinių. Naudojamas grafą sudaro 22 milijonai viršūnių bei 123 milijonų briaunų. Grafas yra pateikiamas WebGraph formatu. Šis formatas yra optimizuotas grafo užimamos vietos diske atžvilgiu. Jame yra saugomi grafo viršūnių numeriai bei briaunos. Viršūnes atitinkančios svetainės yra randamos naudojant pagalbinį failą talpinantį svetainės adresą bei jos eilės numerį grafe. Grafas gali būti nuskaitomas naudojant atviro kodo biblioteką sukurtą pagal \cite{boldi2004webgraph} straipsnį.
+
+\ktusubsection{Kenksmingų tinklalapių sąrašas}
+Kenksmingi tinklapiai surinkti naudojant egzistuojančius juoduosius sąrašus \cite{mal1}, \cite{mal2} \cite{mal3} \cite{mal4}. Taip suformuotas 48761 kenksmingų tinklalapių sąrašas. Jų tipas, pagal vykdomą ataką, nėra išskiriamas. Šių puslapių duomenų rinkiniai yra naudojami kuriant juoduosius sąrašus. Visi rinkiniai sujungiami į vieną tekstinį failą, kuriame vienoje eilutėje suagoma nuoroda į vieną kenksmingą tinklalapį.
+
+\ktusubsection{Nekenksmingų tinklalapių sąrašas}
+
+Nekenksmingų tinklapių sąrašas yra formuojamas iš \cite{webgraph} projekto teikiamų duomenų. Naudojamas tinklalapių grafų duomenų rinkinio tinklalapių sąrašas. Šiame duomenų rinkinyje yra apie 1.7 milijardo tinklalapių. Suspausti šie duomenys diske sudaro apie 20GB informacijos. Išskleidus tai sudarytų apie 133GB duomenų. Tai yra gana daug norint juos apdoroti. Viso sąrašo naudojimas sukeltų per didelį klasių disbalansą, dėl to parenkama dalis įrašų. Įrašai yra išrenkami naudojant scenarijų:
+\ktusrcr{whitelist.sh}{sources/whitelist.sh}{bash}
+Šiuo atveju naudojamos atviro kodo programos zcat, parallel \cite{parallel}, awk. Šios programos parinktos dėl galimybės failų turinį apdoroti kaip duomenų srautą.   Pirmas programos fragmentas skaito visų failų turinį, antras fragmentas skaldo failų turinį į fragmentus kurie apdorojami lygiagrečiai. Kiekvienas lygiagretus procesas išrenka eilutes. Eilutės perkėlimo į galutinį failą tikimybė $P = 0.0005798$. Šis tikimybė siekiant suformuoti duomenų rinkinį kurio 5\% sudaro kenksmingos svetainės, 95\% nekenksmingos svetainės. Lygiagretus vykdymas naudojamas dėl atsitiktinių skaičių generavimo vykdymo metu. Naudojant vieną procesą kompiuterio resursai būtų naudojami neefektyviai, šiuo atveju yra išnaudojami visi turimi skaičiavimo resursai - nauji procesai yra kuriami tol kol pilnai naudojami visi procesoriaus branduoliai. Galiausiai gaunamas nekenksmingų svetainių sąrašas. Parinktų tinklalapių pasiskirstymas pradiniame duomenų rinkinyje yra tolydus.
+
+Dalis tinklalapių naudoja papildomą parametrų kodavimą URL-kodavimo principu. Šis kodavimas tinklalapių adresuose neleistinus simbolius ar rezervuotus simbolius keičia specialiais procento simboliu prasidedančiais kodais. Adresai yra dekoduojami naudojant prieduose pateiktas programas.
