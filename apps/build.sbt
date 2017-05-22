@@ -36,3 +36,9 @@ lazy val pagerank = (project in file("pagerank")).settings(commonSettings:_*).
     mainClass in assembly := Some("andriusdap.orbweaver.pagerank.App"),
     libraryDependencies += "it.unimi.dsi" % "webgraph-big" % "3.3.6"
   )
+
+lazy val frontend = (project in file("frontend")).settings(commonSettings:_*).
+  settings(
+    name:= "frontend"
+  )
+  .disablePlugins(PlayLayoutPlugin).enablePlugins(PlayScala).dependsOn(executor)

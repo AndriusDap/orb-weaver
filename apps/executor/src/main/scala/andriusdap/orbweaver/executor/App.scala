@@ -112,17 +112,21 @@ object App {
     (trainingFile, testingFile, validationFile)
   }
 
+  def toSample(s: FeatureSet): String = s match {
+    case FeatureSet(host, query, dots, spec, maliciousRank, benignRank, label) =>
+      val result = toWabbitValue(label)
+      s"$result " +
+        s"|path ${host.mkString(" ")}" +
+        s" |query ${query.mkString(" ")}" +
+        s" |numerical dots:$dots.0 specialSymbols:$spec.0" +
+        s" |ranks benign:$benignRank malicious:$maliciousRank" +
+        "\n"
+  }
+
   def dump(file: File, set: Iterator[FeatureSet]): Unit = {
     val buffer = file.bufferedWriter()
     set.map {
-      case FeatureSet(host, query, dots, spec, maliciousRank, benignRank, label) =>
-        val result = toWabbitValue(label)
-        s"$result " +
-          s"|path ${host.mkString(" ")}" +
-          s" |query ${query.mkString(" ")}" +
-          s" |numerical dots:$dots.0 specialSymbols:$spec.0" +
-          s" |ranks benign:$benignRank malicious:$maliciousRank" +
-          "\n"
+      toSample
     }.foreach(buffer.write)
     buffer.close()
   }
@@ -141,13 +145,16 @@ object App {
     Source.fromFile(train.jfile).getLines().map(Feature.parse).map { f =>
       val host = strip(f.url)
       val url = UrlBuilder.build(f.url)
+      val malicious = maliciousRanks.getOrElse(host, minMalicious)
+
+      val benign = benignRanks.getOrElse(host, minBenign)
       FeatureSet(
         url.host,
         url.query,
         url.dots,
         url.specialSymbols,
-        maliciousRanks.getOrElse(host, minMalicious),
-        benignRanks.getOrElse(host, minBenign),
+        malicious,
+        benign,
         f.label
       )
     }
