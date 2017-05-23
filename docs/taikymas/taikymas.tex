@@ -1,1 +1,13 @@
 \ktusection{Modelio praktinis pritaikymas}
+
+Apmokytas modelis yra paruoštas naudojimui, tačiau jis nėra itin patogus. Naudojamos programinės įrangos modelis gali būt ipanaudojamas per komandinės eilutės sąsają, pateikiant duomenis mokymo metu naudotu formatu. Modelio grąžinamas rezultatas taip pat nėra lengvai suvokiamas. Dėl to yra kuriama taikomoji aplikacija kuri supaprastina modelio panaudojimą realiose, praktinėse situacijose.
+
+\begin{ktutable}{sasaja}{Klasifikavimo aplikacijos sąsaja}
+    \begin{tabular}{|l|l|p{5cm}|p{5cm}|}
+    \hline
+        Kelias & Metodas & Parametrai & Rezultatas \\ \hline
+        \texttt{/classify} & \texttt{GET} & \texttt{url} klasifikuojamo tinklalapio adresas & slankaus kablelio skaičius - klasifikavimo rezultatas \\ \hline
+    \end{tabular}
+\end{ktutable}
+
+Aplikacija pritaikyta naudoti http protokolu, naudojama REST architektūra. Sąsaja pateikta \vref{tab:sasaja} lentelėje. Tinklalpio kurį norima klasifikuoti adresas yra pateikiamas klasifikavimo aplikacijai, grąžinamas rezultatas yra klasifikavimo modelio pateiktas įvertis.

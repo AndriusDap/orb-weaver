@@ -2,63 +2,50 @@
 
 Modelio apmokymas vykdomas programinės įrangos paketu Vowpal Wabbit \cite{vw}.
 
-\ktusubsection{Sprendimų medžio modelio apmokymas}
+\ktusubsection{Atramos vektorių mašinų modelio mokymas}
 
-%60k imtis, linear, --l2 1e-08 -b 31, runtime 6m
-%
-%Lambda = 0
-%Kernel = linear
-%Num support = 8221
-%Number of kernel evaluations = 0 Number of cache queries = 0
-%Total loss = 0
-%Done freeing model
-%Done freeing kernel params
-%Done with finish
-%ACC    0.86527   pred_thresh  0.500000
-%PPV    0.00000   pred_thresh  0.500000
-%NPV    0.86527   pred_thresh  0.500000
-%SEN    0.00000   pred_thresh  0.500000
-%SPC    1.00000   pred_thresh  0.500000
-%PRE    0.00000   pred_thresh  0.500000
-%REC    0.00000   pred_thresh  0.500000
-%PRF    0.00000   pred_thresh  0.500000
-%LFT    0.00000   pred_thresh  0.500000
-%SAR    0.66607   pred_thresh  0.500000 wacc  1.000000 wroc  1.000000 wrms  1.000000
-%
-%ACC    0.13473   freq_thresh  0.000000
-%PPV    0.13473   freq_thresh  0.000000
-%NPV    0.00000   freq_thresh  0.000000
-%SEN    1.00000   freq_thresh  0.000000
-%SPC    0.00000   freq_thresh  0.000000
-%PRE    0.13473   freq_thresh  0.000000
-%REC    1.00000   freq_thresh  0.000000
-%PRF    0.23746   freq_thresh  0.000000
-%LFT    1.00000   freq_thresh  0.000000
-%SAR    0.42256   freq_thresh  0.000000 wacc  1.000000 wroc  1.000000 wrms  1.000000
-%
-%ACC    0.13473   max_acc_thresh  0.000000
-%PPV    0.13473   max_acc_thresh  0.000000
-%NPV    0.00000   max_acc_thresh  0.000000
-%SEN    1.00000   max_acc_thresh  0.000000
-%SPC    0.00000   max_acc_thresh  0.000000
-%PRE    0.13473   max_acc_thresh  0.000000
-%REC    1.00000   max_acc_thresh  0.000000
-%PRF    0.23746   max_acc_thresh  0.000000
-%LFT    1.00000   max_acc_thresh  0.000000
-%SAR    0.42256   max_acc_thresh  0.000000 wacc  1.000000 wroc  1.000000 wrms  1.000000
-%
-%PRB    0.13473
-%Warning: There are more than 50000 ties in your prediction, using pessimistic ordering in Average Precision.
-%APR    0.07062
-%ROC    0.50000
-%R50    0.00031
-%RKL    90724
-%TOP1   0.00000
-%TOP10  0.00000
-%SLQ    0.53370 Bin_Width  0.010000
-%CXE   8999999999997488077981482897577656465333014215252573954519616480358124176326309577600924132162142208.00000
-%RMS    1.00000
-%CA1    0.05263 19_0.05_bins
-%CA2    1.00000 Bin_Size 100
-%371 - START_TIME
-%
+Naudojant atramos vektorių mašinų modelį sistema Vowpal Wabbit naudojami parametrai nurodyti \vref{tab:ksvm_params} lentelėje.
+
+\begin{ktutable}{ksvm_params}{Atramos vektorių mašinų modelio hiperparametrai}
+    \begin{tabular}{| l | l | p{7cm}|}
+    \hline
+        Komandinės eilutės parametras & Galimos vertės & Parametro reikšmė\\ \hline
+        \texttt{passes} &  & Modelio mokymo iteracijų skaičius \\ \hline
+        \texttt{loss\_function} &          & Mokymo metu naudojama nuostolio funkcija \\
+                               & squared  & Modelio mokymo iteracijų skaičius \\
+                               & hinge    & nuostolio funkcija $l(y) = \max(0, 1 - t * y)$ kur $y$ yra įvertis o $t = \pm 1$ tikroji klasė  \\
+                               & logistic & logistinė nuostolio funkcija \\ \hline
+        \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
+        \texttt{bit\_precision} & & Bitų, naudojamų savybių lentelei, skaičius\\ \hline
+        \texttt{kernel} & & Naudojama kernelio funkcija   \\
+                       & poly & polinominis kernelis     \\
+                       & linear & tiesinis kernelis      \\
+                       & rbf & radialinės bazės kernelis \\ \hline
+        \texttt{degree} & & polinominio kernelio laipsnis \\ \hline
+    \end{tabular}
+\end{ktutable}
+
+Mokant atraminių vektorių mašinų modelį stebimas nuostolių funkcijos įvertis. Pagal jį vertinamas modelio mokymo sėkmingumas.
+
+Modeliai pradėti mokyti nuo polinominio kernelio. Svarbūs parametrai derinant šį modelį yra polinominės funkcijos laipsnis bei parametrų reguliarizavimo koeficientas.
+
+\begin{ktutable}{initial_train}{Pirminio polinominio kernelio modelio parametrai}
+    \begin{tabular}{| l | c | c | c | c | c | c | }
+    \hline
+        Kernelio funkcija & polinominė & polinominė & polinominė & polinominė & polinominė & polinominė \\ \hline
+        L2 reguliarizacija & $10^{-7}$ & $10^{-5}$ & 0.1 & $10^{-7}$ & $10^{-5}$ & 0.1 \\ \hline
+        Kernelio funkcijos laipsnis & 5 & 5 & 5 & 3 & 3 & 3 \\ \hline
+    \end{tabular}
+\end{ktutable}
+
+Mokant modelį naudojant parametrus nurodytus lentelėje \vref{tab:initial_train} pastebėta tendencija. Modelio kokybė mokymo metu negerėja. Tai atspindi šių parametrų nuostolio funkcijų grafikai \ktufigref{images/svm_sux.png}. Naudojant parametrų rinkinius iš lentelės \vref{tab:initial_train} modelis nekonverguoja.
+
+\ktufigure{images/svm_sux.png}{14 cm}{Modelio kokybės tendencijos}
+
+Modelio mokymas toliau tyrinėtas naudojant kitas branduolio funkcijas ir derinant jų parametrus. Modelio parametrų reguliarizacijos parametras L2 nekeistas.
+
+\ktufigure{images/linear_loss.png}{12 cm}{Tiesinio kernelio modelio mokymas}
+\ktufigure{images/polly_loss.png}{12 cm}{Polinominio kernelio modelio mokymas}
+\ktufigure{images/rbf_loss.png}{12 cm}{Radialinės bazės funkcijos kernelio modelio mokymas}
+
+Naudojant kitus kernelio tipus pastebėta ta pati tendencija, matoma \ktufigref{images/linear_loss.png}, \ktufigref{images/polly_loss.png}, \ktufigref{images/rbf_loss.png} grafikuose.
