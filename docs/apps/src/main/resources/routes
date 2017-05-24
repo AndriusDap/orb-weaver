@@ -1,0 +1,1 @@
+GET /classify andriusdap.orbweaver.controllers.Clasifier.classify(url: String)

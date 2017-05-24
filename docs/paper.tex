@@ -80,9 +80,11 @@
 \newpage
 
 \ktuchapter{Metodo taikymas ir rezultatai}
+
 \input{taikymas/duomenys.tex}
 \input{taikymas/mokymas.tex}
 \input{taikymas/taikymas.tex}
+\input{taikymas/bandymas.tex}
 
 \ktuchapter{Išvados}
 \newpage
@@ -100,6 +102,15 @@
 \ktusrcr{Pagerank.scala}{apps/src/main/scala/andriusdap/orbweaver/executor/Pagerank.scala}{scala}
 \ktusrcr{App.scala}{apps/src/main/scala/andriusdap/orbweaver/executor/App.scala}{scala}
 
-\end{ktuappendices}
 
+\ktusection{Modelį naudojančio klasifikavimo programinio įrankio išeities kodas}
+\label{priedas:frontend}
+\ktusrcr{ClassifierController.scala}{apps/src/main/scala/andriusdap/orbweaver/controllers/ClassifierController.scala}{scala}
+\ktusrcr{Classifier.scala}{apps/src/main/scala/andriusdap/orbweaver/core/Classifier.scala}{scala}
+\ktusrcr{routes}{apps/src/main/resources/routes}{scala}
+\ktusrcr{application.conf}{apps/src/main/resources/application.conf}{scala}
+\ktusrcr{application.properties}{apps/src/main/resources/application.properties}{scala}
+\ktusrcr{test.sh}{apps/test.sh}{scala}
+
+\end{ktuappendices}
 \end{document}
