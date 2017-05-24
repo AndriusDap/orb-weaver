@@ -49,3 +49,48 @@ Modelio mokymas toliau tyrinėtas naudojant kitas branduolio funkcijas ir derina
 \ktufigure{images/rbf_loss.png}{12 cm}{Radialinės bazės funkcijos kernelio modelio mokymas}
 
 Naudojant kitus kernelio tipus pastebėta ta pati tendencija, matoma \ktufigref{images/linear_loss.png}, \ktufigref{images/polly_loss.png}, \ktufigref{images/rbf_loss.png} grafikuose.
+
+\ktusubsection{Tiesinio modelio mokymas}
+
+Vowpal Wabbit sistema visiems modeliams naudoja vienodą duomenų formatą bei paanšius parametrus. Tai leidžia lengvai bandyti įvairius modelius. Dėl to po prasto atraminių vektorių mašinų modelių pasirinktas vienas iš paprasčiausių modelių, kuriuo tiėktina pasiekti gerus rezultatus, nenaudojant didelio resursų kiekio modelio formavimui.
+
+\begin{ktutable}{linear_params}{Tiesinio modelio hiperparametrai}
+    \begin{tabular}{| l | l | p{7cm}|}
+    \hline
+        Komandinės eilutės parametras & Galimos vertės & Parametro reikšmė\\ \hline
+        \texttt{passes} &  & Modelio mokymo iteracijų skaičius \\ \hline
+        \texttt{loss\_function} &          & Mokymo metu naudojama nuostolio funkcija \\
+                               & squared  & Modelio mokymo iteracijų skaičius \\
+                               & hinge    & nuostolio funkcija $l(y) = \max(0, 1 - t * y)$ kur $y$ yra įvertis o $t = \pm 1$ tikroji klasė  \\
+                               & logistic & logistinė nuostolio funkcija \\ \hline
+        \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
+        \texttt{bit\_precision} & & Bitų, naudojamų savybių lentelei, skaičius\\ \hline
+    \end{tabular}
+\end{ktutable}
+
+Mokant tiesinį modelį naudojamas mažesnis sąvybių lentelės dydis nurodomas naudojant \texttt{bit\_precision} parametrą. Tai leidžia optimialiau atlikti mokymą sumažinant naudojamą atminties kiekį. Naudojami $27$ bitai.
+
+Pirminiai modelio mokymo rezultatai pateikiami \ktufigref{images/linearModelLoss.png}. Šiame grafike matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atraminių veotkrių mašinų modelius. Mokomas modelis konverguoja, pasiekiama gana pastovi nuostolio funkcijos reikšmė, kuri yra nedidelė, artima nuliui.
+
+\ktufigure{images/linearModelLoss.png}{14 cm}{Tiesinio modelio mokymas}
+
+Apmokius modelį vertinamas jo jautrumas, tikslumas, specifiškumas, AUC įvertis. Jie pateikiami lentelėje \vref{tab:firstLinearModel}. Parametrų L2 reguliarizavimui naudota vertė $10^{-6}$.
+Gautas modelis itin gerai prognozuoja testavimo rinkinio duomenis. Suformuotas tiesinis modelis naudoja
+$145832$ matmenų.
+
+\begin{ktutable}{firstLinearModel}{Pirminio tiesinio modelio rezultatai}
+    \begin{tabular}{| l | l |}
+    \hline
+       Matas & Reikšmė \\ \hline
+               Tikslumas & 0.97552 \\ \hline
+               Jautrumas & 0.92588 \\ \hline
+               Specifiškumas & 0.98325 \\ \hline
+               AUC & 0.95456 \\ \hline
+    \end{tabular}
+\end{ktutable}
+
+\ktufigure{images/roc.png}{12 cm}{Tiesinio modelio ROC kreivė}
+
+Lyginant šio modelio rezultatus pateiktus \cite{comp} straipsnyje šis tiesinis modelis pralenkia atraminių vektorių mašinų klasifikatorių, kuris šiame strapsnyje buvo išskiriamas kaip geriausias klasifikatorius.
+
+Kokybiško atraminių vektorių mašinų modelio apmokyti nepavyko. Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Duomenys turi itin daug matmenų - kiekvienas naujas žodis, simbolių grupė yra koduojama kaip naujas matmuo. Tai
