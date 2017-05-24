@@ -1,1 +1,1 @@
-GET /classify andriusdap.orbweaver.controllers.Clasifier.classify(url: String)
+GET /classify andriusdap.orbweaver.controllers.ClassifierController.classify(url: String)

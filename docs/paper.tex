@@ -10,7 +10,6 @@
 \newcommand{\ktumaster}{Doc. dr. Vytautas Janilionis}
 
 
-
 \newcommand{\kclong}[1]{\cite{#1}}
 \newcommand{\kc}[1]{\citeauthor{#1} \cite{#1}}
 \newcommand{\itrain}{$\mathbf{T_m}$}
@@ -59,6 +58,12 @@
 
 \ktuchapter{Įžanga}
 
+Šiuolaikinės technologijos lemia spartų interneto tinklapių atsiradimą. Tinklalapiai kuriami siekiant gauti kokią nors naudą. Tačiau dalis jų yra kuriama tikintis pasipelnyti naudotojams kenksmingais būdais, tai yra infekuojant jų kompiuterius, vagiant asmens duomenis. Tokie tinklalapiai yra kenksmingi ir juos atpažinti yra svarbu, taip apsaugant naudotojus.
+
+Darbo tikslas - pasiūlyti ir įgyvendinti metodiką tinklalapių klasifikavimui į kenksmingus bei nekenksmingus pasinaudojant jų adresu bei svetainių grafo suteikiama informacija. Tai leidžia tiksliau klasifikuoti kenksmingus tinklalapius remiantis prielaida, kad kenksmingi tinklalapiai svetainių grafe yra susiję, tai yra kenksmingi tinklalapiai turi nuorodas į kenksmingus tinklalapius, nekenksmingi tinklalapiai turi daugiau nuorodų į nekenksmingus tinklalapius.
+
+Pirmoje darbo dalyje yra pateikiama klasifikavimo metodų bei kenksmingų tinklalapių tyrinėjimo literatūros apžvalga. Antroje dalyje pateikiama metodika kenksmingų ir nekenksmingų tinklalapių klasifikavimui, suformuojant mašininio mokymo modelius. Trečiojoje dalyje yra aprašomas ir apmokomas modelis, pateikiama programinė įranga šio modelio praktiniam panaudojimui. Taip pat trečioje dalyje kritiškai įvertinamas praktinis įrankio panaudojimas.
+
 \newpage
 
 \ktuchapter{Literatūros apžvalga}
@@ -87,6 +92,14 @@
 \input{taikymas/bandymas.tex}
 
 \ktuchapter{Išvados}
+
+\begin{enumerate}[label=\arabic*.]
+\item Apžvelgus kensmingų tinklalapių klasifikavimo metodus pasiūlyta naudoti PageRank įverčius topologinei svetainių grafo informacijai panaudoti klasifikavimo modelių formavime
+\item Sudaryta kenksmingų tinklalapių klasifikavimo metodika
+\item Įgyvendinta pasiūlyta metodologija sukuriant mašininio mokymo modelius bei sukurtas programinis įrankis praktiniam modelio panaudojimui
+\item Įvertintas sukurto įrankio praktinis panaudojimas bei įrankio trūkumai: lankstumo bei aiškumo trūkumas klasifikuojant tam tikrus populiarius tinklalapius.
+\end{enumerate}
+
 \newpage
 
 \begin{ktuliterature}
@@ -107,9 +120,9 @@
 \label{priedas:frontend}
 \ktusrcr{ClassifierController.scala}{apps/src/main/scala/andriusdap/orbweaver/controllers/ClassifierController.scala}{scala}
 \ktusrcr{Classifier.scala}{apps/src/main/scala/andriusdap/orbweaver/core/Classifier.scala}{scala}
-\ktusrcr{routes}{apps/src/main/resources/routes}{scala}
-\ktusrcr{application.conf}{apps/src/main/resources/application.conf}{scala}
-\ktusrcr{application.properties}{apps/src/main/resources/application.properties}{scala}
+%\ktusrcr{routes}{apps/src/main/resources/routes}{scala}
+%\ktusrcr{application.conf}{apps/src/main/resources/application.conf}{scala}
+%\ktusrcr{application.properties}{apps/src/main/resources/application.properties}{scala}
 \ktusrcr{test.sh}{apps/test.sh}{scala}
 
 \end{ktuappendices}
