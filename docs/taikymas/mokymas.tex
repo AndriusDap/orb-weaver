@@ -93,4 +93,42 @@ $145832$ matmenų.
 
 Lyginant šio modelio rezultatus pateiktus \cite{comp} straipsnyje šis tiesinis modelis pralenkia atraminių vektorių mašinų klasifikatorių, kuris šiame strapsnyje buvo išskiriamas kaip geriausias klasifikatorius.
 
-Kokybiško atraminių vektorių mašinų modelio apmokyti nepavyko. Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Duomenys turi itin daug matmenų - kiekvienas naujas žodis, simbolių grupė yra koduojama kaip naujas matmuo. Tai
+\ktusubsection{Sprendimų medžio modelio formavimas}
+
+Paskutinis naudojamas modelis yra sprendimų medis. Modelio naudojami parametrai pateikiami lentelėje \vref{tab:medisParams}.
+
+
+\begin{ktutable}{medisParams}{Sprendimų medžio modelio hiperparametrai}
+    \begin{tabular}{| l | l | p{7cm}|}
+    \hline
+        Komandinės eilutės parametras & Galimos vertės & Parametro reikšmė\\ \hline
+        \texttt{passes} &  & Modelio mokymo iteracijų skaičius \\ \hline
+        \texttt{loss\_function} &          & Mokymo metu naudojama nuostolio funkcija \\
+                               & squared  & Modelio mokymo iteracijų skaičius \\
+                               & hinge    & nuostolio funkcija $l(y) = \max(0, 1 - t * y)$ kur $y$ yra įvertis o $t = \pm 1$ tikroji klasė  \\
+                               & logistic & logistinė nuostolio funkcija \\ \hline
+        \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
+        \texttt{bit\_precision} & & Bitų, naudojamų savybių lentelei, skaičius\\ \hline
+        \texttt{log\_multi} & & Siekiamas sprendimų medžio kompeksiškumas laiko atžvilgiu, $O(log(n))$ kur $n$ yra šio parametro vertė\\ \hline
+    \end{tabular}
+\end{ktutable}
+
+Sprendimų medžio modelio mokymas vyksta sėkmingai, stebint nuostolio funkcijos vertes \ktufigref{images/treeLoss.png}.
+
+\ktufigure{images/treeLoss.png}{12 cm}{Sprendimų medžio modelio nuostolio funkcija}
+
+Nepaisant gero nuostolio funkcijos rezultato šis modelis persimokė su visomis naudotomis hiperparametrų vertėmis. Šis modelis visada prognozuoja tik vieną iš reikšmių, tai yra klasifikacija nevykdoma, modelis visada grąžina kad analizuojaams vektorius priklauso klasei 1 (svetainė nežalinga).
+
+\ktusubsection{Modelių mokymo rezultatai}
+
+Kokybiško atraminių vektorių mašinų modelio bei sprendimų medžio apmokyti nepavyko. Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Duomenys turi itin daug matmenų - kiekvienas naujas žodis, simbolių grupė yra koduojama kaip naujas matmuo. Tačiau suformuotas itin tikslus tiesinis modelis. Lyginant tiesinio modelio rezultatus su pateiktais įvairių modelių rezultatais straipsnyje \cite{comp}, kurie pateikiami lentelėje \vref{tab:compTable} visą mokymą galima laikyti pasisekusiu. Nors apmokytas tik vienas modelis iš trijų jis yra itin tikslus ir lenkia atraminių vektorių mašinų modelį, kuris buvo įvertintas kaip geriausias.
+
+\begin{ktutable}{compTable}{Pirminio tiesinio modelio rezultatai}
+    \begin{tabular}{|l|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+    \hline
+                             & Tiesinis modelis  &  K Artimiausių kaimynų modelis  &  Radialinės bazės funkcijos kernelio atraminių vektorių mašinos  &  Tiesinio kernelio atraminių vektorių mašinos               \\ \hline
+               Tikslumas     & 0.97552           & 0.91   & 0.97  &  0.92         \\ \hline
+    \end{tabular}
+\end{ktutable}
+
+Šis modelis toliau naudojamas klasifikavimo įrankio kūrime.
