@@ -11,3 +11,20 @@ Apmokytas modelis yra paruoštas naudojimui, tačiau jis nėra itin patogus. Nau
 \end{ktutable}
 
 Aplikacija pritaikyta naudoti http protokolu, naudojama REST architektūra. Sąsaja pateikta \vref{tab:sasaja} lentelėje. Tinklalpio kurį norima klasifikuoti adresas yra pateikiamas klasifikavimo aplikacijai, grąžinamas rezultatas yra klasifikavimo modelio pateiktas įvertis.
+
+Sukurto įrankio architektūra pateikiama paveiksle \ktufigref{images/architektura.png}
+
+\ktufigure{images/architektura.png}{12 cm}{Praktinio įrankio architektūra}
+
+Įrankis susideda iš dviejų pagrindinių komponentų:
+\begin{enumerate}
+\item sąsaja
+\item branduolys
+\end{enumerate}
+Sąsaja yra komponentas kurio funkcija yra pateikti branduolio suteikiamą funkcionalumą naudotojams. Šiuo atveju tai yra http protokolu veikianti sąsaja. Šis komponentas atsakingas už užklausos perdavimą branduolio komponentui, branduolio komponente esančio klasifikatoriaus rezultato pateikimui naudotojui tinklamu formatu.
+
+Branduolio komponente vykdomas modelio pritaikymas. Jį sudaro klasė \texttt{ClassifierController} bei duomenų saugyklos kenksmingų ir nekenksmingų svetainių PageRank įverčiams.
+
+Komponentų atskyrimas yra viena iš gerų praktikų kuriant sistemas. Atskiriant branduolio elementą kuriame yra vykdoma verslo logika, matematiniai skaičiavimai sistema yra paruošiama greitam plėtimui, lengvam migravimui tarp palaikomų ir naudojamų vartotojo sąsajos protokolų. Šiuo atveju vartotojo sąsaja nepriklauso nuo branduolio, tik nuo klasės \texttt{ClassifierController} implementacijos.
+
+Pirminė programos versija yra kurta siekiant įrodyti jos veikimo koncepciją. Dėl to kai kurios sistemos vietos yra optimizuotos programavimo laiko minimizavimo atžvilgiu. Plėtojant programinę įrangą v ertėtų aplikaciją skaidyti į kelis atskirtus komponentus, pagal naudojamų resursų tipą. PageRank įverčiai turi būti iškeliami į duomenų bazę, mašininio mokymo modelis iškeliamas į atskirą servisą kuris gali būti plečiamas esant reikalui ar skaičiavimo resursų trūkumui. Tačiau tai stipriai apsunkintų pirminį programos prototipą.
