@@ -9,12 +9,18 @@ Modeliams mokyti naudojamas duomenų rinkinys yra dalinamas į tris imtis:
     \item testavimo imtis (25\% viso rinkinio)
     \item validavimo imtis (5\% viso rinkinio)
 \end{enumerate}
- Didžiausia, mokymo imtis yra naudojama modeklio apmokymui. Siekiant aptikti modelių persimokymą naudojama testavimo imtis. Modelį apmokius yra įvertinama jo kokybė naudojant parinktas metrikas, jei įverčiai stipriai skiriasi mokymosi ir testavimo imčiai modelis yra persimokęs, dėl to reikia koreguoti modelio hiperparametrus. Jei gauta modelio kokybė netenkina,  taip pat koreguojami hiperparametrai.
+Didžiausia, mokymo imtis yra naudojama modeklio apmokymui. Siekiant aptikti modelių persimokymą naudojama
+testavimo imtis. Modelį apmokius yra įvertinama jo kokybė naudojant parinktas metrikas, jei įverčiai stipriai
+skiriasi mokymosi ir testavimo imčiai modelis yra persimokęs, dėl to reikia koreguoti modelio hiperparametrus.
+Jei gauta modelio kokybė netenkina,  taip pat koreguojami hiperparametrai.
 
- Suformavus modelį kuris tenkina jis yra tikrinamas paskutinį kartą. Tam naudojama validavimo imtis. Modelio rezultatai naudojant šią imtį yra laikomi galutine modelio kokybe.
+Suformavus modelį kuris tenkina jis yra tikrinamas paskutinį kartą. Tam naudojama validavimo imtis.
+Modelio rezultatai naudojant šią imtį yra laikomi galutine modelio kokybe.
 
 
-Modelio vertinimui naudojamas tikslumas, AUC įvertis, specifiškumas, jautrumas. Šios metrikos leidžia įvertinti modelį net ir esant klasių disbalansui, ko vien naivus teisingų spėjimų procentas parodyti negali. Klasifikavimo modelis gali grąžinti keturis rezultatų tipus pagal jų teisingumą:
+Modelio vertinimui naudojamas tikslumas, AUC įvertis, specifiškumas, jautrumas. Šios metrikos leidžia
+ įvertinti modelį net ir esant klasių disbalansui, ko vien naivus teisingų spėjimų procentas parodyti
+  negali. Klasifikavimo modelis gali grąžinti keturis rezultatų tipus pagal jų teisingumą:
 \begin{enumerate}
     \item teisingai teigiamą rezultatą (žymima $TP$);
     \item klaidingai teigiamą rezultatą (žymima $FP$);
@@ -22,7 +28,12 @@ Modelio vertinimui naudojamas tikslumas, AUC įvertis, specifiškumas, jautrumas
     \item klaidingai neigiamą rezultatą (žymima $FN$).
 \end{enumerate}
 
- Modelio rezultatas yra realus skaičius. Atsižvelgiant į gavėjų veiklos charakteristikų kreivę (angl. \textit{receiver operating characteristic curve}), arba tiesiog ROC, galima nustatyti klasių intervalus kurie yra optimalūs modelio naudojimui. Ši kreivė rodo $TP$ tipo įverčio tikimybės santykį su $FP$ tipo įverčio tikimybe keičiant ribinę klasifikatoriaus vertę, pagal kurią yra parenkama klasė. AUC metrika yra skaičiuojama kaip plotas, esantis po šia kreive. Kiti įverčiai apskaičiuojami naudojant formules:
+ Modelio rezultatas yra realus skaičius. Atsižvelgiant į gavėjų veiklos charakteristikų kreivę
+(angl. \textit{receiver operating characteristic curve}), arba tiesiog ROC, galima nustatyti
+klasių intervalus kurie yra optimalūs modelio naudojimui. Ši kreivė rodo $TP$ tipo įverčio
+tikimybės santykį su $FP$ tipo įverčio tikimybe keičiant ribinę klasifikatoriaus vertę, pagal
+kurią yra parenkama klasė. AUC metrika yra skaičiuojama kaip plotas, esantis po šia kreive.
+Kiti įverčiai apskaičiuojami naudojant formules:
 
 \begin{equation}
 \text{jautrumas} = {TP \over {TP + FN}}

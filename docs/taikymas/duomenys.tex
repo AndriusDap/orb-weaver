@@ -1,4 +1,5 @@
-Aprašyto metodo pritaikytas realiam uždaviniui sudarytas iš dviejų žingsnių. Tai yra modelio apmokymas bei apmokyto modelio naudojimas. Modeliui mokyti reikalingas duomenų rinkinys.
+Aprašyto metodo pritaikytas realiam uždaviniui sudarytas iš dviejų žingsnių. Tai yra modelio apmokymas
+bei apmokyto modelio naudojimas. Modeliui mokyti reikalingas duomenų rinkinys.
 
 \ktusection{Duomenų rinkinys}
 
@@ -10,29 +11,62 @@ Reikalingas duomenų rinkinys yra sudarytas iš trijų komponentų:
 \end{enumerate}
 
 \ktusubsection{Svetainių grafas}
-Interneto grafo duomenys naudojami iš \cite{webgraph} projekto teikiamų duomenų rinkinių. Naudojamas grafą sudaro 22 milijonai viršūnių bei 123 milijonų briaunų. Grafas yra pateikiamas WebGraph formatu. Šis formatas yra optimizuotas grafo užimamos vietos diske atžvilgiu. Jame yra saugomi grafo viršūnių numeriai bei briaunos. Viršūnes atitinkančios svetainės yra randamos naudojant pagalbinį failą talpinantį svetainės adresą bei jos eilės numerį grafe. Grafas gali būti nuskaitomas naudojant atviro kodo biblioteką sukurtą pagal \cite{boldi2004webgraph} straipsnį.
+Interneto grafo duomenys naudojami iš \cite{webgraph} projekto teikiamų duomenų rinkinių. Naudojamas grafą sudaro 22
+milijonai viršūnių bei 123 milijonų briaunų. Grafas yra pateikiamas WebGraph formatu. Šis formatas yra optimizuotas
+grafo užimamos vietos diske atžvilgiu. Jame yra saugomi grafo viršūnių numeriai bei briaunos. Viršūnes atitinkančios
+svetainės yra randamos naudojant pagalbinį failą talpinantį svetainės adresą bei jos eilės numerį grafe. Grafas
+gali būti nuskaitomas naudojant atviro kodo biblioteką sukurtą pagal \cite{boldi2004webgraph} straipsnį.
 
 \ktusubsection{Kenksmingų tinklalapių sąrašas}
-Kenksmingi tinklapiai surinkti naudojant egzistuojančius juoduosius sąrašus \cite{mal1}, \cite{mal2} \cite{mal3} \cite{mal4}. Taip suformuotas 48761 kenksmingų tinklalapių sąrašas. Jų tipas, pagal vykdomą ataką, nėra išskiriamas. Šių puslapių duomenų rinkiniai yra naudojami kuriant juoduosius sąrašus. Visi rinkiniai sujungiami į vieną tekstinį failą, kuriame vienoje eilutėje suagoma nuoroda į vieną kenksmingą tinklalapį.
+Kenksmingi tinklapiai surinkti naudojant egzistuojančius juoduosius sąrašus \cite{mal1}, \cite{mal2} \cite{mal3}
+\cite{mal4}. Taip suformuotas 48761 kenksmingų tinklalapių sąrašas. Jų tipas, pagal vykdomą ataką, nėra išskiriamas.
+Šių puslapių duomenų rinkiniai yra naudojami kuriant juoduosius sąrašus. Visi rinkiniai sujungiami į vieną tekstinį
+failą, kuriame vienoje eilutėje suagoma nuoroda į vieną kenksmingą tinklalapį.
 
 \ktusubsection{Nekenksmingų tinklalapių sąrašas}
 
-Nekenksmingų tinklapių sąrašas yra formuojamas iš \cite{webgraph} projekto teikiamų duomenų. Naudojamas tinklalapių grafų duomenų rinkinio tinklalapių sąrašas. Šiame duomenų rinkinyje yra apie 1.7 milijardo tinklalapių. Suspausti šie duomenys diske sudaro apie 20GB informacijos. Išskleidus tai sudarytų apie 133GB duomenų. Tai yra gana daug norint juos apdoroti. Viso sąrašo naudojimas sukeltų per didelį klasių disbalansą, dėl to parenkama dalis įrašų. Įrašai yra išrenkami naudojant scenarijų:
+Nekenksmingų tinklapių sąrašas yra formuojamas iš \cite{webgraph} projekto teikiamų duomenų. Naudojamas tinklalapių
+grafų duomenų rinkinio tinklalapių sąrašas. Šiame duomenų rinkinyje yra apie 1.7 milijardo tinklalapių. Suspausti
+šie duomenys diske sudaro apie 20GB informacijos. Išskleidus tai sudarytų apie 133GB duomenų. Tai yra gana daug
+norint juos apdoroti. Viso sąrašo naudojimas sukeltų per didelį klasių disbalansą, dėl to parenkama dalis įrašų.
+Įrašai yra išrenkami naudojant scenarijų:
 \ktusrcr{whitelist.sh}{sources/whitelist.sh}{bash}
-Šiuo atveju naudojamos atviro kodo programos zcat, parallel \cite{parallel}, awk. Šios programos parinktos dėl galimybės failų turinį apdoroti kaip duomenų srautą.   Pirmas programos fragmentas skaito visų failų turinį, antras fragmentas skaldo failų turinį į fragmentus kurie apdorojami lygiagrečiai. Kiekvienas lygiagretus procesas išrenka eilutes. Eilutės perkėlimo į galutinį failą tikimybė $P = 0.0005798$. Šis tikimybė siekiant suformuoti duomenų rinkinį kurio 5\% sudaro kenksmingos svetainės, 95\% nekenksmingos svetainės. Lygiagretus vykdymas naudojamas dėl atsitiktinių skaičių generavimo vykdymo metu. Naudojant vieną procesą kompiuterio resursai būtų naudojami neefektyviai, šiuo atveju yra išnaudojami visi turimi skaičiavimo resursai - nauji procesai yra kuriami tol kol pilnai naudojami visi procesoriaus branduoliai. Galiausiai gaunamas nekenksmingų svetainių sąrašas. Parinktų tinklalapių pasiskirstymas pradiniame duomenų rinkinyje yra tolydus.
 
-Dalis tinklalapių naudoja papildomą parametrų kodavimą URL-kodavimo principu. Šis kodavimas tinklalapių adresuose neleistinus simbolius ar rezervuotus simbolius keičia specialiais procento simboliu prasidedančiais kodais. Adresai yra dekoduojami naudojant prieduose pateiktas programas.
+Šiuo atveju naudojamos atviro kodo programos zcat, parallel \cite{parallel}, awk. Šios programos parinktos
+dėl galimybės failų turinį apdoroti kaip duomenų srautą.   Pirmas programos fragmentas skaito visų failų turinį,
+antras fragmentas skaldo failų turinį į fragmentus kurie apdorojami lygiagrečiai. Kiekvienas lygiagretus procesas
+išrenka eilutes. Eilutės perkėlimo į galutinį failą tikimybė $P = 0.0005798$. Šis tikimybė siekiant suformuoti
+duomenų rinkinį kurio 5\% sudaro kenksmingos svetainės, 95\% nekenksmingos svetainės. Lygiagretus vykdymas
+naudojamas dėl atsitiktinių skaičių generavimo vykdymo metu. Naudojant vieną procesą kompiuterio resursai būtų
+naudojami neefektyviai, šiuo atveju yra išnaudojami visi turimi skaičiavimo resursai - nauji procesai yra
+kuriami tol kol pilnai naudojami visi procesoriaus branduoliai. Galiausiai gaunamas nekenksmingų svetainių
+sąrašas. Parinktų tinklalapių pasiskirstymas pradiniame duomenų rinkinyje yra tolydus.
+
+Dalis tinklalapių naudoja papildomą parametrų kodavimą URL-kodavimo principu. Šis kodavimas tinklalapių adresuose
+neleistinus simbolius ar rezervuotus simbolius keičia specialiais procento simboliu prasidedančiais kodais.
+Adresai yra dekoduojami naudojant prieduose pateiktas programas.
 
 \ktusubsection{Duomenų paruošimas mokymui}
 
-Suformuoti duomenų rinkiniai yra skaidomi ir paruošiami apmokymui. Duomenų paruošimo programos išeities kodas yra pateikiamas prieduose \ref{priedas:executor}. Programoje įgyvendintas PageRank įverčio skaičiavimas.
+Suformuoti duomenų rinkiniai yra skaidomi ir paruošiami apmokymui. Duomenų paruošimo programos išeities
+kodas yra pateikiamas prieduose \ref{priedas:executor}. Programoje įgyvendintas PageRank įverčio skaičiavimas.
 
 PageRank įvertis skaičiuojamas iteracijomis. Vienos iteracijos išeities kodas yra:
 \ktusrcr{pagerank.scala}{sources/pagerank.scala}{scala}
-Sukurta funkcija atlieka vieną pagerank iteraciją. Jai reikalingi  parametrai yra grafo duomenys, ankstesnis PageRank įvertis, slopinimo koeficiento vertė. Skaičiavimas vykdomas naudojant biblioteka \cite{webgraph} nuskaitytą grafą. Grafas yra išsaugomas atmintyje naudojant skaičiavimams pritaikytą formatą. Grafas yra saugojamas transponuotas, sudaromas masyvas iš masyvų \texttt{transposedGraph} . Išorinio masyvo indeksai $i$ atitinka grafo viršūnių indeksus. Vidiniai masyvai talpina viršūnes kurios turi briauną į $i$-tąją viršūnę. Taip pat reikalingi viršūnių išėjimo laipsniai. Jie naudojami dažnai, dėl to yra iš anksto suskaičiuojami ir saugomi kitame masyve.
+Sukurta funkcija atlieka vieną pagerank iteraciją. Jai reikalingi  parametrai yra grafo duomenys, ankstesnis
+PageRank įvertis, slopinimo koeficiento vertė. Skaičiavimas vykdomas naudojant biblioteka \cite{webgraph} nuskaitytą
+grafą. Grafas yra išsaugomas atmintyje naudojant skaičiavimams pritaikytą formatą. Grafas yra saugojamas
+transponuotas, sudaromas masyvas iš masyvų \texttt{transposedGraph} . Išorinio masyvo indeksai $i$ atitinka
+grafo viršūnių indeksus. Vidiniai masyvai talpina viršūnes kurios turi briauną į $i$-tąją viršūnę. Taip pat
+reikalingi viršūnių išėjimo laipsniai. Jie naudojami dažnai, dėl to yra iš anksto suskaičiuojami ir saugomi kitame masyve.
 
-Ši funkcija įgyvendinta naudojant procedūrinį programavimo stilių, kas nėra įprasta rašant išeities kodą Scala kalba. Šis stilius parinktas dėl geresnio vykdymo greičio, naudojant funkcinį stilių išeities kodą galima supaprastinti iki
+Ši funkcija įgyvendinta naudojant procedūrinį programavimo stilių, kas nėra įprasta rašant išeities kodą Scala
+kalba. Šis stilius parinktas dėl geresnio vykdymo greičio, naudojant funkcinį stilių išeities kodą galima
+supaprastinti iki
 \ktusrcr{pagerank.scala}{sources/simple_pagerank.scala}{scala}
 tačiau tokios funkcijos vykdymo greitis yra apie 10 kartų lėtesnis. Tai šiuo atveju netinka dėl naudojamo duomenų kiekio.
 
- Duomenims saugoti naudojami masyvai, nes naudojamas duomenų kiekis yra tam tinkamas. Iteravimas per įprastinius masyvus yra vykdomas žymiai greičiau nei naudojant kitas duomenų struktūras dėl geros procesoriaus optimizacijos naudojant spartinančiasias atmintines. Naudojant pasirinktą duomenų rinkinį suvartojama apie 5GB darbinės atminties.
+Duomenims saugoti naudojami masyvai, nes naudojamas duomenų kiekis yra tam tinkamas. Iteravimas per
+įprastinius masyvus yra vykdomas žymiai greičiau nei naudojant kitas duomenų struktūras dėl geros
+procesoriaus optimizacijos naudojant spartinančiasias atmintines. Naudojant pasirinktą duomenų
+rinkinį suvartojama apie 5GB darbinės atminties.
