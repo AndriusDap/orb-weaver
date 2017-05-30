@@ -17,21 +17,21 @@ Naudojant atramos vektorių mašinų modelį sistema Vowpal Wabbit naudojami par
                                & logistic & logistinė nuostolio funkcija \\ \hline
         \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
         \texttt{bit\_precision} & & Bitų, naudojamų savybių lentelei, skaičius\\ \hline
-        \texttt{kernel} & & Naudojama kernelio funkcija   \\
-                       & poly & polinominis kernelis     \\
-                       & linear & tiesinis kernelis      \\
-                       & rbf & radialinės bazės kernelis \\ \hline
-        \texttt{degree} & & polinominio kernelio laipsnis \\ \hline
+        \texttt{kernel} & & Naudojama branduolio funkcija   \\
+                       & poly & polinominis branduolis     \\
+                       & linear & tiesinis branduolis      \\
+                       & rbf & radialinės bazės branduolis \\ \hline
+        \texttt{degree} & & polinominio branduolio laipsnis \\ \hline
     \end{tabular}
 \end{ktutable}
 
 Mokant atramos vektorių mašinų modelį stebimas nuostolių funkcijos įvertis. Pagal jį
 vertinamas modelio mokymo sėkmingumas.
 
-Modeliai pradėti mokyti nuo polinominio kernelio. Svarbūs parametrai derinant šį modelį yra polinominės
+Modeliai pradėti mokyti nuo polinominio branduolio. Svarbūs parametrai derinant šį modelį yra polinominės
 funkcijos laipsnis bei parametrų reguliarizavimo koeficientas.
 
-\begin{ktutable}{initial_train}{Pirminio polinominio kernelio modelio parametrai}
+\begin{ktutable}{initial_train}{Pirminio polinominio branduolio modelio parametrai}
     \begin{tabular}{| l | c | c | c | c | c | c | }
     \hline
         Kernelio funkcija & polinominė & polinominė & polinominė & polinominė & polinominė & polinominė \\ \hline
@@ -50,17 +50,17 @@ modelis nekonverguoja.
 Modelio mokymas toliau tyrinėtas naudojant kitas branduolio funkcijas ir derinant jų parametrus.
 Modelio parametrų reguliarizacijos parametras L2 nekeistas.
 
-\ktufigure{images/linear_loss.png}{12 cm}{Tiesinio kernelio modelio mokymas}
-\ktufigure{images/polly_loss.png}{12 cm}{Polinominio kernelio modelio mokymas}
-\ktufigure{images/rbf_loss.png}{12 cm}{Radialinės bazės funkcijos kernelio modelio mokymas}
+\ktufigure{images/linear_loss.png}{12 cm}{Tiesinio branduolio modelio mokymas}
+\ktufigure{images/polly_loss.png}{12 cm}{Polinominio branduolio modelio mokymas}
+\ktufigure{images/rbf_loss.png}{12 cm}{Radialinės bazės funkcijos branduolio modelio mokymas}
 
-Naudojant kitus kernelio tipus pastebėta ta pati tendencija, matoma \ktufigref{images/linear_loss.png}, \ktufigref{images/polly_loss.png}, \ktufigref{images/rbf_loss.png} grafikuose.
+Naudojant kitus branduolio tipus pastebėta ta pati tendencija, matoma \ktufigref{images/linear_loss.png}, \ktufigref{images/polly_loss.png}, \ktufigref{images/rbf_loss.png} grafikuose.
 
 \ktusubsection{Tiesinio modelio mokymas}
 
-Vowpal Wabbit sistema visiems modeliams naudoja vienodą duomenų formatą bei paanšius parametrus.
+Vowpal Wabbit sistema visiems modeliams naudoja vienodą duomenų formatą bei panašius parametrus.
 Tai leidžia lengvai bandyti įvairius modelius. Dėl to po prasto atramos vektorių mašinų modelių
-pasirinktas vienas iš paprasčiausių modelių, kuriuo tiėktina pasiekti gerus rezultatus, nenaudojant
+pasirinktas vienas iš paprasčiausių modelių, kuriuo tikėtina pasiekti gerus rezultatus, nenaudojant
 didelio resursų kiekio modelio formavimui.
 
 \begin{ktutable}{linear_params}{Tiesinio modelio hiperparametrai}
@@ -77,11 +77,11 @@ didelio resursų kiekio modelio formavimui.
     \end{tabular}
 \end{ktutable}
 
-Mokant tiesinį modelį naudojamas mažesnis sąvybių lentelės dydis nurodomas naudojant \texttt{bit\_precision}
- parametrą. Tai leidžia optimialiau atlikti mokymą sumažinant naudojamą atminties kiekį. Naudojami $27$ bitai.
+Mokant tiesinį modelį naudojamas mažesnis savybių lentelės dydis nurodomas naudojant \texttt{bit\_precision}
+ parametrą. Tai leidžia optimaliau atlikti mokymą sumažinant naudojamą atminties kiekį. Naudojami $27$ bitai.
 
 Pirminiai modelio mokymo rezultatai pateikiami \ktufigref{images/linearModelLoss.png}. Šiame grafike
-matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atramos veotkrių mašinų
+matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atramos vektorių mašinų
 modelius. Mokomas modelis konverguoja, pasiekiama gana pastovi nuostolio funkcijos reikšmė, kuri
 yra nedidelė, artima nuliui.
 
@@ -107,7 +107,7 @@ $145832$ matmenų.
 \ktufigure{images/roc.png}{12 cm}{Tiesinio modelio ROC kreivė}
 
 Lyginant šio modelio rezultatus pateiktus \cite{comp} straipsnyje šis tiesinis modelis pralenkia
-atramos vektorių mašinų klasifikatorių, kuris šiame strapsnyje buvo išskiriamas kaip geriausias klasifikatorius.
+atramos vektorių mašinų klasifikatorių, kuris šiame straipsnyje buvo išskiriamas kaip geriausias klasifikatorius.
 
 \ktusubsection{Sprendimų medžio modelio formavimas}
 
@@ -126,7 +126,7 @@ Paskutinis naudojamas modelis yra sprendimų medis. Modelio naudojami parametrai
                                & logistic & logistinė nuostolio funkcija \\ \hline
         \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
         \texttt{bit\_precision} & & Bitų, naudojamų savybių lentelei, skaičius\\ \hline
-        \texttt{log\_multi} & & Siekiamas sprendimų medžio kompeksiškumas laiko atžvilgiu, $O(log(n))$ kur $n$ yra šio parametro vertė\\ \hline
+        \texttt{log\_multi} & & Siekiamas sprendimų medžio kompleksiškumas laiko atžvilgiu, $O(log(n))$ kur $n$ yra šio parametro vertė\\ \hline
     \end{tabular}
 \end{ktutable}
 
@@ -134,7 +134,7 @@ Sprendimų medžio modelio mokymas vyksta sėkmingai, stebint nuostolio funkcijo
 
 Nepaisant gero nuostolio funkcijos rezultato šis modelis persimokė su visomis naudotomis
 hiperparametrų vertėmis. Šis modelis visada prognozuoja tik vieną iš reikšmių, tai yra
-klasifikacija nevykdoma, modelis visada grąžina kad analizuojaams vektorius priklauso klasei 1 (svetainė nežalinga).
+klasifikacija nevykdoma, modelis visada grąžina kad analizuojamas vektorius priklauso klasei 1 (svetainė nežalinga).
 
 \ktusubsection{Modelių mokymo rezultatai}
 
@@ -150,7 +150,7 @@ modelį, kuris buvo įvertintas kaip geriausias.
 \begin{ktutable}{compTable}{Pirminio tiesinio modelio rezultatai}
     \begin{tabular}{|l|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
     \hline
-                             & Tiesinis modelis  &  K Artimiausių kaimynų modelis  &  Radialinės bazės funkcijos kernelio atramos vektorių mašinos  &  Tiesinio kernelio atramos vektorių mašinos               \\ \hline
+                             & Tiesinis modelis  &  K Artimiausių kaimynų modelis  &  Radialinės bazės funkcijos branduolio atramos vektorių mašinos  &  Tiesinio branduolio atramos vektorių mašinos               \\ \hline
                Tikslumas     & 0.97552           & 0.91   & 0.97  &  0.92         \\ \hline
     \end{tabular}
 \end{ktutable}
