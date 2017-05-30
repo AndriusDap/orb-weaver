@@ -25,7 +25,7 @@ Naudojant atramos vektorių mašinų modelį sistema Vowpal Wabbit naudojami par
     \end{tabular}
 \end{ktutable}
 
-Mokant atraminių vektorių mašinų modelį stebimas nuostolių funkcijos įvertis. Pagal jį vertinamas modelio mokymo sėkmingumas.
+Mokant atramos vektorių mašinų modelį stebimas nuostolių funkcijos įvertis. Pagal jį vertinamas modelio mokymo sėkmingumas.
 
 Modeliai pradėti mokyti nuo polinominio kernelio. Svarbūs parametrai derinant šį modelį yra polinominės funkcijos laipsnis bei parametrų reguliarizavimo koeficientas.
 
@@ -52,7 +52,7 @@ Naudojant kitus kernelio tipus pastebėta ta pati tendencija, matoma \ktufigref{
 
 \ktusubsection{Tiesinio modelio mokymas}
 
-Vowpal Wabbit sistema visiems modeliams naudoja vienodą duomenų formatą bei paanšius parametrus. Tai leidžia lengvai bandyti įvairius modelius. Dėl to po prasto atraminių vektorių mašinų modelių pasirinktas vienas iš paprasčiausių modelių, kuriuo tiėktina pasiekti gerus rezultatus, nenaudojant didelio resursų kiekio modelio formavimui.
+Vowpal Wabbit sistema visiems modeliams naudoja vienodą duomenų formatą bei paanšius parametrus. Tai leidžia lengvai bandyti įvairius modelius. Dėl to po prasto atramos vektorių mašinų modelių pasirinktas vienas iš paprasčiausių modelių, kuriuo tiėktina pasiekti gerus rezultatus, nenaudojant didelio resursų kiekio modelio formavimui.
 
 \begin{ktutable}{linear_params}{Tiesinio modelio hiperparametrai}
     \begin{tabular}{| l | l | p{7cm}|}
@@ -70,7 +70,7 @@ Vowpal Wabbit sistema visiems modeliams naudoja vienodą duomenų formatą bei p
 
 Mokant tiesinį modelį naudojamas mažesnis sąvybių lentelės dydis nurodomas naudojant \texttt{bit\_precision} parametrą. Tai leidžia optimialiau atlikti mokymą sumažinant naudojamą atminties kiekį. Naudojami $27$ bitai.
 
-Pirminiai modelio mokymo rezultatai pateikiami \ktufigref{images/linearModelLoss.png}. Šiame grafike matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atraminių veotkrių mašinų modelius. Mokomas modelis konverguoja, pasiekiama gana pastovi nuostolio funkcijos reikšmė, kuri yra nedidelė, artima nuliui.
+Pirminiai modelio mokymo rezultatai pateikiami \ktufigref{images/linearModelLoss.png}. Šiame grafike matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atramos veotkrių mašinų modelius. Mokomas modelis konverguoja, pasiekiama gana pastovi nuostolio funkcijos reikšmė, kuri yra nedidelė, artima nuliui.
 
 \ktufigure{images/linearModelLoss.png}{14 cm}{Tiesinio modelio mokymas}
 
@@ -91,7 +91,7 @@ $145832$ matmenų.
 
 \ktufigure{images/roc.png}{12 cm}{Tiesinio modelio ROC kreivė}
 
-Lyginant šio modelio rezultatus pateiktus \cite{comp} straipsnyje šis tiesinis modelis pralenkia atraminių vektorių mašinų klasifikatorių, kuris šiame strapsnyje buvo išskiriamas kaip geriausias klasifikatorius.
+Lyginant šio modelio rezultatus pateiktus \cite{comp} straipsnyje šis tiesinis modelis pralenkia atramos vektorių mašinų klasifikatorių, kuris šiame strapsnyje buvo išskiriamas kaip geriausias klasifikatorius.
 
 \ktusubsection{Sprendimų medžio modelio formavimas}
 
@@ -121,12 +121,12 @@ Nepaisant gero nuostolio funkcijos rezultato šis modelis persimokė su visomis 
 
 \ktusubsection{Modelių mokymo rezultatai}
 
-Kokybiško atraminių vektorių mašinų modelio bei sprendimų medžio apmokyti nepavyko. Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Duomenys turi itin daug matmenų - kiekvienas naujas žodis, simbolių grupė yra koduojama kaip naujas matmuo. Tačiau suformuotas itin tikslus tiesinis modelis. Lyginant tiesinio modelio rezultatus su pateiktais įvairių modelių rezultatais straipsnyje \cite{comp}, kurie pateikiami lentelėje \vref{tab:compTable} visą mokymą galima laikyti pasisekusiu. Nors apmokytas tik vienas modelis iš trijų jis yra itin tikslus ir lenkia atraminių vektorių mašinų modelį, kuris buvo įvertintas kaip geriausias.
+Kokybiško atramos vektorių mašinų modelio bei sprendimų medžio apmokyti nepavyko. Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Duomenys turi itin daug matmenų - kiekvienas naujas žodis, simbolių grupė yra koduojama kaip naujas matmuo. Tačiau suformuotas itin tikslus tiesinis modelis. Lyginant tiesinio modelio rezultatus su pateiktais įvairių modelių rezultatais straipsnyje \cite{comp}, kurie pateikiami lentelėje \vref{tab:compTable} visą mokymą galima laikyti pasisekusiu. Nors apmokytas tik vienas modelis iš trijų jis yra itin tikslus ir lenkia atramos vektorių mašinų modelį, kuris buvo įvertintas kaip geriausias.
 
 \begin{ktutable}{compTable}{Pirminio tiesinio modelio rezultatai}
     \begin{tabular}{|l|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
     \hline
-                             & Tiesinis modelis  &  K Artimiausių kaimynų modelis  &  Radialinės bazės funkcijos kernelio atraminių vektorių mašinos  &  Tiesinio kernelio atraminių vektorių mašinos               \\ \hline
+                             & Tiesinis modelis  &  K Artimiausių kaimynų modelis  &  Radialinės bazės funkcijos kernelio atramos vektorių mašinos  &  Tiesinio kernelio atramos vektorių mašinos               \\ \hline
                Tikslumas     & 0.97552           & 0.91   & 0.97  &  0.92         \\ \hline
     \end{tabular}
 \end{ktutable}

@@ -1,7 +1,7 @@
 Straipsnyje lyginami įvairūs metodai skirti svetainių klasifikavimui į kenksmingas ir nekenksmingas. Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant metodus \cite{comp}
 \begin{enumerate}
  \item K-Artimiausų kaimynų (K-Nearest neighbours)
- \item Atraminių vektorių mašinų (Support Vector Machine)
+ \item Atramos vektorių mašinų (Support Vector Machine)
  \item Paprastasis Bayes klasifikatorius (Naive Bayes)
  \item K-Vidurkių (K-Means)
  \item Affinity propagation metodas
@@ -21,15 +21,15 @@ Pagrindiniai šio metodo sunkumai yra $k$ dydžio parinkimas. Per didelis lems g
 
 Šio metodo privalumas yra tai,  kad skaičiavimai atliekami tingiai. Pirminio modelio formavimo metu nėra atliekami jokie skaičiavimai, jie vykdomi tik klasifikuojant naujus duomenis \cite{Wu2008}.
 
-Atraminių vektorių mašinų (Support Vector Machine) metodas yra vienas iš patikimiausių klasifikavimo metodų \cite{Wu2008}. Jis pasižymi geru rezultatu net turint mažą kiekį mokymo duomenų bei nenukenčia dėl didelio matmenų kiekio \cite{Wu2008}. Šio metodo esmė yra duomenų atvaizdavimas kitoje erdvėje kurioje bus galima aptikti hiperplokštumą kuri skiria įrašų klases.
+Atramos vektorių mašinų (Support Vector Machine) metodas yra vienas iš patikimiausių klasifikavimo metodų \cite{Wu2008}. Jis pasižymi geru rezultatu net turint mažą kiekį mokymo duomenų bei nenukenčia dėl didelio matmenų kiekio \cite{Wu2008}. Šio metodo esmė yra duomenų atvaizdavimas kitoje erdvėje kurioje bus galima aptikti hiperplokštumą kuri skiria įrašų klases.
 
-Atraminių vektorių mašinos modelis aprašomas kaip \cite{comp}:
+Atramos vektorių mašinos modelis aprašomas kaip \cite{comp}:
 \begin{equation}
     h(x) = b + \sum_{n=1}^{N}y_i \alpha_i K(x, x_i)
 \end{equation}
 kur $h(x)$ yra elemento $x$ atstumas nuo klases skiriančios hiperplokštumos, $b$ yra papildomas svorio koeficientas, $\alpha$ yra hiperplokštumos paraštės korekcijos koeficientas mokymo imčiai, $N$ yra matmenų skaičius, $K$ yra branduolio funkcija kuri transformuoja elementus į atramos vektorių mašinos erdvę, $x$ yra klasifikuojamas įrašas.
 
-Apmokant atraminių vektorių mašinų modelį yra svarbu parinkti tinkamą branduolio funkciją, nuo jos itin priklauso modelio rezultatų tikslumas. Mokymas vykdomas parenkant branduolio funkciją ir pskaičiuojant tokius koeficientus $\alpha_i$ su kuriais gaunamas didžiausias riba tarp hiperplokštumos ir teisingai klasifikuotų mokymo duomenų erdvėje.
+Apmokant atramos vektorių mašinų modelį yra svarbu parinkti tinkamą branduolio funkciją, nuo jos itin priklauso modelio rezultatų tikslumas. Mokymas vykdomas parenkant branduolio funkciją ir pskaičiuojant tokius koeficientus $\alpha_i$ su kuriais gaunamas didžiausias riba tarp hiperplokštumos ir teisingai klasifikuotų mokymo duomenų erdvėje.
 
 Šio metodo trūkumas yra didelio kiekio skaičiavimo resursų reikalavimas modelio apmokymo metu. Tačiau po modelio formavimo jis gali būti panaudojamas nereikalaujant daug resursų \cite{Wu2008}.
 
