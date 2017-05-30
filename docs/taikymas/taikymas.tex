@@ -2,6 +2,8 @@
 
 Apmokytas modelis yra paruoštas naudojimui, tačiau jis nėra itin patogus. Naudojamos programinės įrangos modelis gali būt ipanaudojamas per komandinės eilutės sąsają, pateikiant duomenis mokymo metu naudotu formatu. Modelio grąžinamas rezultatas taip pat nėra lengvai suvokiamas. Dėl to yra kuriama taikomoji aplikacija kuri supaprastina modelio panaudojimą realiose, praktinėse situacijose.
 
+Kuriama sistema vadinama toliau vadinama \textbf{klasifikavimo aplikacija}.
+
 \begin{ktutable}{sasaja}{Klasifikavimo aplikacijos sąsaja}
     \begin{tabular}{|l|l|p{5cm}|p{5cm}|}
     \hline
@@ -12,11 +14,11 @@ Apmokytas modelis yra paruoštas naudojimui, tačiau jis nėra itin patogus. Nau
 
 Aplikacija pritaikyta naudoti http protokolu, naudojama REST architektūra. Sąsaja pateikta \vref{tab:sasaja} lentelėje. Tinklalpio kurį norima klasifikuoti adresas yra pateikiamas klasifikavimo aplikacijai, grąžinamas rezultatas yra klasifikavimo modelio pateiktas įvertis.
 
-Sukurto įrankio architektūra pateikiama paveiksle \ktufigref{images/architektura.png}
+Klasifikavimo aplikacijos architektūra pateikiama paveiksle \ktufigref{images/architektura.png}
 
-\ktufigure{images/architektura.png}{12 cm}{Praktinio įrankio architektūra}
+\ktufigure{images/architektura.png}{12 cm}{Klasifikavimo aplikacijos architektūra}
 
-Įrankis susideda iš dviejų pagrindinių komponentų:
+Klasifikavimo aplikacija susideda iš dviejų pagrindinių komponentų:
 \begin{enumerate}
 \item sąsaja
 \item branduolys
@@ -27,4 +29,11 @@ Branduolio komponente vykdomas modelio pritaikymas. Jį sudaro klasė \texttt{Cl
 
 Komponentų atskyrimas yra viena iš gerų praktikų kuriant sistemas. Atskiriant branduolio elementą kuriame yra vykdoma verslo logika, matematiniai skaičiavimai sistema yra paruošiama greitam plėtimui, lengvam migravimui tarp palaikomų ir naudojamų vartotojo sąsajos protokolų. Šiuo atveju vartotojo sąsaja nepriklauso nuo branduolio, tik nuo klasės \texttt{ClassifierController} implementacijos.
 
-Pirminė programos versija yra kurta siekiant įrodyti jos veikimo koncepciją. Dėl to kai kurios sistemos vietos yra optimizuotos programavimo laiko minimizavimo atžvilgiu. Plėtojant programinę įrangą v ertėtų aplikaciją skaidyti į kelis atskirtus komponentus, pagal naudojamų resursų tipą. PageRank įverčiai turi būti iškeliami į duomenų bazę, mašininio mokymo modelis iškeliamas į atskirą servisą kuris gali būti plečiamas esant reikalui ar skaičiavimo resursų trūkumui. Tačiau tai stipriai apsunkintų pirminį programos prototipą.
+Lyginant su alternatyvia sistema \cite{gapi} yra matomi klasifikavimo aplikacijos privalumai:
+ \begin{enumerate}
+    \item galima naudoti alternatyvi sąsaja, pakeitus sąsajos komponento implementaciją;
+    \item klasifikavimo modelis gali būti keičiamas;
+    \item nereikalauja interneto prieigos.
+ \end{enumerate}
+
+Pirminė programos versija yra kurta siekiant įrodyti jos veikimo koncepciją. Dėl to kai kurios sistemos vietos yra optimizuotos programavimo laiko minimizavimo atžvilgiu. Plėtojant programinę įrangą v ertėtų aplikaciją skaidyti į kelis atskirtus komponentus, pagal naudojamų resursų tipą. PageRank įverčiai turi būti iškeliami į duomenų bazę, mašininio mokymo modelis iškeliamas į atskirą vykdomąją aplikaciją kuri gali būti plečiamas esant reikalui ar skaičiavimo resursų trūkumui.
