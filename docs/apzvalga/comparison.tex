@@ -1,19 +1,19 @@
 Straipsnyje lyginami įvairūs metodai skirti svetainių klasifikavimui į kenksmingas ir nekenksmingas. Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant metodus \cite{comp}
 \begin{enumerate}
- \item K-Artimiausų kaimynų (K-Nearest neighbours)
- \item Atraminių vektorių klasifikatorius (Support Vector Machine)
- \item Paprastasis Bayes klasifikatorius (Naive Bayes)
- \item K-Vidurkių (K-Means)
- \item Affinity propagation metodas
+ \item K-Artimiausų kaimynų (K-Nearest neighbours);
+ \item Atraminių vektorių klasifikatorius (Support Vector Machine);
+ \item Paprastasis Bayes klasifikatorius (Naive Bayes);
+ \item K-Vidurkių (K-Means);
+ \item Affinity propagation metodas.
 \end{enumerate}
 
-Staripsnyje naudojami ir prižiūrimi ir neprižiūrimi metodai. Jų rezultatas yra lyginamas siekiant aptikti geriausiai tinkantį parinktai problemai spręsti \cite{comp}.
+Staripsnyje naudojami ir metodai mokomi su mokytoju ir be. Jų rezultatas yra lyginamas siekiant aptikti geriausiai tinkantį parinktai problemai spręsti \cite{comp}.
 
 K-Artimiausų kaimynų (K-Nearest neighbours) metodas yra paremtas trimis elementais \cite{Wu2008}:
 \begin{enumerate}
-    \item Pavyzdinis duomenų rinkinys (Mokymo duomenų rinkinys)
-    \item Elementų atstumo matas
-    \item Analizuojamų kaimynų kiekis $k$
+    \item Pavyzdinis duomenų rinkinys (Mokymo duomenų rinkinys);
+    \item Elementų atstumo matas;
+    \item Analizuojamų kaimynų kiekis $k$.
 \end{enumerate}
 Elemento klasifikacija vyksta balsavimo principu - išrenkama $k$ elementų, kurie yra artimiausi pagal parinktą artumo metriką, dominuojanti klasė išrinktame rinkinyje priskiriama klasifikuojamam elementui.
 
@@ -100,7 +100,7 @@ Duomenų rinkinys surinktas iš dviejų pagrindinių šaltinių, Alexa katalogo,
 
 Modeliai apmokyti naudojant 70\% pradinių, sužymėtų duomenų apmokymui bei 30\% testavimui \ktufigref{images/validation.png}. Duomenų rinkinys atsitiktinai skaidomas į dvi dalis, mokymo ir validacijos. Mokymo duomenys naudojami modelio apmokymui, o validacijos duomenys naudojami įvertinti modelį. Taip yra išvengiama modelio persimokymo, galima teisingai suderinti modelio hiperparametrus. Kenksmingų ir nekenksmingų svetainių santykis išlaikytas vienodas testavimo ir mokymo imtyse.
 
-\begin{ktutable}{webtrees_rezultatas}{Prižiūrimų modelių rezultatai}
+\begin{ktutable}{webtrees_rezultatas}{Strapsnyje pateikiami modelių rezultatai}
     \begin{tabular}{l c c c c }
      \hline
        \diagbox{Metrika}{Modelis} & KNN & LS & RS & NB \\ \hline

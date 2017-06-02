@@ -8,7 +8,7 @@ Svetainės kurias stengiamasi aptikti pasižymi tam tikromis topologinėmis savy
 
 PageRank algoritmas ranguoja interneto puslapius pagal kiekvieno puslapio svarbą. Svarba vertinama pagal nuorodų į puslapį kiekį, laikoma kad svarbesni puslapiai yra dažniau minimi kitose svetainėse. Taip pat svarbių svetainių paminėjimai yra verti daugiau nei nesvarbių svetainių. Taip imituojamas socialinio tinklo prestižo statusas \cite{Wu2008}.
 
-Vertinant svetainės PageRank įvertį internetas laikomas kryptiniu grafu $G = (V, E)$ kur $V$ yra grafo viršūnės, tai yra puslapiai, o $E$ yra kryptinės briaunos, tai yra nuorodos tarp puslapių \cite{Wu2008}. Supaprastintas PageRank įvertis yra apibrėžiamas kaip \cite{pagerank}:
+Vertinant svetainės PageRank įvertį internetas laikomas orientuotu grafu $G = (V, E)$ kur $V$ yra grafo viršūnės, tai yra puslapiai, o $E$ yra orientuotos briaunos, tai yra nuorodos tarp puslapių \cite{Wu2008}. Supaprastintas PageRank įvertis yra apibrėžiamas kaip \cite{pagerank}:
 \begin{equation}
     R(u) = c \sum_{v \in B_u} \frac{R(v)}{N_v}
 \end{equation}
