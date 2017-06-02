@@ -5,9 +5,9 @@ būti panaudojamas per komandinės eilutės sąsają, pateikiant duomenis mokymo
 rezultatas taip pat nėra lengvai suvokiamas. Dėl to yra kuriama taikomoji aplikacija kuri supaprastina modelio
 panaudojimą realiose, praktinėse situacijose.
 
-Kuriama sistema vadinama toliau vadinama \textbf{klasifikavimo aplikacija}.
+Kuriama sistema vadinama toliau vadinama \textbf{kenksmingų interneto tinklalapių identifikavimo programa}.
 
-\begin{ktutable}{sasaja}{Klasifikavimo aplikacijos sąsaja}
+\begin{ktutable}{sasaja}{KKenksmingų interneto tinklalapių identifikavimo programos sąsaja}
     \begin{tabular}{|l|l|p{5cm}|p{5cm}|}
     \hline
         Kelias & Metodas & Parametrai & Rezultatas \\ \hline
@@ -15,7 +15,7 @@ Kuriama sistema vadinama toliau vadinama \textbf{klasifikavimo aplikacija}.
     \end{tabular}
 \end{ktutable}
 
-Aplikacija pritaikyta naudoti http protokolu, naudojama REST architektūra. Sąsaja pateikta \vref{tab:sasaja}
+Kenksmingų interneto tinklalapių identifikavimo programa pritaikyta naudoti http protokolu, naudojama REST architektūra. Sąsaja pateikta \vref{tab:sasaja}
 lentelėje. Tinklalpio kurį norima klasifikuoti adresas yra pateikiamas klasifikavimo aplikacijai, grąžinamas
 rezultatas yra klasifikavimo modelio pateiktas įvertis.
 
@@ -23,7 +23,7 @@ Kenksmingų interneto tinklalapių identifikavimo programos architektūra pateik
 
 \ktufigure{images/architektura.png}{12 cm}{Kenksmingų interneto tinklalapių identifikavimo programos architektūra}
 
-Klasifikavimo aplikacija susideda iš dviejų pagrindinių komponentų:
+Kenksmingų interneto tinklalapių identifikavimo programa susideda iš dviejų komponentų:
 \begin{enumerate}
 \item sąsaja,
 \item branduolys.
@@ -36,12 +36,12 @@ branduolio komponente esančio klasifikatoriaus rezultato pateikimui naudotojui 
 Branduolio komponente vykdomas modelio pritaikymas. Jį sudaro klasė \texttt{ClassifierController} bei duomenų
 saugyklos kenksmingų ir nekenksmingų svetainių PageRank įverčiams.
 
-Komponentų atskyrimas yra viena iš gerų praktikų kuriant sistemas. Atskiriant branduolio elementą kuriame yra
+Kenksmingų interneto tinklalapių identifikavimo programoje atskirti komponentai siekiant supaprastinti programos modifikacijas.. Atskiriant branduolio elementą kuriame yra
 vykdoma verslo logika, matematiniai skaičiavimai sistema yra paruošiama greitam plėtimui, lengvam migravimui
 tarp palaikomų ir naudojamų vartotojo sąsajos protokolų. Šiuo atveju vartotojo sąsaja nepriklauso nuo
 branduolio, tik nuo klasės \texttt{ClassifierController} implementacijos.
 
-Lyginant su alternatyvia sistema \cite{gapi} yra matomi klasifikavimo aplikacijos privalumai:
+Lyginant su alternatyvia sistema \cite{gapi} yra matomi kenksmingų interneto tinklalapių identifikavimo programos privalumai:
  \begin{enumerate}
     \item galima naudoti alternatyvi sąsaja, pakeitus sąsajos komponento implementaciją;
     \item klasifikavimo modelis gali būti keičiamas;
