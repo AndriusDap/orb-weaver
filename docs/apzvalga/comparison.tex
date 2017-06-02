@@ -1,9 +1,11 @@
+
+
 Straipsnyje lyginami įvairūs metodai skirti svetainių klasifikavimui į kenksmingas ir nekenksmingas. Formuluojama problema yra svetainių klasifikavimas į dvi grupes, naudojant metodus \cite{comp}
 \begin{enumerate}
- \item K-Artimiausų kaimynų (K-Nearest neighbours);
+ \item K-artimiausų kaimynų (K-Nearest neighbours);
  \item Atraminių vektorių klasifikatorius (Support Vector Machine);
  \item Paprastasis Bayes klasifikatorius (Naive Bayes);
- \item K-Vidurkių (K-Means);
+ \item K-vidurkių (K-Means);
  \item Affinity propagation metodas.
 \end{enumerate}
 
@@ -11,13 +13,13 @@ Staripsnyje naudojami ir metodai mokomi su mokytoju ir be. Jų rezultatas yra ly
 
 K-Artimiausų kaimynų (K-Nearest neighbours) metodas yra paremtas trimis elementais \cite{Wu2008}:
 \begin{enumerate}
-    \item Pavyzdinis duomenų rinkinys (Mokymo duomenų rinkinys);
+    \item Mokymo duomenų rinkinys;
     \item Elementų atstumo matas;
     \item Analizuojamų kaimynų kiekis $k$.
 \end{enumerate}
-Elemento klasifikacija vyksta balsavimo principu - išrenkama $k$ elementų, kurie yra artimiausi pagal parinktą artumo metriką, dominuojanti klasė išrinktame rinkinyje priskiriama klasifikuojamam elementui.
+Elementų klasifikacija vyksta balsavimo principu - išrenkama $k$ elementų, kurie yra artimiausi pagal parinktą artumo metriką, dominuojanti klasė išrinktame rinkinyje priskiriama klasifikuojamam elementui.
 
-Pagrindiniai šio metodo sunkumai yra $k$ dydžio parinkimas. Per didelis lems gretimų klasių įtraukimą į balsavimo procesą, per mažas gali lemti blogą rezultatą esant triukšmui pradiniuose, apmokymo, duomenyse. Tai sprendžiama pridedant balso svorį \cite{Wu2008} kuris yra atvirkščiai proporcingas elemento atstumui nuo balsuojančio elemento. Taip pat svarbus atstumo mato parinkimas. Dažnai naudojamas Euklido atstumas, tačiau jis nėra tinkamas kai yra daug matmenų, ar jų reikšmės yra itin skirtingos \cite{Wu2008}. Tada verta naudoti kitus matus arba normalizuoti atributų vertes.
+Pagrindiniai šio metodo trūkumai yra $k$, kaimynų skaičiaus, parinkimas. Per didelis $k$ lems gretimų klasių įtraukimą į balsavimo procesą, per mažas gali lemti blogą rezultatą esant triukšmui pradiniuose, apmokymo, duomenyse. Tai sprendžiama pridedant balso svorį \cite{Wu2008} kuris yra atvirkščiai proporcingas elemento atstumui nuo balsuojančio elemento. Taip pat svarbus atstumo mato parinkimas. Dažnai naudojamas Euklido atstumas, tačiau jis nėra tinkamas kai yra daug matmenų, ar jų reikšmės yra itin skirtingos \cite{Wu2008}. Tada verta naudoti kitus matus arba normalizuoti atributų vertes.
 
 Šio metodo privalumas yra tai,  kad skaičiavimai atliekami tingiai. Pirminio modelio formavimo metu nėra atliekami jokie skaičiavimai, jie vykdomi tik klasifikuojant naujus duomenis \cite{Wu2008}.
 
@@ -47,9 +49,9 @@ Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma kad visi �
 
   Šis metodas leidžia panaudoti nedidelį duomenų kiekį modelio apmokymui, apmokymas vyksta greitai ir paprastai, nereikalauja komplikuotų iteracinių schemų modelio formavimui \cite{Wu2008}. Tačiau vienas iš reikalavimų labiausiai ribojančių šį metodą yra visų duomenų matmenų nepriklausomumas tarpusavyje. Tačiau tai galima spręsti naudojant pirminį duomenų apdorojimą, pašalinant stipriai koreliuotas reikšmes \cite{Wu2008}. Taip pat metodas gali modeliuoti tik tiesines ribas tarp klasių, be papildomų modifikacijų jo pritaikyti netiesiniams uždaviniams neina \cite{comp}.
 
- K-Vidurkių algoritmas yra iteracinis metodas skirtas skaidyti duomenų rinkinį į naudotojo parinktą klasterių skaičių $k$ \cite{Wu2008}. Algoritmo metu siekiama minimizuoti visų imties elementų atstumą iki jiems priskirtų klasterių centrų. Algoritmas susideda iš dviejų žingsnių:
+ K-vidurkių algoritmas yra iteracinis metodas skirtas skaidyti duomenų rinkinį į naudotojo parinktą klasterių skaičių $k$ \cite{Wu2008}. Algoritmo metu siekiama minimizuoti visų imties elementų atstumą iki jiems priskirtų klasterių centrų. Algoritmo iteracija susideda iš dviejų žingsnių:
 
- \textbf{Duomenų priskyrimas.} Visi elementai yra priskiriami jiems artimiausiam centroidui. Esant vienodiems atstumais centroidas parenkamas atsitiktinai. Pirmą kartą vykdant šį žingsnį centroidai parenkami atsitiktinai. Šio žingsnio rezultatas yra duomenys, suskaidyti į $k$ grupių.
+ \textbf{Duomenų priskyrimas.} Visi objektai yra priskiriami jiems artimiausiam centroidui. Esant vienodiems atstumais centroidas parenkamas atsitiktinai. Pirmą kartą vykdant šį žingsnį centroidai parenkami atsitiktinai. Šio žingsnio rezultatas yra duomenys, suskaidyti į $k$ grupių.
 
  \textbf{Centrų tikslinimas.} Perskaičiuojamos grupių vidutinės parametrų vertės, parenkamas naujas centroidas esantis arčiausiai tikrojo grupės centro.
  Šie algoritmo žingsniai yra kartojami kol centroidai nebesikeičia \cite{Wu2008}. Atstumui įvertinti naudojamas Euklido atstumas \cite{comp}:
@@ -92,7 +94,7 @@ Affinity propagation yra vienas iš klasterizavimo metodų. Tai yra neprižiūri
 
 Šis metodas leidžia kontroliuoti suformuojamų klasterių kiekį per $\lambda$ vertę \cite{comp}. Šis metodas pasižymi geresne greitaveika lyginant su K-vidurkių metodu \cite{fastprop}.
 
-Pritaikant šiuos metodus svetainės turi būti supaprastinamos iki tam tikrų savybių vektoriaus. Tyrimo metu nauodtas svetainių turinys, jų URL adresai \cite{comp}. Svetainių turinys, kuris yra anglų kalba buvo analizuojamas siekiant išgauti jų semantinę prasmę. Tam naudota Term Frequency - inverse document frequency (TFIDF) metodika. Taip pat į svetainių savybes įtraukta ir jų HTML kodo struktūra, jų adreso semantinė reikšmė, nuorodos į kitus puslapius, atvaizduoto puslapio vaizdas.
+Pritaikant šiuos metodus svetainės turi būti supaprastinamos iki tam tikrų savybių vektoriaus. Tyrimo metu nauodtas svetainių turinys, jų URL adresai \cite{comp}. Svetainių turinys, kuris yra anglų kalba buvo analizuojamas siekiant išgauti jų semantinę prasmę. Tam naudota Term Frequency - inverse document frequency (TFIDF) metodika. Taip pat į svetainių savybes įtraukta ir jų HTML kodo struktūra, jų adreso semantinė reikšmė, nuorodos į kitus tinklalapius, atvaizduoto tinklalapio vaizdas.
 
 Duomenų rinkinys surinktas iš dviejų pagrindinių šaltinių, Alexa katalogo, iš kurio išgautos nekenksmingos svetainės, bei iš Phishtank žalingų svetainių registro. Surinkta $100000$ svetainių informacija.
 

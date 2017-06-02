@@ -1,4 +1,4 @@
-Kuriama metodika tinklalapių klasifikavimui. Siekiamas galutinis rezultatas yra įrankis, kurio įvestis yra tinklalapio adresas, o rezultatas -- klasifikacija su jai priskirtu tikslumu. Tinklapio adresas (URL) yra pakankamas identifikuoti tinklalapius. Taip pat naudojantis juo galima pasiekti patį tinklapį, taip įrankiui paliekama galimybė pridėti papildomas savybes, tokias kaip tinklalapio turinio peržiūra.
+Kuriama metodika tinklalapių klasifikavimui. Siekiamas galutinis rezultatas yra įrankis, kurio įvestis yra tinklalapio adresas, o rezultatas -- klasifikacija ir jos kokybės vertinimas. Tinklapio adresas (URL) yra pakankamas identifikuoti tinklalapius. Taip pat naudojantis juo galima pasiekti patį tinklapį, taip įrankiui paliekama galimybė pridėti papildomas savybes, tokias kaip tinklalapio turinio peržiūra.
 
 Klasifikavimo modeliai savo bendroje formoje kaip įvestį naudoja parametrų vektorių, dažniausiai tai yra $n$ ilgio vektorius $X = (x_1, x_2, ... , x_n)$ žymintis klasifikuojamo objekto savybes. Savybės išreiškiamos skaitinėmis vertėmis. Klasifikatoriaus tikslas - kiekvienam vektoriui $X$ priskirti klasę $Y$. Dėl to vienas pirmų užduočių kuriuos reikia atlikti yra nagrinėjamo objekto, tinklalapio adreso, transformavimas į savybių vektorių $X$.
 
@@ -56,9 +56,9 @@ Pagerank įverčiai gaunami iš orientuoto svetainių grafo $G = (V, E)$, kur $V
 
 Grafo viršūnės $V$ yra svetainės, o lankai atitinka ryšius tarp svetainių. Tai yra nuorodos tarp svetainių aptinkamos svetainių tinklalapiuose. Šie lankai turi kryptį. Jei svetainės $v_a$ tinklalapyje yra nuoroda į svetainės $v_b$ tinklalapį laikoma, kad egzistuoja lankas $e_{ab}$ iš viršūnės $v_a$ į viršūnę $v_b$. Visų lankų svoris yra vienodas, tai yra jei keli svetainės $v_a$ tinklalapiai turi nuorodas į svetainės $v_b$ tinklalapius, vis vien laikoma kad yra tik vienas lankas $e_{ab}$. Galimi abipusiai svetainių ryšiai, tai yra jei egzistuoja lankas $e_{ab}$ lankas $e_{ba}$, kuris rodo ryšį iš viršūnės $v_b$ į viršūnę $v_a$ taip pat gali egzistuoti.
 
-Svetainių grafas naudojamas skaičiuoti Pagerank įverčiams. Pagerank įvertis apibrėžiamas kaip \cite{pagerank}:
+Svetainių grafas naudojamas skaičiuoti Pagerank įverčiams. Pagerank įvertis čia apibrėžiamas \cite{pagerank}:
 \begin{equation} \label{eq:pagerank}
-    R(v) = (1 - d) + d \sum_{u \in B_{v}} \frac{R(u)}{N_u}
+    R(v) = (1 - d) + d \sum_{u \in B_{v}} \frac{R(u)}{N_u},
 \end{equation}
 kur $R(v)$ yra viršūnės $v$ PageRank įvertis, $d$ - slopinimo faktorius, $B_v$ viršūnės $u$ kurios turi lankus $e_{uv}$ su viršūne $v$. $N_u$ yra viršūnės $u$ išėjimo laipsnis, tai yra skaičius lankų kurie veda iš viršūnės $u$. Slopinimo faktorius $d$ gali turėti reikšmes tarp $0$ ir $1$.
 
@@ -78,7 +78,7 @@ PageRank įvertis negali būti tiesiogiai apskaičiuojamas pagal \ref{eq:pageran
 \Until{$\delta < e$}
 \end{ktualgo}
 
-Šis būdas apskaičiuoti PageRank priklauso nuo nuo kelių parametrų \vref{tab:pagerank_params}. Tai yra $S$, nulinės iteracijos įvertis. Šios iteracijos metu nustatytos reikšmės bus naudojamos tolimesnių viršūnių įverčiui rasti. Nustatant šį vektorių galima koreguoti kurios viršūnės yra svarbios skaičiavimų pradžioje. Šio vektoriaus keitimas leidžia pritaikyti PageRank įverčio rezultatą. Parametras $d$ yra slopinimas, nuo jo priklauso metodo konvergavimo greitis. Viskas vykdoma kol pasiekiamas pasirinktas konvergavimo lygmuo, kurį galima aptikti pagal tai, jog iteruojant įvertis kinta nežymiai. Minimali iteracijos įverčio pakitimo riba nustatoma kintamuoju $e$.
+Šis būdas apskaičiuoti PageRank priklauso nuo nuo kelių parametrų lentelėje \vref{tab:pagerank_params}. Vienas iš jų yra $S_0$, nulinės iteracijos įvertis. Šios iteracijos metu nustatytos reikšmės bus naudojamos tolimesnių viršūnių įverčiui rasti. Nustatant šį vektorių galima koreguoti kurios viršūnės yra svarbios skaičiavimų pradžioje. Šio vektoriaus keitimas leidžia pritaikyti PageRank įverčio rezultatą. Parametras $d$ yra slopinimas, nuo jo priklauso metodo konvergavimo greitis. Viskas vykdoma kol pasiekiamas pasirinktas konvergavimo lygmuo, kurį galima aptikti pagal tai, jog iteruojant įvertis kinta nežymiai. Minimali iteracijos įverčio pakitimo riba nustatoma kintamuoju $e$.
 
 \begin{ktutable}{pagerank_params}{Iteracinio PageRank įverčio skaičiavimo algoritmo parametrai}
     \begin{tabular}{ | r | l | }

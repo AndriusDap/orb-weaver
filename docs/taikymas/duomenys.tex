@@ -1,11 +1,11 @@
-Aprašyto metodo pritaikytas realiam uždaviniui sudarytas iš dviejų žingsnių. Tai yra modelio apmokymas
+Darbe siūlomo metodo taikymas realiam uždaviniui sudarytas iš dviejų žingsnių - modelio apmokymas
 bei apmokyto modelio naudojimas. Modeliui mokyti reikalingas duomenų rinkinys.
 
 \ktusection{Duomenų rinkinys}
 
-Reikalingas duomenų rinkinys yra sudarytas iš trijų komponentų:
+Analizuojamas duomenų rinkinys yra sudarytas iš trijų komponentų:
 \begin{enumerate}
-    \item Svetainių grafo duomenys;
+    \item svetainių grafo duomenys;
     \item kenksmingų tinklalapių sąrašas;
     \item nekenksmingų tinklalapių sąrašas.
 \end{enumerate}
@@ -20,7 +20,7 @@ gali būti nuskaitomas naudojant atviro kodo biblioteką sukurtą pagal \cite{bo
 \ktusubsection{Kenksmingų tinklalapių sąrašas}
 Kenksmingi tinklapiai surinkti naudojant egzistuojančius juoduosius sąrašus \cite{mal1}, \cite{mal2} \cite{mal3}
 \cite{mal4}. Taip suformuotas 48761 kenksmingų tinklalapių sąrašas. Jų tipas, pagal vykdomą ataką, nėra išskiriamas.
-Šių puslapių duomenų rinkiniai yra naudojami kuriant juoduosius sąrašus. Visi rinkiniai sujungiami į vieną tekstinį
+Šių tinklalapių duomenų rinkiniai yra naudojami kuriant juoduosius sąrašus. Visi rinkiniai sujungiami į vieną tekstinį
 failą, kuriame vienoje eilutėje suagoma nuoroda į vieną kenksmingą tinklalapį.
 
 \ktusubsection{Nekenksmingų tinklalapių sąrašas}
@@ -40,7 +40,7 @@ duomenų rinkinį kurio 5\% sudaro kenksmingos svetainės, 95\% nekenksmingos sv
 naudojamas dėl atsitiktinių skaičių generavimo vykdymo metu. Naudojant vieną procesą kompiuterio resursai būtų
 naudojami neefektyviai, šiuo atveju yra išnaudojami visi turimi skaičiavimo resursai - nauji procesai yra
 kuriami tol kol pilnai naudojami visi procesoriaus branduoliai. Galiausiai gaunamas nekenksmingų svetainių
-sąrašas. Parinktų tinklalapių pasiskirstymas pradiniame duomenų rinkinyje yra tolydus.
+sąrašas. Parinktų tinklalapių pasiskirstymas pradiniame duomenų rinkinyje yra tolygus.
 
 Dalis tinklalapių naudoja papildomą parametrų kodavimą URL-kodavimo principu. Šis kodavimas tinklalapių adresuose
 neleistinus simbolius ar rezervuotus simbolius keičia specialiais procento simboliu prasidedančiais kodais.
@@ -49,9 +49,9 @@ Adresai yra dekoduojami naudojant prieduose pateiktas programas.
 \ktusubsection{Duomenų paruošimas mokymui}
 
 Suformuoti duomenų rinkiniai yra skaidomi ir paruošiami apmokymui. Duomenų paruošimo programos išeities
-kodas yra pateikiamas prieduose \ref{priedas:executor}. Programoje įgyvendintas PageRank įverčio skaičiavimas.
+kodas yra pateikiamas prieduose (\ref{priedas:executor}). Programoje įgyvendintas PageRank įverčio skaičiavimas.
 
-PageRank įvertis skaičiuojamas iteracijomis. Vienos iteracijos išeities kodas yra:
+PageRank įvertis skaičiuojamas iteracijomis. Vienos iteracijos išeities kodas:
 \ktusrcr{pagerank.scala}{sources/pagerank.scala}{scala}
 Sukurta funkcija atlieka vieną pagerank iteraciją. Jai reikalingi  parametrai yra grafo duomenys, ankstesnis
 PageRank įvertis, slopinimo koeficiento vertė. Skaičiavimas vykdomas naudojant biblioteka \cite{webgraph} nuskaitytą

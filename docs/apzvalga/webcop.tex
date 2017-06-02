@@ -1,14 +1,14 @@
-Straipsnyje \kclong{webcop} siūlomas \mq{WebCop} metodas skirtas atpažinti žalingus internetinius puslapius ir pavojingų tinklapių grupes, kaimynystes.
+Straipsnyje \kclong{webcop} siūlomas \mq{WebCop} metodas skirtas atpažinti žalingus internetinius tinklalapius ir kenksmingų tinklapių grupes, kaimynystes.
 
 Šiuo straipnsiu siekiama \cite{webcop}:
     \begin{itemize}
-        \item pateikti sistemą gebančią atpažinti pavojingas bei saugias interneto kaimynystes kurias sudaro svetainių nuorodos
+        \item pateikti sistemą gebančią atpažinti kenksmingas bei saugias interneto kaimynystes kurias sudaro svetainių nuorodos
          \item pateikti tikslingą, iš apačios aukštyn, veikiantį kenkėjiškos programinės įrangos aptikimo metodą
          \item papildomą būdą atpažinti pirmojo tipo klaidas kenkėjiškos programinės įrangos identifikavimo modulyje
          \item pateikti naują būda atrasti kenkėjišką programinę įrangą.
     \end{itemize}
 
-Straipsnyje aprašoma žalingos programinės įrangos plitimo problema. Vienas iš būdų kaip į kompiuterius patenka  tokia programinė įranga yra kenksmingų vykdomųjų failų parsisiuntimas iš interneto svetainių. Kenkimo programų plitimą siekiama apriboti naudojant prevencines priemones. Siekiama identifikuoti svetaines platinančias kenksmingus failus ir neleisti naudotojams jas pasiekti, ar juos kitaip perspėti apie potencialiai pavojingą svetainę.
+Straipsnyje aprašoma žalingos programinės įrangos plitimo problema. Vienas iš būdų kaip į kompiuterius patenka  tokia programinė įranga yra kenksmingų vykdomųjų failų parsisiuntimas iš interneto svetainių. Kenkimo programų plitimą siekiama apriboti naudojant prevencines priemones. Siekiama identifikuoti svetaines platinančias kenksmingus failus ir neleisti naudotojams jas pasiekti, ar juos kitaip perspėti apie potencialiai kenksmingą svetainę.
 
 Straipsnyje identifikuotą kenkėjiškos programinės įrangos plitimo problemos sprendimui siūloma WebCop sistema. Tai yra sistema, atpažįstanti kenkėjiškas ir joms gretimas svetaines. Pavyzdžiui jei turima struktūra atitinkanti \ktufigref{images/kenksmingos_A_B.png} pav. tinklapius. Šiuo atveju tinklapiai A ir B nuorodas turi tik į kenksmingą programinę įrangą, dėl to galima laikyti, kad vartotojas negaus jokios naudos iš jų, tik bus skatinamas įsidiegti kenksmingą programinę įrangą. Taip pat, keliaujant interneto grafu nuo apačios, pradedant kenksminga programine įranga galima aptikit ją platinančias svetaines, ir jas taip pat pažymėti kaip kenksmingas.
 
@@ -21,7 +21,7 @@ WebCop sistemą WebCop modulis bei dvi duomenų bazės. Viena duomenų bazėje s
         \item naujos, potencialiai žalingos, programinės įrangos aptikimas.
     \end{enumerate}
 
-Pirmas žingsnis, platinimo svetainių atpažinimas vykdomas jungiant identifikuotų kenkėjų duomenų bazės duomenis su interneto grafo viršūnėmis. Sekančiame žingsnyje išrenkamos svetainės gretimos platinimo svetainėms. Tai yra vienos nuorodos atstumu nuo pavojingų svetainių esančios svetainės. Šie interneto puslapiai yra laikomi žalingos programinės įrangos katalogais. Naudotojų prieiga prie šių puslapių turi būti apribota, siekiant juos apsaugoti. Svetainės esančios dviejų nuorodų atstumu ir talpinančios nežinomas taikomąsias programas identifikuojamos kaip potencialiai pavojingos, laikoma kad tai nauja, neidentifikuota kenkėjiška programinė įranga.
+Pirmas žingsnis, platinimo svetainių atpažinimas vykdomas jungiant identifikuotų kenkėjų duomenų bazės duomenis su interneto grafo viršūnėmis. Sekančiame žingsnyje išrenkamos svetainės gretimos platinimo svetainėms. Tai yra vienos nuorodos atstumu nuo kenksmingų svetainių esančios svetainės. Šie interneto tinklalapiai yra laikomi žalingos programinės įrangos katalogais. Naudotojų prieiga prie šių tinklalapių turi būti apribota, siekiant juos apsaugoti. Svetainės esančios dviejų nuorodų atstumu ir talpinančios nežinomas taikomąsias programas identifikuojamos kaip potencialiai kenksmingos, laikoma kad tai nauja, neidentifikuota kenkėjiška programinė įranga.
 
 WebCop sistema naudoja du duomenų rinkinius -- kenksmingos programinės įrangos registrą bei interneto grafą. Interneto grafo duomenų rinkinys formuotas naudojant interneto paieškos variklio duomenis. Kenkėjišių programų registras kuriamas naudojantis Windows operacinės sistemos naudotojų teikiamais duomenimis.
 

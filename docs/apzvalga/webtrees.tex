@@ -1,8 +1,8 @@
 Straipsnyje \kclong{trees} naudojamas paprastesnis duomenų rinkinys ir siūlomas sprendimų medžio naudojimas kenkėjiškoms svetainėms identifikuoti pagal įvairias jų savybes.
 
-Internetinės svetainės naudoja įvairius pajamų generavimo metodus. Dalis jų yra neteisėti ir kenkia svetainių naudotojams. Tokių svetainių identifikavimas ir blokavimas leidžia apsaugoti naudotojus nuo kenkėjiškos programinės įrangos. Įprasti metodai naudoja pavojingų svetainių sąrašus, tačiau šie sąrašai yra baigtiniai, naujos svetainės į juos pridedamos ne iš karto\cite{webtrees}. Alternatyva blokuojamų sąrašų sudarymui yra mašininio mokymo modelis kuris gali atpažinti pavojingas svetaines pagal jų adresą.
+Internetinės svetainės naudoja įvairius pajamų generavimo metodus. Dalis jų yra neteisėti ir kenkia svetainių naudotojams. Tokių svetainių identifikavimas ir blokavimas leidžia apsaugoti naudotojus nuo kenkėjiškos programinės įrangos. Įprasti metodai naudoja kenksmingų svetainių sąrašus, tačiau šie sąrašai yra baigtiniai, naujos svetainės į juos pridedamos ne iš karto\cite{webtrees}. Alternatyva blokuojamų sąrašų sudarymui yra mašininio mokymo modelis kuris gali atpažinti kenksmingas svetaines pagal jų adresą.
 
-\ktutexfigure{apzvalga/webtrees_process.tex}{Metodo schema}
+\ktutexfigure{apzvalga/webtrees_process.tex}{Straipsnyje analizuojamo metodo schema}
 
 Metodo pritaikymo schema yra vaizduojama \vref{fig:apzvalga/webtrees_process.tex} diagramoje. Svetainių klasifikavimui naudojamas C4.5 sprendimų medis.
 
@@ -48,7 +48,7 @@ Naudojamos leksikografinės savybės yra formuojamos iš svetainės universalaus
 
 Modeliui apmokyti naudotas duomenų rinkinys surinktas iš kelių skirtingų šaltinių. Naudoti 5000 URL iš kurių 1676 yra kenkėjiškų svetainių adresai.
 
-Apmokant modelį naudota kryžminė patikra, 10\% duomenų skiriama testavimo duomenų imčiai. Naudoti matai tikslumui įvertinti yra jautrumas, tikslumas, specifiškumas, AUC metrika. Kryžminė patikra naudota dėl mažo duomenų rinkinio. Jos algoritmas aprašomas \ktualgoref{cross}.
+Apmokant modelį naudota kryžminė patikra, 10\% duomenų skiriama testavimo duomenų imčiai. Klasifikavimo kokybės metrikos naudojamos metodo kokybei įvertinti yra jautrumas, tikslumas, specifiškumas, AUC metrika. Kryžminė patikra naudota dėl mažo duomenų rinkinio. Jos algoritmas aprašomas \ktualgoref{cross}.
 
 \begin{ktualgo}{cross}{Kryžminės validacijos algoritmas}
    \For{validacijos žingsniams i}
@@ -60,7 +60,7 @@ Apmokant modelį naudota kryžminė patikra, 10\% duomenų skiriama testavimo du
     \State{Pateikti vidutines validacijų reikšmes}
 \end{ktualgo}
 
-Naudoti tikslumo matai yra:
+Naudotos klasifikavimo kokybės metrikos yra:
 \begin{equation}\label{eq:jautrumas}
 jautrumas = {TP \over {TP + FN}} \cdot 100
 \end{equation}
@@ -76,7 +76,7 @@ specifi \check skumas = {TN \over {TN + FP}} \cdot 100
 kur \textit{TN} yra tikrų neigiamų, \textit{TP} tikrų teigiamų, \textit{FP} klaidingai teigiamų, \textit{FN} klaidingai
 neigiamų klasifikavimų skaičius.
 
-\begin{ktutable}{webtrees_rezultatas}{Straipsnyje pateikiami matavimų rezultatai}
+\begin{ktutable}{webtrees_rezultatas}{Straipsnyje apžvelgiamų klasifikatorių kokybė}
     \begin{tabular}{| l | c | c | c | c | }
      \hline
      \diagbox{Kategorija}{Metrika} & Tikslumas & Jautrumas & Specifiškumas & AUC \\ \hline
@@ -85,4 +85,4 @@ neigiamų klasifikavimų skaičius.
     \end{tabular}
 \end{ktutable}
 
-Matavimų rezultatai pateikiami \vref{tab:webtrees_rezultatas} lentelėje. Rezultatai yra itin aukšti. Tai gali būti lemiama duomenų rinkinio formavimo specifikos. Mokymo duomenų rinkiniui naudojamos svetainės iš egzistuojančių juodųjų sąrašų. Modelis sugeba išmokti tik jau aptiktų svetainių savybių, naudojant jį po tam tikro laiko tarpo, kai kenksmingos svetainės yra atnaujintos atsižvelgiant į egzistuojančius juoduosius sąrašus modelio rezultatai turėtų prastėti. Taip pat naudojamas duomenų rinkinys yra nedidelis, tai leidžia medžiui gerai prisitaikyti prie jame esančių duomenų.
+Matavimų rezultatai pateikiami lentelėje \vref{tab:webtrees_rezultatas}. Rezultatai yra itin geri. Tai gali būti lemiama duomenų rinkinio formavimo specifikos. Mokymo duomenų rinkiniui naudojamos svetainės iš egzistuojančių juodųjų sąrašų. Modelis sugeba išmokti tik jau aptiktų svetainių savybių, naudojant jį po tam tikro laiko tarpo, kai kenksmingos svetainės yra atnaujintos atsižvelgiant į egzistuojančius juoduosius sąrašus modelio rezultatai turėtų prastėti. Taip pat naudojamas duomenų rinkinys yra nedidelis, tai leidžia medžiui gerai prisitaikyti prie jame esančių duomenų.
