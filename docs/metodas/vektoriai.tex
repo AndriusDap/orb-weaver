@@ -1,10 +1,10 @@
-Atramos vektorių metodas naudojamas klasifikuoti daugelio matmenų vektorius į dvi klases \cite{comp}. Tai atliekama atskiriant objektus erdvėje naudojant tam tikrą hiperplokštumą. Tai vaizduojama \ktufigref{images/svm.png} paveiksle. Objektų erdvė yra transformuojama naudojant branduolio funkciją, kuri leidžia parinkti tokią erdvę kurioje klasių atskyrimas naudojant hiperplokštumą yra įmanomas.
+atraminių vektorių klasifikatorius naudojamas klasifikuoti daugelio matmenų vektorius į dvi klases \cite{comp}. Tai atliekama atskiriant objektus erdvėje naudojant tam tikrą hiperplokštumą. Tai vaizduojama \ktufigref{images/svm.png} paveiksle. Objektų erdvė yra transformuojama naudojant branduolio funkciją, kuri leidžia parinkti tokią erdvę kurioje klasių atskyrimas naudojant hiperplokštumą yra įmanomas.
 
-\ktufigure{images/svm.png}{8 cm}{Supaprastinta atramos vektorių mašinų metodo schema}.
+\ktufigure{images/svm.png}{8 cm}{Supaprastinta atraminių vektorių klasifikatoriaus schema}.
 
-Atramos vektorių mašinos modelis yra kaip \cite{comp}:
+Atraminių vektorių klasifikatoriaus modelis išreiškiamas\cite{comp}:
 \begin{equation}
-    h(x) = b + \sum_{n=1}^{N}y_i \alpha_i K(x, x_i)
+    h(x) = b + \sum_{n=1}^{N}y_i \alpha_i K(x, x_i),
 \end{equation}
 kur $h(x)$ yra atstumas nuo hiperplokštumos skiriančios klases, $b$ yra papildomas svorio koeficientas, $y_i$ yra $i$-tojo mokymo rinkinio elemento klasė, o $x_i$ yra $i$-tasis mokymo imties elementas. $N$ yra mokymo imties elementų skaičius, $K$ yra naudojama branduolio funkcija kuri parinkta optimaliai erdvės transformacijai, $x$ yra klasifikuojamas objektas.
 
@@ -12,7 +12,7 @@ Modelis yra formuojamas apibrėžiant \cite{ksvm}:
 \begin{equation}
     W(\alpha) = \sum_{i}\alpha_i y_i - \frac{1}{2} \sum_{i, j} \alpha_i \alpha_j K(x_i, x_j)
 \end{equation}
-ir sprendažitn atramos vektorių mašinų kvadratinio optimizavimo uždavinį:
+ir sprendžiant atraminių vektorių kalsifikatoriaus kvadratinio optimizavimo uždavinį:
 \begin{equation}
 \max_{\alpha} W(\alpha) \text{kur} \left\{
                   \begin{array}{l}
@@ -32,7 +32,7 @@ Kur C yra hiperparametras naudojamas modelio formavime. Naudojant mažas $C$ ver
     \item radialinės bazės
 \end{enumerate}
 
-Tiesinis branduolio tipas yra naudojamas kai funkcija $K$ yra nenaudojama, tokiu atveju atramos vektorių mašinos yra apibrėžiamos kaip
+Tiesinis branduolio tipas yra naudojamas kai funkcija $K$ yra nenaudojama, tokiu atveju atraminių vektorių klasifikatorius yra apibrėžiamos kaip
 \begin{equation}
     W(\alpha) = \sum_{i}\alpha_i y_i - \frac{1}{2} \sum_{i, j} \alpha_i \alpha_j x_i x_j
 \end{equation}.

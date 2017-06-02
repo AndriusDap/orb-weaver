@@ -2,11 +2,11 @@
 
 Modelio apmokymas vykdomas programinės įrangos paketu Vowpal Wabbit \cite{vw}.
 
-\ktusubsection{Atramos vektorių mašinų modelio mokymas}
+\ktusubsection{Atraminių vektorių klasifikatoriaus mokymas}
 
-Naudojant atramos vektorių mašinų modelį sistema Vowpal Wabbit naudojami parametrai nurodyti \vref{tab:ksvm_params} lentelėje.
+Naudojant atraminių vektorių klasifikatorių sistemoje Vowpal Wabbit naudojami parametrai nurodyti \vref{tab:ksvm_params} lentelėje.
 
-\begin{ktutable}{ksvm_params}{Atramos vektorių mašinų modelio hiperparametrai}
+\begin{ktutable}{ksvm_params}{Atraminių vektorių klasifikatoriaus hiperparametrai}
     \begin{tabular}{| l | l | p{7cm}|}
     \hline
         Komandinės eilutės parametras & Galimos vertės & Parametro reikšmė\\ \hline
@@ -25,7 +25,7 @@ Naudojant atramos vektorių mašinų modelį sistema Vowpal Wabbit naudojami par
     \end{tabular}
 \end{ktutable}
 
-Mokant atramos vektorių mašinų modelį stebimas nuostolių funkcijos įvertis. Pagal jį
+Mokant atraminių vektorių klasifikatorių stebimas nuostolių funkcijos įvertis. Pagal jį
 vertinamas modelio mokymo sėkmingumas.
 
 Modeliai pradėti mokyti nuo polinominio branduolio. Svarbūs parametrai derinant šį modelį yra polinominės
@@ -59,7 +59,7 @@ Naudojant kitus branduolio tipus pastebėta ta pati tendencija, matoma \ktufigre
 \ktusubsection{Tiesinio modelio mokymas}
 
 Vowpal Wabbit sistema visiems modeliams naudoja vienodą duomenų formatą bei panašius parametrus.
-Tai leidžia lengvai bandyti įvairius modelius. Dėl to po prasto atramos vektorių mašinų modelių
+Tai leidžia lengvai bandyti įvairius modelius. Dėl to po prastų atraminių vektorių klasifikatoriaus rezultatų
 pasirinktas vienas iš paprasčiausių modelių, kuriuo tikėtina pasiekti gerus rezultatus, nenaudojant
 didelio resursų kiekio modelio formavimui.
 
@@ -81,8 +81,7 @@ Mokant tiesinį modelį naudojamas mažesnis savybių lentelės dydis nurodomas 
  parametrą. Tai leidžia optimaliau atlikti mokymą sumažinant naudojamą atminties kiekį. Naudojami $27$ bitai.
 
 Pirminiai modelio mokymo rezultatai pateikiami \ktufigref{images/linearModelLoss.png}. Šiame grafike
-matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atramos vektorių mašinų
-modelius. Mokomas modelis konverguoja, pasiekiama gana pastovi nuostolio funkcijos reikšmė, kuri
+matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atraminių vektorių klasifikatorius. Mokomas modelis konverguoja, pasiekiama gana pastovi nuostolio funkcijos reikšmė, kuri
 yra nedidelė, artima nuliui.
 
 \ktufigure{images/linearModelLoss.png}{14 cm}{Tiesinio modelio mokymas}
@@ -107,7 +106,7 @@ $145832$ matmenų.
 \ktufigure{images/roc.png}{12 cm}{Tiesinio modelio ROC kreivė}
 
 Lyginant šio modelio rezultatus pateiktus \cite{comp} straipsnyje šis tiesinis modelis pralenkia
-atramos vektorių mašinų klasifikatorių, kuris šiame straipsnyje buvo išskiriamas kaip geriausias klasifikatorius.
+atraminių vektorių klasifikatorių, kuris šiame straipsnyje buvo išskiriamas kaip geriausias klasifikatorius.
 
 \ktusubsection{Sprendimų medžio modelio formavimas}
 
@@ -138,19 +137,18 @@ klasifikacija nevykdoma, modelis visada grąžina kad analizuojamas vektorius pr
 
 \ktusubsection{Modelių mokymo rezultatai}
 
-Kokybiško atramos vektorių mašinų modelio bei sprendimų medžio apmokyti nepavyko.
+Kokybiško atraminių vektorių klasifikatoriaus bei sprendimų medžio apmokyti nepavyko.
 Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Duomenys turi itin daug
 matmenų - kiekvienas naujas žodis, simbolių grupė yra koduojama kaip naujas matmuo.
 Tačiau suformuotas itin tikslus tiesinis modelis. Lyginant tiesinio modelio rezultatus
 su pateiktais įvairių modelių rezultatais straipsnyje \cite{comp}, kurie pateikiami
 lentelėje \vref{tab:compTable} visą mokymą galima laikyti pasisekusiu. Nors apmokytas
-tik vienas modelis iš trijų jis yra itin tikslus ir lenkia atramos vektorių mašinų
-modelį, kuris buvo įvertintas kaip geriausias.
+tik vienas modelis iš trijų jis yra itin tikslus ir lenkia atraminių vektorių mašinų klasifikatorių, kuris buvo įvertintas kaip geriausias.
 
 \begin{ktutable}{compTable}{Pirminio tiesinio modelio rezultatai}
     \begin{tabular}{|l|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
     \hline
-                             & Tiesinis modelis  &  K Artimiausių kaimynų modelis  &  Radialinės bazės funkcijos branduolio atramos vektorių mašinos  &  Tiesinio branduolio atramos vektorių mašinos               \\ \hline
+                             & Tiesinis modelis  &  K Artimiausių kaimynų modelis  &  Radialinės bazės funkcijos branduolio atraminių vektorių klasifikatorius  &  Tiesinio branduolio atraminių vektorių klasifikatorius \\ \hline
                Tikslumas     & 0.97552           & 0.91   & 0.97  &  0.92         \\ \hline
     \end{tabular}
 \end{ktutable}
