@@ -1,13 +1,13 @@
-\ktusection{Modelio naudojimas įrankio kūrimui}
+\ktusection{Modelio naudojimas kenksmingų interneto tinklalapių identifikavimo programos kūrimui}
 
 Apmokytas modelis yra paruoštas naudojimui, tačiau jis nėra itin patogus. Naudojamos programinės įrangos modelis gali
 būti panaudojamas per komandinės eilutės sąsają, pateikiant duomenis mokymo metu naudotu formatu. Modelio grąžinamas
-rezultatas taip pat nėra lengvai suvokiamas. Dėl to yra kuriama taikomoji aplikacija kuri supaprastina modelio
+rezultatas taip pat nėra lengvai suvokiamas. Dėl to yra kuriama taikomoji programa kuri supaprastina modelio
 panaudojimą realiose, praktinėse situacijose.
 
 Kuriama sistema vadinama toliau vadinama \textbf{kenksmingų interneto tinklalapių identifikavimo programa}.
 
-\begin{ktutable}{sasaja}{KKenksmingų interneto tinklalapių identifikavimo programos sąsaja}
+\begin{ktutable}{sasaja}{Kenksmingų interneto tinklalapių identifikavimo programos sąsaja}
     \begin{tabular}{|l|l|p{5cm}|p{5cm}|}
     \hline
         Kelias & Metodas & Parametrai & Rezultatas \\ \hline
@@ -16,7 +16,7 @@ Kuriama sistema vadinama toliau vadinama \textbf{kenksmingų interneto tinklalap
 \end{ktutable}
 
 Kenksmingų interneto tinklalapių identifikavimo programa pritaikyta naudoti http protokolu, naudojama REST architektūra. Sąsaja pateikta \vref{tab:sasaja}
-lentelėje. Tinklalpio kurį norima klasifikuoti adresas yra pateikiamas klasifikavimo aplikacijai, grąžinamas
+lentelėje. Tinklalpio kurį norima klasifikuoti adresas yra pateikiamas klasifikavimo programai, grąžinamas
 rezultatas yra klasifikavimo modelio pateiktas įvertis.
 
 Kenksmingų interneto tinklalapių identifikavimo programos architektūra pateikiama paveiksle \ktufigref{images/architektura.png}
@@ -49,7 +49,7 @@ Lyginant su alternatyvia sistema \cite{gapi} yra matomi kenksmingų interneto ti
  \end{enumerate}
 
 Pirminė programos versija yra kurta siekiant įrodyti jos veikimo koncepciją. Dėl to kai kurios sistemos vietos
-yra optimizuotos programavimo laiko minimizavimo atžvilgiu. Plėtojant programinę įrangą vertėtų aplikaciją
+yra optimizuotos programavimo laiko minimizavimo atžvilgiu. Plėtojant programinę įrangą vertėtų programą
 skaidyti į kelis atskirtus komponentus, pagal naudojamų resursų tipą. PageRank įverčiai turi būti iškeliami
 į duomenų bazę, mašininio mokymo modelis iškeliamas į atskirą vykdomąją aplikaciją kuri gali būti plečiamas
 esant reikalui ar skaičiavimo resursų trūkumui.

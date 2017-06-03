@@ -10,18 +10,18 @@ Straipsnyje \kclong{webcop} siūlomas \mq{WebCop} metodas skirtas atpažinti ža
 
 Straipsnyje aprašoma žalingos programinės įrangos plitimo problema. Vienas iš būdų kaip į kompiuterius patenka  tokia programinė įranga yra kenksmingų vykdomųjų failų parsisiuntimas iš interneto svetainių. Kenkimo programų plitimą siekiama apriboti naudojant prevencines priemones. Siekiama identifikuoti svetaines platinančias kenksmingus failus ir neleisti naudotojams jas pasiekti, ar juos kitaip perspėti apie potencialiai kenksmingą svetainę.
 
-Straipsnyje identifikuotą kenkėjiškos programinės įrangos plitimo problemos sprendimui siūloma WebCop sistema. Tai yra sistema, atpažįstanti kenkėjiškas ir joms gretimas svetaines. Pavyzdžiui jei turima struktūra atitinkanti \ktufigref{images/kenksmingos_A_B.png} pav. tinklapius. Šiuo atveju tinklapiai A ir B nuorodas turi tik į kenksmingą programinę įrangą, dėl to galima laikyti, kad vartotojas negaus jokios naudos iš jų, tik bus skatinamas įsidiegti kenksmingą programinę įrangą. Taip pat, keliaujant interneto grafu nuo apačios, pradedant kenksminga programine įranga galima aptikit ją platinančias svetaines, ir jas taip pat pažymėti kaip kenksmingas.
+Straipsnyje identifikuotą kenkėjiškos programinės įrangos plitimo problemos sprendimui siūloma WebCop sistema. Tai yra sistema, atpažįstanti kenkėjiškas ir joms gretimas svetaines. Pavyzdžiui jei turima struktūra atitinkanti paveiklso \ktufigref{images/kenksmingos_A_B.png} tinklalapius. Šiuo atveju tinklalapiai A ir B nuorodas turi tik į kenksmingą programinę įrangą, dėl to galima laikyti, kad vartotojas negaus jokios naudos iš jų, tik bus skatinamas įsidiegti kenksmingą programinę įrangą. Taip pat, keliaujant interneto grafu nuo apačios, pradedant kenksminga programine įranga galima aptikit ją platinančias svetaines, ir jas taip pat pažymėti kaip kenksmingas.
 
 \ktufigure{images/kenksmingos_A_B.png}{10 cm}{Kenksmingos programinės įrangos platinimo svetainės struktūros pavyzdys}
 
-WebCop sistemą WebCop modulis bei dvi duomenų bazės. Viena duomenų bazėje saugomi interneto svetainių tarpusavio ryšių informacija, tai yra interneto svetainių grafas. Antra duomenų bazė laiko informaciją apie identifikuotas kenkėjiškas programas bei jų šaltinius internete. Ši sistema veikia keliais etapais:
+WebCop sistemą sudaro WebCop modulis bei dvi duomenų bazės. Viena duomenų bazėje saugomi interneto svetainių tarpusavio ryšių informacija, tai yra interneto svetainių grafas. Antra duomenų bazė laiko informaciją apie identifikuotas kenkėjiškas programas bei jų šaltinius internete. Ši sistema veikia keliais etapais:
     \begin{enumerate}[label=\arabic*.]
         \item nuorodų į platinimo svetaines aptikimas;
         \item žalingų kaimynysčių aptikimas;
         \item naujos, potencialiai žalingos, programinės įrangos aptikimas.
     \end{enumerate}
 
-Pirmas žingsnis, platinimo svetainių atpažinimas vykdomas jungiant identifikuotų kenkėjų duomenų bazės duomenis su interneto grafo viršūnėmis. Sekančiame žingsnyje išrenkamos svetainės gretimos platinimo svetainėms. Tai yra vienos nuorodos atstumu nuo kenksmingų svetainių esančios svetainės. Šie interneto tinklalapiai yra laikomi žalingos programinės įrangos katalogais. Naudotojų prieiga prie šių tinklalapių turi būti apribota, siekiant juos apsaugoti. Svetainės esančios dviejų nuorodų atstumu ir talpinančios nežinomas taikomąsias programas identifikuojamos kaip potencialiai kenksmingos, laikoma kad tai nauja, neidentifikuota kenkėjiška programinė įranga.
+Pirmas žingsnis, platinimo svetainių atpažinimas, vykdomas jungiant identifikuotų kenkėjų duomenų bazės duomenis su interneto grafo viršūnėmis. Sekančiame žingsnyje išrenkamos svetainės gretimos platinimo svetainėms. Tai yra vienos nuorodos atstumu nuo kenksmingų svetainių esančios svetainės. Šie interneto tinklalapiai yra laikomi žalingos programinės įrangos katalogais. Naudotojų prieiga prie šių tinklalapių turi būti apribota, siekiant juos apsaugoti. Svetainės esančios dviejų nuorodų atstumu ir talpinančios nežinomas taikomąsias programas identifikuojamos kaip potencialiai kenksmingos, laikoma kad tai nauja, neidentifikuota kenkėjiška programinė įranga.
 
 WebCop sistema naudoja du duomenų rinkinius -- kenksmingos programinės įrangos registrą bei interneto grafą. Interneto grafo duomenų rinkinys formuotas naudojant interneto paieškos variklio duomenis. Kenkėjišių programų registras kuriamas naudojantis Windows operacinės sistemos naudotojų teikiamais duomenimis.
 
@@ -38,4 +38,4 @@ WebCop sistema naudoja du duomenų rinkinius -- kenksmingos programinės įrango
 
 Lentelėje \vref{tab:webcop_rezultatas} pateikiami straipsnyje atliktų matavimų rezultatai.
 
-Šis metodas yra unikalus keliais aspektais -- skenavimas iš viršaus žemyn pakeičiamas skenavimu iš apačios žemyn ir naudojamas egzistuojantis kenkėjiškos programinės įrangos registras vietoje bandymo ją identifikuoti skenavimo metu. Tai leidžia pasinaudoti interneto grafo struktūra, ne tik atskirų svetainių bei tinklapių savybėmis.
+Šis metodas yra unikalus keliais aspektais -- skenavimas iš viršaus žemyn pakeičiamas skenavimu iš apačios žemyn ir naudojamas egzistuojantis kenkėjiškos programinės įrangos registras vietoje bandymo ją identifikuoti skenavimo metu. Tai leidžia pasinaudoti interneto grafo struktūra, ne tik atskirų svetainių bei tinklalapių savybėmis.

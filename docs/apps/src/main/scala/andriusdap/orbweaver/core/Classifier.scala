@@ -8,8 +8,12 @@ import scala.language.postfixOps
 import scala.sys.process._
 
 object Classifier {
-  lazy val maliciousRanks = loadPageranks("/media/ssd/temp_dir/malicious_pagerank.txt")
-  lazy val benignRanks = loadPageranks("/media/ssd/temp_dir/benign_pagerank.txt")
+  lazy val maliciousRanks = loadPageranks(
+    "/media/ssd/temp_dir/malicious_pagerank.txt")
+
+  lazy val benignRanks = loadPageranks(
+    "/media/ssd/temp_dir/benign_pagerank.txt")
+
   val model = "/media/ssd/vw/model.vw"
 
   lazy val minMalicious = maliciousRanks.values.min
@@ -38,7 +42,9 @@ object Classifier {
       App.Benign
     ))
 
-    val result = Process("echo", Seq(sample)) #| Process("/media/ssd/vw2/test.sh") lineStream_!
+    val result = Process("echo", Seq(sample)) #| Process(
+      "/media/ssd/vw2/test.sh"
+    ) lineStream_!
 
     val head = result.head
     head

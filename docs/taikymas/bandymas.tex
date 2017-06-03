@@ -1,32 +1,21 @@
-\ktusection{Praktinis įrankio taikymas}
+\ktusection{Praktinis kenksmingų interneto tinklalapių identifikavimo programos taikymas}
 
 Sukurtas įrankis bandytas panaudoti naudojant kelias nekenksmingas interneto svetaines. Dalis iš bandytų
 tinklalapių pateikiama lentelėje \vref{tab:bandymas}.
 
-\begin{ktutable}{bandymas}{Įrankio bandymo rezultatai}
-    \begin{tabular}{|p{5 cm}|p{5 cm}|r|}
+\begin{ktutable}{bandymas}{Kenksmingų interneto tinklalapių identifikavimo programos bandymo rezultatai}
+    \begin{tabular}{|p{5 cm}|p{5 cm}|p{3 cm}|}
     \hline
     Tinklalapis & Tinklalapio adresas & Kenksmingas \\ \hline
     KTU titulinis tinklalapis & http://ktu.edu/ & Ne \\ \hline
-    Wikipedia straipsnis apie dramblius & https://lt.wikipedia.org/wiki/Drambliai & Ne \\ \hline
+    Wikipedia straipsnis apie dramblius & https://lt.wikipedia.org/ wiki/Drambliai & Ne \\ \hline
     Socialinis tinklas Facebook & https://facebook.com & Taip \\ \hline
     Google paieškos variklis & https://google.com & Taip \\ \hline
     15 min laikraštis & https://15min.lt & Taip \\ \hline
-    Šio darbo repozitorija & https://github.com/andriusdap/orb-weaver & Ne \\ \hline
     \end{tabular}
 \end{ktutable}
 
-Toks įrankio bandymas parodo vieną iš jo trūkumų. Tokie tinklalapiai kaip Google, 15min tikrai nėra kenksmingi,
-tačiau jie klasifikuojami netiesingai. Tą galima taisyti iš nauojo formuojant duomenų rinkinį mokymui,
-įtraukiant šiuos tinklalapius. Tačiau tai iškreipia mokymo metodiką.
+Toks kenksmingų interneto tinklalapių identifikavimo programos bandymas parodo trūkumų. Tam tikri tinklalapiai kaip Google, 15min kurie nėra kenksmingi,
+yra klasifikuojami netiesingai. Tačiau validavimo imties klasifikavimo kokybės metrikos rodo gerus rezultatus - \textbf{tikslumas 0.976, specifiškumas 0.982, jautrumas 0.932}.
 
-Šioje vietoje matomas pagrindinis įprasto juodojo sąrašo privalumas. Jo klasifikavimo modelio modifikavimas yra
-paprastas - užtenka tiesiog įterpti įrašą į duomenų bazę ir modelis yra atnaujintas. Taip pat visada yra aišku
-kodėl tinklalapis laikomas klaidingu, paprasta suprasti ką reikia keisti. Naudojant mašininio mokymo modelį tai
-gali būti atliekama peržiūrint modelio svorius, tačiau juos galima modifikuoti tik vykdant visą mokymo procesą iš naujo.
-
-Nors suformuotas modelis rodo tikrai gerus rezultatus su validavimo imtimis, tačiau praktinis panaudojimas nėra
-įmanomas. Tinklalapiai kurie klasifikuojami kaip blogi ar geri negali būti lengvai pakeisti esant blogam modelio
-klasifikavimui. Taip pat neina paaiškinti kodėl jie klasifikuojami kaip geri ar blogi. Tai gali būti keičiama
-įtraukiant papildomus matmenis į modelį - į juos turi įeiti turinio savybės bei tinklalapį talpinančio serverio
-informacija, topografinė struktūra.
+Programos trūkumas yra tai, kad iš tiesinės regresijos modelio negalima paprastai gauti priežasčių, dėl ko tinklalapis buvo klasifikuotas kaip kenksmingas ar nekenksmingas. Tačiau kenksmingų interneto tinklalapių identifikaivmo programa turi ir privalumų. Kenksmingų tinklalapių klasifikavimas vykdomas pagal mokymo duomenų rinkinį, tai leidžia pakeitus kenksmingų tinklalapių sąrašą identifikuoti kitos klasės tinklalapius, pavyzdžiui pagal jų tematiką. Taip pat sistemos veikimas yra aiškus - komercinės sistemos nepateikia tikslaus klasifikavimo metodo. Šią programą galima lengvai modifikuoti, ar keičiant sistemos sąsają ar klasifikavimo modelį. Taikant programą praktikoje būtina atsižvelgti į šiuos trūkumus bei privalumus.
