@@ -40,20 +40,20 @@ funkcijos laipsnis bei parametrų reguliarizavimo koeficientas.
 \end{ktutable}
 
 Mokant modelį pagal lentelėje \vref{tab:initial_train} nurodytus parametrus pastebėta tendencija, kad
-modelio kokybė mokymo metu negerėja. Tai atspindi šių parametrų nuostolio funkcijų grafikai
+modelio kokybė mokymo metu negerėja. Tai atspindi šių parametrų logistinių nuostolių funkcijų grafikai
 \ktufigref{images/svm_sux.png}. Naudojant parametrų rinkinius iš lentelės \vref{tab:initial_train}
 modelis nekonverguoja.
 
-\ktufigure{images/svm_sux.png}{14 cm}{Klasifikatoriaus nuostolių priklausomybė nuo mokymo duomenų kiekio}
+\ktufigure{images/svm_sux.png}{14 cm}{Klasifikatoriaus logistinių nuostolių priklausomybė nuo mokymo duomenų kiekio}
 
 Modelio mokymas toliau tyrinėtas naudojant kitas branduolio funkcijas ir derinant jų parametrus.
 Modelio parametrų reguliarizacijos parametras L2 nekeistas.
 
-\ktufigure{images/linear_loss.png}{12 cm}{Tiesinio branduolio modelio nuostolių ir mokymo duomenų kiekio santykis}
-\ktufigure{images/polly_loss.png}{12 cm}{Polinominio branduolio modelio nuostolių ir mokymo duomenų kiekio santykis}
-\ktufigure{images/rbf_loss.png}{12 cm}{Radialinės bazės funkcijos branduolio modelio nuostolių ir mokymo duomenų kiekio santykis}
+\ktufigure{images/linear_loss.png}{12 cm}{Tiesinio branduolio modelio nuostolių ir mokymo duomenų kiekio priklausomybė}
+\ktufigure{images/polly_loss.png}{12 cm}{Polinominio branduolio modelio nuostolių ir mokymo duomenų kiekio priklausomybė}
+\ktufigure{images/rbf_loss.png}{12 cm}{Radialinės bazės funkcijos branduolio modelio nuostolių ir mokymo duomenų kiekio priklausomybė}
 
-Naudojant kitus branduolio tipus pastebėta ta pati tendencija, matoma \ktufigref{images/linear_loss.png} - \ktufigref{images/rbf_loss.png}.
+Naudojant kitus branduolio tipus ir logistinę nuostolių funkciją pastebėta ta pati tendencija, matoma \ktufigref{images/linear_loss.png} - \ktufigref{images/rbf_loss.png}.
 
 \ktusubsection{Logistinės regresijos modelio mokymas}
 
