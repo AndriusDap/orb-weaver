@@ -5,10 +5,10 @@ ir pagal juos parenkama tam tikra klasė.
 \ktufigure{images/sprendimu_medis.png}{8 cm}{Sprendimų medžio pavyzdys}
 
 Sprendimų medžio pavyzdys klasifikuojantis vektorių $X$ į klases $Y = (y_1, y_2, y_3)$ pateikiamas
- \ktufigref{images/sprendimu_medis.png} paveiksle. Jį sudaro sąlyginių viršūnių rinkinys $T$.
+ \ktufigref{images/sprendimu_medis.png} . Jį sudaro sąlyginių viršūnių rinkinys $T$.
 
-Sprendimų medį sudarančios sąlyginės viršnūnės yra formuojamos modelio apmokymo metu. Mokymui naudojamas duomenų
-rinkinys $H$ kurį sudaro mokymosi duomenys su jiems priskirtomis klasėmis. Medžio formavimo metu
+Sprendimų medį sudarančios sąlyginės viršnūnės yra formuojamos modelio mokymo metu. Mokymui naudojamas duomenų
+rinkinys $H$. Medžio formavimo metu
 parenkami testai kurie maksimizuoja funkciją:
 \begin{equation} \label{eq:gainratio}
     santykinisIšlošis(t_i) = \frac{išlošis(t_i)}{santykinėEntropija(t_i)}
@@ -39,11 +39,11 @@ Aptikus testą kuris maksimizuoja santykinį išlošį \ref{eq:gainratio} testas
 Mokymo duomenų rinkinys $H$ yra skaidomas pagal testą į kelis rinkinius\cite{c45}. Šie duomenų
 rinkiniai priskiriami medžio šakoms atitinkančioms testo rezultatus ir rekursiškai tęsiamas medžio formavimas.
 
-C4.5 medžio formavimo algoritmas palaiko diskrečių reikšmių parametrus bei tolygius kintamuosius.
+C4.5 medžio formavimo algoritmas palaiko diskrečius parametrus bei tolydžius kintamuosius.
 Sąlyginių viršūnių testai vykdomi diskretiems parametrams sukuria po vieną šaką kiekvienai galimai parametro reikšmei.
 
 Sąlyginių viršūnių testai tolydiems parametrams vykdomi parenkant ribinę vertę $Z$, su kuria bus lyginama parametro
-$A$ vertė \cite{c45}. Kadangi apmokymui naudojamas baigtinis duomenų rinkinys, jame yra baigtinis
+ vertė \cite{c45}. Kadangi apmokymui naudojamas baigtinis duomenų rinkinys, jame yra baigtinis
 kiekis galimų tolydaus parametro $A$ reikšmių $\{v_1, v_2, ..., v_m\}$. Ribinei vertei $Z$ priskiriama
 viena iš egzistuojančių parametro $A$ verčių  $v_i$. Parenkama vertė kuri maksimizuoja
 santykinį išlošį \ref{eq:gainratio}.

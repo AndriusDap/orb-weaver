@@ -9,7 +9,7 @@ Straipsnyje lyginami įvairūs metodai skirti svetainių klasifikavimui į kenks
  \item Affinity propagation metodas.
 \end{enumerate}
 
-Staripsnyje naudojami ir metodai mokomi su mokytoju ir be. Jų rezultatas yra lyginamas siekiant aptikti geriausiai tinkantį parinktai problemai spręsti \cite{comp}.
+Staripsnyje naudojami metodai su mokytoju ir be. Jų rezultatas yra lyginamas siekiant aptikti geriausiai tinkantį parinktai problemai spręsti \cite{comp}.
 
 K-Artimiausų kaimynų (K-Nearest neighbours) metodas yra paremtas trimis elementais \cite{Wu2008}:
 \begin{enumerate}
@@ -19,9 +19,9 @@ K-Artimiausų kaimynų (K-Nearest neighbours) metodas yra paremtas trimis elemen
 \end{enumerate}
 Elementų klasifikacija vyksta balsavimo principu - išrenkama $k$ elementų, kurie yra artimiausi pagal parinktą artumo metriką, dominuojanti klasė išrinktame rinkinyje priskiriama klasifikuojamam elementui.
 
-Pagrindiniai šio metodo trūkumai yra $k$, kaimynų skaičiaus, parinkimas. Per didelis $k$ lems gretimų klasių įtraukimą į balsavimo procesą, per mažas gali lemti blogą rezultatą esant triukšmui pradiniuose, apmokymo, duomenyse. Tai sprendžiama pridedant balso svorį \cite{Wu2008} kuris yra atvirkščiai proporcingas elemento atstumui nuo balsuojančio elemento. Taip pat svarbus atstumo mato parinkimas. Dažnai naudojamas Euklido atstumas, tačiau jis nėra tinkamas kai yra daug matmenų, ar jų reikšmės yra itin skirtingos \cite{Wu2008}. Tada verta naudoti kitus matus arba normalizuoti atributų vertes.
+Pagrindiniai šio metodo trūkumai yra tinkamo kaimynų skaičiaus $k$ parinkimas. Per didelis $k$ lems gretimų klasių įtraukimą į balsavimo procesą, per mažas gali lemti blogą rezultatą esant triukšmui pradiniuose, apmokymo, duomenyse. Tai sprendžiama pridedant balso svorį \cite{Wu2008} kuris yra atvirkščiai proporcingas elemento atstumui nuo balsuojančio elemento. Taip pat svarbus atstumo mato parinkimas. Dažnai naudojamas Euklido atstumas, tačiau jis nėra tinkamas kai yra daug matmenų, ar jų reikšmės yra itin skirtingos \cite{Wu2008}. Tada verta naudoti kitus matus arba normalizuoti atributų vertes.
 
-Šio metodo privalumas yra tai,  kad skaičiavimai atliekami tingiai. Pirminio modelio formavimo metu nėra atliekami jokie skaičiavimai, jie vykdomi tik klasifikuojant naujus duomenis \cite{Wu2008}.
+Šio metodo privalumas yra tai, kad skaičiavimai atliekami tingiai. Pirminio modelio formavimo metu nėra atliekami jokie skaičiavimai, jie vykdomi tik klasifikuojant naujus duomenis \cite{Wu2008}.
 
 Atraminių vektorių klasifikatoriaus (Support Vector Machine) metodas yra vienas iš patikimiausių klasifikavimo metodų \cite{Wu2008}. Jis pasižymi geru rezultatu net turint mažą kiekį mokymo duomenų bei nenukenčia dėl didelio matmenų kiekio \cite{Wu2008}. Šio metodo esmė yra duomenų atvaizdavimas kitoje erdvėje kurioje bus galima aptikti hiperplokštumą kuri skiria įrašų klases.
 
@@ -33,21 +33,21 @@ kur $h(x)$ yra elemento $x$ atstumas nuo klases skiriančios hiperplokštumos, $
 
 Apmokant atraminių vektorių klasifikatorių yra svarbu parinkti tinkamą branduolio funkciją, nuo jos itin priklauso modelio rezultatų tikslumas. Mokymas vykdomas parenkant branduolio funkciją ir pskaičiuojant tokius koeficientus $\alpha_i$ su kuriais gaunamas didžiausias riba tarp hiperplokštumos ir teisingai klasifikuotų mokymo duomenų erdvėje.
 
-Šio metodo trūkumas yra didelio kiekio skaičiavimo resursų reikalavimas modelio apmokymo metu. Tačiau po modelio formavimo jis gali būti panaudojamas nereikalaujant daug resursų \cite{Wu2008}.
+Šio metodo trūkumas yra sudėtingas modelio apmokymas, apmokant modelį reikia atlikti itin daug skaičiavimų. Tačiau po modelio formavimo jis gali būti panaudojamas nereikalaujant daug resursų \cite{Wu2008}.
 
-Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma, kad visi įrašų matmenys priklauso nepriklauso vienas nuo kito \cite{comp}. Šio metodo privalumas yra paprastas modelio formavimas, nėra hiperparametrų kuriuos reikėtų derinti. Taip pat jo sudėtingumas mokymosi metu laiko atžvilgiu yra tiesinis, mokymosi imties dydžiui. Tai leidžia jį pritaikyti dideliems duomenų rinkiniams \cite{Wu2008}. Taip pat rezultatas yra pakankamai geras, ypač įvertinant reikalingą pastangų kiekį norint apmokyti modelį \cite{Wu2008}.
+Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema \cite{comp}. Šio metodo privalumas yra paprastas modelio formavimas, nėra hiperparametrų kuriuos reikėtų derinti. Taip pat jo sudėtingumas mokymosi metu laiko atžvilgiu yra tiesinis, mokymosi imties dydžiui. Tai leidžia jį pritaikyti dideliems duomenų rinkiniams \cite{Wu2008}. Taip pat rezultatas yra pakankamai geras, ypač įvertinant reikalingą pastangų kiekį norint apmokyti modelį \cite{Wu2008}.
 
-  Modelis formuojamas naudojantis Bajeso teorema ir sąlyginėmis tikimybėmis. Jei klasių aibė yra $i = 0, 1$ tik dviejų elementų, $P(i|x)$ yra tikimybė kad įrašas su verčių vektoriumi $x = (x_1, ..., x_p)$ priklauso klasei $i$, tai bet kokia monotoniška $P(i|x)$ gali būti naudojama klasifikavimui \cite{Wu2008}. Ši funkcija gali būti išreiškiama kaip santykis $P(1|x)/P(0|x)$. Tai gali būti išreiškiama kaip \cite{Wu2008}:
+  Modelis formuojamas naudojantis Bajeso teorema ir sąlyginėmis tikimybėmis. Jei klasių aibė yra $i = 0, 1$ tik dviejų elementų, $P(i|x)$ yra tikimybė, kad įrašas su verčių vektoriumi $x = (x_1, ..., x_p)$ priklauso klasei $i$, tai bet kokia monotoniška $P(i|x)$ gali būti naudojama klasifikavimui \cite{Wu2008}. Ši funkcija gali būti išreiškiama kaip santykis $P(1|x)/P(0|x)$. Tai gali būti išreiškiama kaip \cite{Wu2008}:
     \begin{equation}
         \frac{P(1|x)}{P(0|x)} = \frac{f(x|1)P(1)}{f(x|0)P(0)}
     \end{equation}
-  Šią funkciją klasifikavimui galima naudoti radus $f(x|i)$ funkciją. Paprastojo Bajeso klasifikavimo metode laikoma, kad visi $x$ vektorių matmenys yra nepriklausomi, tada $f(x|i)$ prastinama į \cite{Wu2008}
+  Šią funkciją klasifikavimui galima naudoti radus $f(x|i)$ funkciją. Paprastojo Bajeso klasifikavimo metode laikoma, kad visi $x$ vektoriaus elementai nepriklauso vienas nuo kito tada $f(x|i)$ prastinama į \cite{Wu2008}
   \begin{equation}
     f(x|i) = \prod_{j=1}^{p} f(x_j|i)
   \end{equation}
   kur visos $f(x_j|i)$ funkcijos yra įvertinamos atskirai, taip supaprastinant problemą į daug  vienmačių uždavinių.
 
-  Šis metodas leidžia panaudoti nedidelį duomenų kiekį modelio apmokymui, apmokymas vyksta greitai ir paprastai, nereikalauja komplikuotų iteracinių schemų modelio formavimui \cite{Wu2008}. Tačiau vienas iš reikalavimų labiausiai ribojančių šį metodą yra visų duomenų matmenų nepriklausomumas tarpusavyje. Tačiau tai galima spręsti naudojant pirminį duomenų apdorojimą, pašalinant stipriai koreliuotas reikšmes \cite{Wu2008}. Taip pat metodas gali modeliuoti tik tiesines ribas tarp klasių, be papildomų modifikacijų jo pritaikyti netiesiniams uždaviniams neina \cite{comp}.
+  Šis metodas leidžia panaudoti nedidelį duomenų kiekį modelio apmokymui, apmokymas vyksta greitai ir paprastai, nereikalauja komplikuotų iteracinių schemų modelio formavimui \cite{Wu2008}. Tačiau vienas iš reikalavimų labiausiai ribojančių šį metodą yra visų klasifikuojamo objekto požymių nepriklausomumas tarpusavyje. Tačiau tai galima spręsti naudojant pirminį duomenų apdorojimą, pašalinant stipriai koreliuotas reikšmes \cite{Wu2008}. Taip pat metodas gali modeliuoti tik tiesines ribas tarp klasių, netiesiniams uždaviniams spręsti reikalingos papildomos modelio modifikavijos \cite{comp}.
 
  K-vidurkių algoritmas yra iteracinis metodas skirtas skaidyti duomenų rinkinį į naudotojo parinktą klasterių skaičių $k$ \cite{Wu2008}. Algoritmo metu siekiama minimizuoti visų imties elementų atstumą iki jiems priskirtų klasterių centrų. Algoritmo iteracija susideda iš dviejų žingsnių:
 
@@ -62,7 +62,7 @@ Paprastas Bajeso klasifikatorius yra paremtas Bajeso teorema. Laikoma, kad visi 
 
    K vidurkių metodas turi trūkumų. Galutiniai klasteriai priklauso nuo pirminių taškų pasirinkimo. Netinkamai parinkti taškai gali lemti neoptimalų sprendimą. Taip pat k-vidurkių metodas nesugeba išskirti klasterių kurie nėra vienas nuo kito aiškiai atskirtos sferos erdvėje.
 
-   Dėl vidurkio funkcijos naudojimo centroidų parinkimui rezultatas gali būti stipriai iškreiptas kelių išskirčių. Tai gali būti sprendžiama naudojant papildomą duomenų valymą, pirma suskaidant į daugiau klasterių, siekiant kad išskirtims būtų priskiriami maži klasteriai, ir vėliau jas prijungiant prie didesnių klasterių \cite{Wu2008}.
+   Dėl vidurkio funkcijos naudojimo centroidų parinkimui rezultatas gali būti stipriai iškreiptas kelių išskirčių. Tai gali būti sprendžiama naudojant papildomą duomenų valymą, pirma suskaidant į daugiau klasterių siekiant, kad išskirtims būtų priskiriami maži klasteriai, ir vėliau jas prijungiant prie didesnių klasterių \cite{Wu2008}.
 
 Affinity propagation yra vienas iš klasterizavimo metodų \cite{comp}. Šio metodo įvestis yra panašumų matrica, kurioje saugoma visų duomenų įrašų porų panašumai $s[i, j]$ kur $i, j =  (1,  2, ..., N)$. Naudojant šį metodą siekiama surasti kiekvieno elemento duomenų aibėje atstovą. Tą galima analizuoti kaip žinučių tarp duomenų įrašų perdavimą \cite{fastprop}. Kiekvienai elementų porai $i$ ir $j$ egzistuoja dvi žinutės -- atsakomybė (responsibility), $r[i, j]$ siunčiama iš taško $i$ į $j$, kuri parodo sukauptus įrodymus apie elemento $j$ galimybę atstovauti elementą $i$ klasteryje.  Antra žinutė yra tinkamumas (availability) $a[i, j]$, tai žinutė siunčiama iš elemento $j$ elementui $i$ kuri parodo $j$ elemento tinkamumą atstovauti elementą $i$. Iš pradžių visos $a$ ir $r$ reikšmės nustatomos į nulį ir yra iteratyviai atnaujinamos pagal \cite{fastprop}:
  \begin{equation}

@@ -1,37 +1,36 @@
 \ktusection{Kenksmingų interneto tinklalapių identifikavimo modelio apmokymas}
 
-Kenksmingų interneto tinklalapių identifikavim modelio apmokymo schema yra pateikiama paveiksle \ktufigref{images/mokymas.png}.
+Kenksmingų interneto tinklalapių identifikavim modelio apmokymo schema yra pateikiama \ktufigref{images/mokymas.png}.
 \ktufigure{images/mokymas.png}{13 cm}{Modelio formavimo schema}
 
 Modeliams mokyti naudojamas duomenų rinkinys yra dalinamas į tris imtis:
 \begin{enumerate}
-    \item mokymo imtis (70\% viso rinkinio);
-    \item testavimo imtis (25\% viso rinkinio);
-    \item validavimo imtis (5\% viso rinkinio).
+    \item mokymo imtis (70\% viso duomenų rinkinio);
+    \item testavimo imtis (25\% viso duomenų rinkinio);
+    \item validavimo imtis (5\% viso duomenų rinkinio).
 \end{enumerate}
-Didžiausia, mokymo imtis yra naudojama modelio apmokymui. Siekiant aptikti modelių persimokymą naudojama
-testavimo imtis. Modelį apmokius yra įvertinama jo kokybė naudojant parinktas metrikas, jei įverčiai stipriai
+Didžiausia, mokymo imtis yra naudojama modelio mokymui. Siekiant aptikti modelių persimokymą naudojama
+validavimo imtis. Modelį apmokius yra įvertinama jo kokybė naudojant parinktas metrikas, jei įverčiai stipriai
 skiriasi mokymosi ir testavimo imčiai modelis yra persimokęs, dėl to reikia koreguoti modelio hiperparametrus.
 Jei gauta modelio kokybė netenkina,  taip pat koreguojami hiperparametrai.
 
-Suformavus modelį kuris tenkina jis yra tikrinamas paskutinį kartą. Tam naudojama validavimo imtis.
+Suformavus modelį naudojant mokymo ir testavimo imtis jis yra tikrinamas paskutinį kartą. Tam naudojama validavimo imtis.
 Modelio rezultatai naudojami įvertinti modelio klasifikavimo kokybę.
 
 
 Modelio klasifikavimo kokybės įverčiai yra tikslumas, AUC įvertis, specifiškumas, jautrumas. Šios metrikos leidžia
- įvertinti modelį net ir esant klasių disbalansui, ko vien naivus teisingų spėjimų procentas parodyti
-  negali. Klasifikavimo rezultatų lentelę sudaro keturis rezultatų tipai pagal jų teisingumą:
+ įvertinti modelį net ir esant klasių disbalansui. Klasifikavimo rezultatų lentelę sudaro keturi dažniai:
 \begin{enumerate}
-    \item teisingai teigiamą rezultatą (žymima $TP$);
-    \item klaidingai teigiamą rezultatą (žymima $FP$);
-    \item teisingai neigiamą rezultatą (žymima $TN$);
-    \item klaidingai neigiamą rezultatą (žymima $FN$).
+    \item teisingai teigiamų dažnis (žymima $TP$);
+    \item klaidingai teigiamų dažnis (žymima $FP$);
+    \item teisingai neigiamų dažnis (žymima $TN$);
+    \item klaidingai neigiamų dažnis (žymima $FN$).
 \end{enumerate}
 
  Atsižvelgiant į ROC kreivę
 (angl. \textit{receiver operating characteristic curve}), galima nustatyti
-klasių intervalus kurie yra optimalūs modelio naudojimui. Ši kreivė rodo $TP$ tipo įverčio
-tikimybės santykį su $FP$ tipo įverčio tikimybe keičiant ribinę klasifikatoriaus vertę, pagal
+klasių intervalus kurie yra optimalūs modelio naudojimui. Ši kreivė rodo $TP$ dažnio
+ santykį su $FP$ dažniu, keičiant ribinę klasifikatoriaus vertę, pagal
 kurią yra parenkama klasė. AUC metrika yra skaičiuojama kaip plotas, esantis po šia kreive.
 Kitos klasifikavimo kokybės metrikos apskaičiuojamos:
 

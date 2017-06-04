@@ -96,11 +96,11 @@
   {%
   }%
 }%
-\renewcommand{\reftextfaraway}{(žr. psl. \pageref}
-\renewcommand{\reftextfacebefore}{ankstesniame puslapyje}
-\renewcommand{\reftextbefore}{ankstesniame puslapyje}
-\renewcommand{\reftextfaceafter}{kitame puslapyje}
-\renewcommand{\reftextafter}{kitame puslapyje}
+\renewcommand{\reftextfaraway}{(žr. psl. \pageref)}
+\renewcommand{\reftextfacebefore}{}
+\renewcommand{\reftextbefore}{}
+\renewcommand{\reftextfaceafter}{}
+\renewcommand{\reftextafter}{}
 \newminted{pascal}{linenos=true,baselinestretch=1,samepage=false,frame=leftline}
 \newminted{text}{linenos=false,baselinestretch=1,samepage=false}
 \renewcommand\theFancyVerbLine{\lstfont\arabic{FancyVerbLine}}
@@ -173,7 +173,7 @@
     \end{center}
   \end{figure}
 }
-\newcommand{\ktufigref}[1]{(\ref{fig:#1} pav.)}
+\newcommand{\ktufigref}[1]{\ref{fig:#1} pav.}
 % filename, width, caption
 \newcommand{\ktufigure}[3]{
   \begin{figure}[H]

@@ -1,4 +1,4 @@
-atraminių vektorių klasifikatorius naudojamas klasifikuoti daugelio matmenų vektorius į dvi klases \cite{comp}. Tai atliekama atskiriant objektus erdvėje naudojant tam tikrą hiperplokštumą. Tai vaizduojama \ktufigref{images/svm.png} paveiksle. Objektų erdvė yra transformuojama naudojant branduolio funkciją, kuri leidžia parinkti tokią erdvę kurioje klasių atskyrimas naudojant hiperplokštumą yra įmanomas.
+Atraminių vektorių klasifikatorius naudojamas klasifikuoti vektorius į dvi klases \cite{comp}. Tai atliekama atskiriant objektus erdvėje naudojant tam tikrą hiperplokštumą. Tai vaizduojama \ktufigref{images/svm.png}. Objektų erdvė yra transformuojama naudojant branduolio funkciją, kuri leidžia parinkti tokią erdvę kurioje įmanomas klasių atskyrimas naudojant hiperplokštumą.
 
 \ktufigure{images/svm.png}{8 cm}{Supaprastinta atraminių vektorių klasifikatoriaus schema}.
 
@@ -34,17 +34,17 @@ Kur C yra hiperparametras naudojamas modelio formavime. Naudojant mažas $C$ ver
 
 Tiesinis branduolio tipas yra naudojamas kai funkcija $K$ yra nenaudojama, tokiu atveju atraminių vektorių klasifikatorius yra apibrėžiamos kaip
 \begin{equation}
-    W(\alpha) = \sum_{i}\alpha_i y_i - \frac{1}{2} \sum_{i, j} \alpha_i \alpha_j x_i x_j
-\end{equation}.
+    W(\alpha) = \sum_{i}\alpha_i y_i - \frac{1}{2} \sum_{i, j} \alpha_i \alpha_j x_i x_j.
+\end{equation}
 Šis modelio variantas gali būti naudojamas kai objektai nagrinėjamoje erdvėje gali būti atskirti tiesia plokštumas, nėra reikalingos papildomos modifikacijos.
 
 Polinominis branduolys gali būti formuojamas naudojant \cite{vw}
 \begin{equation}
-    K(u, v) = (1 + u \cdot v)^d
+    K(u, v) = (1 + u \cdot v)^d,
 \end{equation}
 radialinės bazės branduolys išreiškiamas
 \begin{equation}
-    K(u, v) = exp \big( - \frac{|| u - v ||^2}{2 \sigma ^ 2} \big)
+    K(u, v) = exp \big( - \frac{|| u - v ||^2}{2 \sigma ^ 2} \big).
 \end{equation}
 
-Šis modelis turi du derinamus hiperparametrus - tai yra konstanta $C$, bei parenkama branduolio funkcija. Branduolio funkcija taip pat prideda papildomus hiperparametrus. Polinominio branduolio atveju tai yra laipsnio parametras $d$, radialinės bazės branduolio atveju tai yra parametras $\sigma$.
+Šis modelis turi du hiperparametrus - tai konstanta $C$, bei parenkama branduolio funkcija. Branduolio funkcija taip pat prideda papildomus hiperparametrus. Polinominio branduolio atveju tai yra laipsnio parametras $d$, radialinės bazės branduolio atveju tai yra parametras $\sigma$.
