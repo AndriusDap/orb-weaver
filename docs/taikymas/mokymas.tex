@@ -12,7 +12,6 @@ Naudojant atraminių vektorių klasifikatorių sistemoje Vowpal Wabbit naudojami
         Komandinės eilutės parametras & Galimos vertės & Parametro reikšmė\\ \hline
         \texttt{passes} &  & Modelio mokymo iteracijų skaičius \\ \hline
         \texttt{loss\_function} &          & Mokymo metu naudojama nuostolio funkcija: \\
-                               & squared  & kvadratinė nuostolio funkcija \\
                                & hinge    & nuostolio funkcija $l(y) = \max(0, 1 - t * y)$ kur $y$ yra įvertis o $t = \pm 1$ tikroji klasė  \\
                                & logistic & logistinė nuostolio funkcija \\ \hline
         \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
@@ -39,21 +38,10 @@ funkcijos laipsnis bei parametrų reguliarizavimo koeficientas.
     \end{tabular}
 \end{ktutable}
 
-Mokant modelį pagal lentelėje \vref{tab:initial_train} nurodytus parametrus pastebėta tendencija, kad
-modelio kokybė mokymo metu negerėja. Tai atspindi šių parametrų logistinių nuostolių funkcijų grafikai
-\ktufigref{images/svm_sux.png}. Naudojant parametrų rinkinius iš lentelės \vref{tab:initial_train}
-modelis nekonverguoja.
-
-\ktufigure{images/svm_sux.png}{14 cm}{Klasifikatoriaus logistinių nuostolių priklausomybė nuo mokymo duomenų kiekio}
-
 Modelio mokymas toliau tyrinėtas naudojant kitas branduolio funkcijas ir derinant jų parametrus.
 Modelio parametrų reguliarizacijos parametras L2 nekeistas.
 
-\ktufigure{images/linear_loss.png}{12 cm}{Tiesinio branduolio modelio nuostolių ir mokymo duomenų kiekio priklausomybė}
-\ktufigure{images/polly_loss.png}{12 cm}{Polinominio branduolio modelio nuostolių ir mokymo duomenų kiekio priklausomybė}
-\ktufigure{images/rbf_loss.png}{12 cm}{Radialinės bazės funkcijos branduolio modelio nuostolių ir mokymo duomenų kiekio priklausomybė}
-
-Naudojant kitus branduolio tipus ir logistinę nuostolių funkciją pastebėta ta pati tendencija, matoma \ktufigref{images/linear_loss.png} - \ktufigref{images/rbf_loss.png}.
+\ktufigure{images/linear_loss.png}{12 cm}{Tiesinio branduolio modelio nuostolių ir tinklalapių skaičiaus naudoto mokymui priklausomybė}
 
 \ktusubsection{Logistinės regresijos modelio mokymas}
 
@@ -68,7 +56,6 @@ didelio resursų kiekio modelio formavimui.
         Komandinės eilutės parametras & Galimos vertės & Parametro reikšmė\\ \hline
         \texttt{passes} &  & Modelio mokymo iteracijų skaičius \\ \hline
         \texttt{loss\_function} &          & Mokymo metu naudojama nuostolio funkcija \\
-                               & squared  & kvadratinė nuostolio funkcija  \\
                                & hinge    & nuostolio funkcija $l(y) = \max(0, 1 - t * y)$ kur $y$ yra įvertis o $t = \pm 1$ tikroji klasė  \\
                                & logistic & logistinė nuostolio funkcija \\ \hline
         \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
@@ -82,24 +69,11 @@ Mokant logistinės regresijos modelį naudojamas mažesnis savybių lentelės dy
 Modelio mokymo nuostoliai pateikiami \ktufigref{images/linearModelLoss.png}. Šiame grafike
 matoma, kad nuostolio funkcijos rezultatai yra žymiai geresni nei mokant atraminių vektorių klasifikatorius. Mokomas modelis konverguoja, pasiekiama gana pastovi nuostolio funkcijos reikšmė, artima nuliui.
 
-\ktufigure{images/linearModelLoss.png}{14 cm}{Logistinės regresijos modelio nuostolių priklausomybė nuo mokymo duomenų kiekio}
+\ktufigure{images/linearModelLoss.png}{14 cm}{Logistinės regresijos modelio nuostolių priklausomybė nuo mokymui naudojamų tinklalapių skaičiaus}
 
-Apmokius modelį vertinamas jo jautrumas, tikslumas, specifiškumas, AUC įvertis. Jie pateikiami
-lentelėje \vref{tab:firstLinearModel}. Parametrų L2 reguliarizavimui naudota vertė $10^{-6}$.
 
 Gautas modelis itin gerai prognozuoja testavimo rinkinio duomenis. Suformuotas logistinės regresijos modelis naudoja
 $145832$ matmenų.
-
-\begin{ktutable}{firstLinearModel}{Logistinės regresijos modelio kokybės įverčiai}
-    \begin{tabular}{| l | l |}
-    \hline
-       Matas & Reikšmė \\ \hline
-               Tikslumas & 0.97552 \\ \hline
-               Jautrumas & 0.92588 \\ \hline
-               Specifiškumas & 0.98325 \\ \hline
-               AUC & 0.95456 \\ \hline
-    \end{tabular}
-\end{ktutable}
 
 \ktufigure{images/roc.png}{12 cm}{Logistinės regresijos modelio ROC kreivė}
 
@@ -108,7 +82,7 @@ atraminių vektorių klasifikatorių, kuris šiame straipsnyje buvo išskiriamas
 
 \ktusubsection{Sprendimų medžio modelio formavimas}
 
-\ktufigure{images/treeLoss.png}{12 cm}{Sprendimų medžio modelio nuostolių priklausomybė nuo mokymo duomenų kiekio}
+\ktufigure{images/treeLoss.png}{12 cm}{Sprendimų medžio modelio nuostolių priklausomybė nuo mokymui naudojamų tinklalapių skaičiaus}
 
 Sprendimų medžio modelio mokymo parametrai pateikiami lentelėje \vref{tab:medisParams}.
 
@@ -118,7 +92,6 @@ Sprendimų medžio modelio mokymo parametrai pateikiami lentelėje \vref{tab:med
         Komandinės eilutės parametras & Galimos vertės & Parametro reikšmė\\ \hline
         \texttt{passes} &  & Modelio mokymo iteracijų skaičius \\ \hline
         \texttt{loss\_function} &          & Mokymo metu naudojama nuostolio funkcija \\
-                               & squared  & kvadratinė nuostolio funkcija  \\
                                & hinge    & nuostolio funkcija $l(y) = \max(0, 1 - t * y)$ kur $y$ yra įvertis o $t = \pm 1$ tikroji klasė  \\
                                & logistic & logistinė nuostolio funkcija \\ \hline
         \texttt{l2} & & l2 parametrų reguliarizacija \\ \hline
@@ -131,19 +104,31 @@ Sprendimų medžio modelio mokymas vyksta sėkmingai, stebint nuostolio funkcijo
 
 Nepaisant gero nuostolio funkcijos rezultato šis modelis persimokė su visomis naudotomis
 hiperparametrų vertėmis. Šis modelis visada prognozuoja tik vieną iš reikšmių, tai yra
-klasifikacija nevykdoma, modelis visada grąžina, kad analizuojamas vektorius priklauso klasei 1 (svetainė nežalinga).
+klasifikacija nevykdoma, modelis visada grąžina, kad analizuojamas vektorius priklauso klasei 1 (tinklalapis kenksmingas).
 
 \ktusubsection{Modelių mokymo rezultatai}
 
+
+\begin{ktutable}{firstLinearModel}{Modelių kokybės įverčiai}
+    \begin{tabular}{| l | p{4cm} | p{4cm} | p{4cm} |}
+    \hline
+               Matas & Logistinės regresijos klasifikatorius & Atraminių vektorių klasifikatorius & Sprendimų medžio klasifikatorius \\\hline
+               Tikslumas & 0,97552 & 0,13473 & 0,13473 \\ \hline
+               Jautrumas & 0,92588 & 1,00000 & 1,00000 \\ \hline
+               Specifiškumas & 0,98325 & 0 & 0 \\ \hline
+               AUC & 0.95456 & 0,5 & 0,5 \\ \hline
+    \end{tabular}
+\end{ktutable}
+
 Kokybiško atraminių vektorių klasifikatoriaus bei sprendimų medžio apmokyti nepavyko.
-Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Duomenys turi itin daug
+Tikėtina, kad tai lemia naudojamo duomenų tipo specifika. Visi klasifikavimo kokybės įverčiai pateikiami lentelėje \vref{tab:firstLinearModel}. Duomenys turi itin daug
 matmenų - kiekvienas naujas žodis, simbolių grupė yra koduojama kaip naujas matmuo.
 Tačiau suformuotas itin tikslus logistinės regresijos modelis. Lyginant logistinės regresijos modelio rezultatus
 su pateiktais įvairių modelių rezultatais straipsnyje \cite{comp}, kurie pateikiami
 lentelėje \vref{tab:compTable} visą mokymą galima laikyti sėkmingu. Nors apmokytas
 tik vienas modelis iš trijų jis yra itin tikslus ir lenkia atraminių vektorių mašinų klasifikatorių, kuris buvo įvertintas kaip geriausias.
 
-\begin{ktutable}{compTable}{Logistinės regresijos modelio kokybės metrikos}
+\begin{ktutable}{compTable}{Logistinės regresijos modelio kokybės metrikos lyginamos su \cite{comp}}
     \begin{tabular}{|l|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
     \hline
                              & Logistinės regresijos modelis  &  K-artimiausių kaimynų modelis  &  Radialinės bazės funkcijos branduolio atraminių vektorių klasifikatorius  &  Tiesinio branduolio atraminių vektorių klasifikatorius \\ \hline
