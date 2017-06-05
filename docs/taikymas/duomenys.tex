@@ -52,7 +52,7 @@ Suformuoti duomenų rinkiniai yra skaidomi ir paruošiami apmokymui. Duomenų pa
 kodas yra pateikiamas prieduose (\ref{priedas:executor}). Programoje įgyvendintas PageRank įverčio skaičiavimas.
 
 PageRank įvertis skaičiuojamas iteracijomis. Vienos iteracijos išeities kodas:
-\ktusrcr{pagerank.scala}{sources/pagerank.scala}{scala}
+\ktusrcr{pagerank}{sources/pagerank.scala}{scala}
 Sukurta funkcija atlieka vieną pagerank iteraciją. Jai reikalingi  parametrai yra grafo duomenys, ankstesnis
 PageRank įvertis, slopinimo koeficiento vertė. Skaičiavimas vykdomas naudojant biblioteka \cite{webgraph} nuskaitytą
 grafą. Grafas yra išsaugomas atmintyje naudojant skaičiavimams pritaikytą formatą. Grafas yra saugojamas priešingos krypties nei yra pateikiamas duomenų faile. Grafas yra saugomas kaip masyvas iš masyvų \texttt{transposedGraph}. Išorinio masyvo indeksai $i$ atitinka
